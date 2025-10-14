@@ -47,11 +47,9 @@ header nav {
 
 /* 4. CRITICAL: Dropdown Menu - Consistently positioned relative to button */
 #services-dropdown {
-    position: absolute;
-    top: calc(100% + 4px); /* Small gap below button */
-    /* Center dropdown under button for consistent positioning across all pages */
+    position: fixed !important; /* Use fixed positioning to escape any container issues */
+    /* Position will be calculated by JavaScript */
     left: 50%;
-    right: auto;
     transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px)));
     -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px)));
     
@@ -83,17 +81,6 @@ header nav {
     -webkit-backface-visibility: hidden;
     will-change: transform, opacity;
     -webkit-font-smoothing: antialiased;
-}
-
-/* Fixed-position mode to escape any ancestor clipping and clamp to viewport */
-#services-dropdown.is-fixed,
-.services-dropdown.is-fixed {
-    position: fixed !important;
-    left: 50% !important;
-    right: auto !important;
-    /* top is set dynamically in JS to button bottom */
-    transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) !important;
-    -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) !important;
 }
 
 /* Invisible bridge between button and dropdown for smooth mouse movement */
