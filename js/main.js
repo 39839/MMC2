@@ -80,9 +80,9 @@ function initDropdown() {
         dropdown.style.top = `${Math.round(btnRect.bottom + 8)}px`;
 
         // Restore visibility; keep display so open anim is smooth
-        dropdown.style.display = prev.display || 'block';
-        dropdown.style.opacity = prev.opacity || '0';
-        dropdown.style.visibility = prev.visibility || 'hidden';
+        dropdown.style.display = prev.display !== undefined ? prev.display : '';
+        dropdown.style.opacity = prev.opacity !== undefined ? prev.opacity : '';
+        dropdown.style.visibility = prev.visibility !== undefined ? prev.visibility : '';
     }
 
     function openDropdown() {

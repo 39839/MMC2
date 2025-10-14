@@ -22,6 +22,8 @@ function initHeaderEnhancements() {
 
     let isDropdownOpen = false;
 
+    const dropdownWrapper = servicesButton.closest('.services-dropdown-wrapper');
+
     const computeAndPlace = () => {
         servicesDropdown.classList.add('is-fixed');
 
@@ -48,9 +50,9 @@ function initHeaderEnhancements() {
         servicesDropdown.style.left = `${clampedCenter}px`;
         servicesDropdown.style.top = `${Math.round(btnRect.bottom + 8)}px`;
 
-        servicesDropdown.style.display = prev.display || 'block';
-        servicesDropdown.style.opacity = prev.opacity || '0';
-        servicesDropdown.style.visibility = prev.visibility || 'hidden';
+        servicesDropdown.style.display = prev.display !== undefined ? prev.display : '';
+        servicesDropdown.style.opacity = prev.opacity !== undefined ? prev.opacity : '';
+        servicesDropdown.style.visibility = prev.visibility !== undefined ? prev.visibility : '';
     };
 
     const showDropdown = () => {
@@ -88,6 +90,37 @@ function initHeaderEnhancements() {
             }
         }
     });
+
+    const openOnHover = () => {
+        if (window.innerWidth > 1024) {
+            isDropdownOpen = true;
+            showDropdown();
+        }
+    };
+
+    const maybeCloseHover = (event) => {
+        if (window.innerWidth > 1024) {
+            const related = event.relatedTarget;
+            const withinDropdown = related ? servicesDropdown.contains(related) : false;
+            const withinButton = related ? servicesButton.contains(related) : false;
+            if (!withinDropdown && !withinButton) {
+                isDropdownOpen = false;
+                hideDropdown();
+            }
+        }
+    };
+
+    if (dropdownWrapper) {
+        dropdownWrapper.addEventListener('mouseenter', openOnHover);
+        dropdownWrapper.addEventListener('mouseleave', maybeCloseHover);
+        dropdownWrapper.addEventListener('focusin', openOnHover);
+        dropdownWrapper.addEventListener('focusout', maybeCloseHover);
+    }
+
+    servicesDropdown.addEventListener('mouseenter', openOnHover);
+    servicesDropdown.addEventListener('mouseleave', maybeCloseHover);
+    servicesDropdown.addEventListener('focusin', openOnHover);
+    servicesDropdown.addEventListener('focusout', maybeCloseHover);
 
     if (!dropdownDocumentHandlerAttached) {
         document.addEventListener('click', (event) => {
