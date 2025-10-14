@@ -51,8 +51,43 @@ function initDropdown() {
     let isOpen = false;
     let closeTimer = null;
 
+    function computeAndPlace() {
+        // Ensure fixed mode to avoid ancestor clipping
+        dropdown.classList.add('is-fixed');
+
+        // Temporarily show invisibly to measure
+        const prev = {
+            display: dropdown.style.display,
+            opacity: dropdown.style.opacity,
+            visibility: dropdown.style.visibility,
+            left: dropdown.style.left,
+            top: dropdown.style.top,
+        };
+        dropdown.style.display = 'block';
+        dropdown.style.opacity = '0';
+        dropdown.style.visibility = 'hidden';
+        dropdown.style.left = '50%';
+
+        const btnRect = button.getBoundingClientRect();
+        const ddWidth = dropdown.offsetWidth || 380;
+        const centerX = btnRect.left + (btnRect.width / 2);
+        const pad = 12; // viewport padding
+        const minCenter = pad + ddWidth / 2;
+        const maxCenter = window.innerWidth - pad - ddWidth / 2;
+        const clampedCenter = Math.min(Math.max(centerX, minCenter), maxCenter);
+
+        dropdown.style.left = `${clampedCenter}px`;
+        dropdown.style.top = `${Math.round(btnRect.bottom + 8)}px`;
+
+        // Restore visibility; keep display so open anim is smooth
+        dropdown.style.display = prev.display || 'block';
+        dropdown.style.opacity = prev.opacity || '0';
+        dropdown.style.visibility = prev.visibility || 'hidden';
+    }
+
     function openDropdown() {
         clearTimeout(closeTimer);
+        computeAndPlace();
         dropdown.style.display = 'block';
         dropdown.offsetHeight; // Force reflow
         dropdown.style.opacity = '1';
@@ -116,6 +151,15 @@ function initDropdown() {
             closeDropdown();
         }
     });
+
+    // Keep position correct across resize/scroll while open
+    const reflowPosition = () => {
+        if (isOpen) {
+            computeAndPlace();
+        }
+    };
+    window.addEventListener('resize', reflowPosition);
+    window.addEventListener('scroll', reflowPosition, { passive: true });
 
     dropdownInitialized = true;
     return true;

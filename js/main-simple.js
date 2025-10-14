@@ -22,7 +22,39 @@ function initHeaderEnhancements() {
 
     let isDropdownOpen = false;
 
+    const computeAndPlace = () => {
+        servicesDropdown.classList.add('is-fixed');
+
+        const prev = {
+            display: servicesDropdown.style.display,
+            opacity: servicesDropdown.style.opacity,
+            visibility: servicesDropdown.style.visibility,
+            left: servicesDropdown.style.left,
+            top: servicesDropdown.style.top,
+        };
+        servicesDropdown.style.display = 'block';
+        servicesDropdown.style.opacity = '0';
+        servicesDropdown.style.visibility = 'hidden';
+        servicesDropdown.style.left = '50%';
+
+        const btnRect = servicesButton.getBoundingClientRect();
+        const ddWidth = servicesDropdown.offsetWidth || 380;
+        const centerX = btnRect.left + (btnRect.width / 2);
+        const pad = 12;
+        const minCenter = pad + ddWidth / 2;
+        const maxCenter = window.innerWidth - pad - ddWidth / 2;
+        const clampedCenter = Math.min(Math.max(centerX, minCenter), maxCenter);
+
+        servicesDropdown.style.left = `${clampedCenter}px`;
+        servicesDropdown.style.top = `${Math.round(btnRect.bottom + 8)}px`;
+
+        servicesDropdown.style.display = prev.display || 'block';
+        servicesDropdown.style.opacity = prev.opacity || '0';
+        servicesDropdown.style.visibility = prev.visibility || 'hidden';
+    };
+
     const showDropdown = () => {
+        computeAndPlace();
         servicesDropdown.style.display = 'block';
         servicesDropdown.offsetHeight; // Force reflow for transition
         servicesDropdown.style.opacity = '1';
@@ -104,6 +136,15 @@ function initHeaderEnhancements() {
 
     window.addEventListener('scroll', updateHeaderShadow);
     updateHeaderShadow();
+
+    // Maintain placement on resize/scroll
+    const reflowPosition = () => {
+        if (isDropdownOpen) {
+            computeAndPlace();
+        }
+    };
+    window.addEventListener('resize', reflowPosition);
+    window.addEventListener('scroll', reflowPosition, { passive: true });
 }
 
 document.addEventListener('DOMContentLoaded', function() {

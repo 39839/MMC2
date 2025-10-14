@@ -81,6 +81,17 @@ header nav {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Fixed-position mode to escape any ancestor clipping and clamp to viewport */
+#services-dropdown.is-fixed,
+.services-dropdown.is-fixed {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    /* top is set dynamically in JS to button bottom */
+    transform: translateX(-50%) translateY(-10px) !important;
+    -webkit-transform: translateX(-50%) translateY(-10px) !important;
+}
+
 /* Invisible bridge between button and dropdown for smooth mouse movement */
 .services-dropdown-wrapper::after {
     content: '';
