@@ -3,7 +3,7 @@
    ================================================================== */
 
 :root {
-    --services-dropdown-offset-x: 2px;
+    --services-dropdown-offset-x: -52px;
 }
 
 /* 1. CRITICAL: Force Header to Top Stacking Layer - Safari Compatible */
