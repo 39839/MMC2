@@ -68,7 +68,7 @@ header nav {
     
     z-index: 999999 !important;
     
-    margin-top: 0.5rem; /* Small gap but bridged by pseudo-element */
+    margin-top: 0rem; /* No gap - dropdown directly under button */
     padding: 0.75rem 0;
     
     /* Hidden state */
@@ -103,7 +103,7 @@ header nav {
     top: 100%;
     left: 0;
     right: 0;
-    height: 20px; /* Bridge the gap */
+    height: 8px; /* Bridge the small gap */
     z-index: 999998;
 }
 
@@ -152,15 +152,15 @@ section[class*="hero"],
 #services-dropdown::before {
     content: '';
     position: absolute;
-    top: -10px;
+    top: -8px;
     /* Center the arrow */
     left: calc(50% - var(--services-dropdown-offset-x, 0px));
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #0d47a1;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #0d47a1;
     filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.1));
     z-index: 1;
 }
