@@ -4,7 +4,7 @@
 
 :root {
     /* Perfect centering for all screen sizes */
-    --dropdown-offset: 0px;
+    --dropdown-offset: 40px;
     --dropdown-width: 320px;
     --dropdown-border-radius: 12px;
     --dropdown-shadow: 0 12px 40px rgba(13, 71, 161, 0.15), 0 4px 20px rgba(0, 0, 0, 0.08);
