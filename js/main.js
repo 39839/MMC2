@@ -23,22 +23,29 @@ function initDropdown() {
     const button = document.getElementById('services-button');
     const dropdown = document.getElementById('services-dropdown');
 
+    // Align JS-applied baseline with CSS in css/dropdown-fix.css
     dropdown.style.cssText = `
         position: absolute;
         top: 100%;
         left: 50%;
-        transform: translateX(-50%);
-        width: 300px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        transform: translateX(-50%) translateY(-10px);
+        width: 380px;
+        max-width: 90vw;
+        background: linear-gradient(to bottom, #ffffff, #f8fbff);
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(13, 71, 161, 0.1);
         border: 2px solid #0d47a1;
-        z-index: 99999;
+        z-index: 999999;
         margin-top: 0.5rem;
+        padding: 0.75rem 0;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
         display: none;
+        -webkit-font-smoothing: antialiased;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     `;
 
     let isOpen = false;
@@ -50,6 +57,7 @@ function initDropdown() {
         dropdown.offsetHeight; // Force reflow
         dropdown.style.opacity = '1';
         dropdown.style.visibility = 'visible';
+        dropdown.style.pointerEvents = 'auto';
         dropdown.style.transform = 'translateX(-50%) translateY(0)';
         isOpen = true;
     }
@@ -57,10 +65,11 @@ function initDropdown() {
     function closeDropdown() {
         dropdown.style.opacity = '0';
         dropdown.style.visibility = 'hidden';
+        dropdown.style.pointerEvents = 'none';
         dropdown.style.transform = 'translateX(-50%) translateY(-10px)';
         closeTimer = setTimeout(() => {
             dropdown.style.display = 'none';
-        }, 300);
+        }, 220);
         isOpen = false;
     }
 
