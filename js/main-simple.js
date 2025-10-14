@@ -1,7 +1,6 @@
-// Montgomery Medical Clinic - Simplified Main JavaScript
+// Montgomery Medical Clinic - Enhanced Main JavaScript with Perfect Dropdown
 
 let headerEnhancementsInitialized = false;
-let dropdownDocumentHandlerAttached = false;
 
 function initHeaderEnhancements() {
     if (headerEnhancementsInitialized) {
@@ -13,8 +12,6 @@ function initHeaderEnhancements() {
     const mobileMenuButton = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const header = document.querySelector('header');
-    const hiddenTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px)';
-    const visibleTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0)';
 
     if (!servicesButton || !servicesDropdown || !mobileMenuButton || !mobileMenu || !header) {
         return;
@@ -23,123 +20,150 @@ function initHeaderEnhancements() {
     headerEnhancementsInitialized = true;
 
     let isDropdownOpen = false;
-
+    let closeTimer = null;
     const dropdownWrapper = servicesButton.closest('.services-dropdown-wrapper');
 
-    const computeAndPlace = () => {
-        servicesDropdown.classList.add('is-fixed');
+    // Position dropdown using fixed positioning for consistency
+    function positionDropdown() {
+        const buttonRect = servicesButton.getBoundingClientRect();
+        const dropdownWidth = servicesDropdown.offsetWidth || 360;
+        
+        // Calculate center position
+        const buttonCenter = buttonRect.left + (buttonRect.width / 2);
+        
+        // Calculate dropdown left position (centered under button)
+        let dropdownLeft = buttonCenter - (dropdownWidth / 2);
+        
+        // Ensure dropdown doesn't go off screen
+        const minLeft = 16; // 16px padding from edge
+        const maxLeft = window.innerWidth - dropdownWidth - 16;
+        dropdownLeft = Math.max(minLeft, Math.min(dropdownLeft, maxLeft));
+        
+        // Position directly below button
+        const dropdownTop = buttonRect.bottom + 8;
+        
+        // Apply positioning
+        servicesDropdown.style.left = `${dropdownLeft}px`;
+        servicesDropdown.style.top = `${dropdownTop}px`;
+        
+        // Center the arrow under the button
+        const arrowOffset = buttonCenter - dropdownLeft;
+        servicesDropdown.style.setProperty('--arrow-offset', `${arrowOffset}px`);
+    }
 
-        const prev = {
-            display: servicesDropdown.style.display,
-            opacity: servicesDropdown.style.opacity,
-            visibility: servicesDropdown.style.visibility,
-            left: servicesDropdown.style.left,
-            top: servicesDropdown.style.top,
-        };
+    function showDropdown() {
+        clearTimeout(closeTimer);
+        
+        // Position first
+        positionDropdown();
+        
+        // Show dropdown
+        servicesDropdown.classList.add('show');
         servicesDropdown.style.display = 'block';
-        servicesDropdown.style.opacity = '0';
-        servicesDropdown.style.visibility = 'hidden';
-        servicesDropdown.style.left = '50%';
-
-        const btnRect = servicesButton.getBoundingClientRect();
-        const ddWidth = servicesDropdown.offsetWidth || 380;
-        const centerX = btnRect.left + (btnRect.width / 2);
-        const pad = 12;
-        const minCenter = pad + ddWidth / 2;
-        const maxCenter = window.innerWidth - pad - ddWidth / 2;
-        const clampedCenter = Math.min(Math.max(centerX, minCenter), maxCenter);
-
-        servicesDropdown.style.left = `${clampedCenter}px`;
-        servicesDropdown.style.top = `${Math.round(btnRect.bottom + 8)}px`;
-
-        servicesDropdown.style.display = prev.display !== undefined ? prev.display : '';
-        servicesDropdown.style.opacity = prev.opacity !== undefined ? prev.opacity : '';
-        servicesDropdown.style.visibility = prev.visibility !== undefined ? prev.visibility : '';
-    };
-
-    const showDropdown = () => {
-        computeAndPlace();
-        servicesDropdown.style.display = 'block';
-        servicesDropdown.offsetHeight; // Force reflow for transition
+        
+        // Force reflow for smooth transition
+        servicesDropdown.offsetHeight;
+        
         servicesDropdown.style.opacity = '1';
         servicesDropdown.style.visibility = 'visible';
         servicesDropdown.style.pointerEvents = 'auto';
-        servicesDropdown.style.transform = visibleTransform;
-        servicesDropdown.style.webkitTransform = visibleTransform;
-    };
+        
+        isDropdownOpen = true;
+    }
 
-    const hideDropdown = () => {
+    function hideDropdown() {
+        servicesDropdown.classList.remove('show');
         servicesDropdown.style.opacity = '0';
         servicesDropdown.style.visibility = 'hidden';
         servicesDropdown.style.pointerEvents = 'none';
-        servicesDropdown.style.transform = hiddenTransform;
-        servicesDropdown.style.webkitTransform = hiddenTransform;
-        setTimeout(() => {
+        
+        closeTimer = setTimeout(() => {
             if (!isDropdownOpen) {
-                servicesDropdown.style.display = '';
+                servicesDropdown.style.display = 'none';
             }
-        }, 300); // Match transition duration
-    };
+        }, 300);
+        
+        isDropdownOpen = false;
+    }
 
-    servicesButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (window.innerWidth <= 1024) {
-            isDropdownOpen = !isDropdownOpen;
-            if (isDropdownOpen) {
+    // Desktop: Show on hover
+    if (dropdownWrapper) {
+        dropdownWrapper.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 1024) {
                 showDropdown();
-            } else {
+            }
+        });
+        
+        dropdownWrapper.addEventListener('mouseleave', (event) => {
+            if (window.innerWidth > 1024) {
+                const related = event.relatedTarget;
+                if (!servicesDropdown.contains(related)) {
+                    hideDropdown();
+                }
+            }
+        });
+    }
+
+    // Keep dropdown open when hovering over it
+    servicesDropdown.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 1024) {
+            clearTimeout(closeTimer);
+            isDropdownOpen = true;
+        }
+    });
+    
+    servicesDropdown.addEventListener('mouseleave', (event) => {
+        if (window.innerWidth > 1024) {
+            const related = event.relatedTarget;
+            if (!dropdownWrapper.contains(related)) {
                 hideDropdown();
             }
         }
     });
 
-    const openOnHover = () => {
-        if (window.innerWidth > 1024) {
-            isDropdownOpen = true;
-            showDropdown();
-        }
-    };
-
-    const maybeCloseHover = (event) => {
-        if (window.innerWidth > 1024) {
-            const related = event.relatedTarget;
-            const withinDropdown = related ? servicesDropdown.contains(related) : false;
-            const withinButton = related ? servicesButton.contains(related) : false;
-            if (!withinDropdown && !withinButton) {
-                isDropdownOpen = false;
+    // Mobile: Toggle on click
+    servicesButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if (window.innerWidth <= 1024) {
+            if (isDropdownOpen) {
                 hideDropdown();
+            } else {
+                showDropdown();
             }
         }
-    };
+    });
 
-    if (dropdownWrapper) {
-        dropdownWrapper.addEventListener('mouseenter', openOnHover);
-        dropdownWrapper.addEventListener('mouseleave', maybeCloseHover);
-        dropdownWrapper.addEventListener('focusin', openOnHover);
-        dropdownWrapper.addEventListener('focusout', maybeCloseHover);
+    // Close on click outside
+    document.addEventListener('click', (event) => {
+        if (isDropdownOpen && 
+            !servicesButton.contains(event.target) && 
+            !servicesDropdown.contains(event.target)) {
+            hideDropdown();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && isDropdownOpen) {
+            hideDropdown();
+        }
+    });
+
+    // Reposition on scroll and resize
+    let repositionTimer;
+    function handleRepositioning() {
+        if (isDropdownOpen) {
+            clearTimeout(repositionTimer);
+            repositionTimer = setTimeout(positionDropdown, 10);
+        }
     }
+    
+    window.addEventListener('scroll', handleRepositioning, { passive: true });
+    window.addEventListener('resize', handleRepositioning);
 
-    servicesDropdown.addEventListener('mouseenter', openOnHover);
-    servicesDropdown.addEventListener('mouseleave', maybeCloseHover);
-    servicesDropdown.addEventListener('focusin', openOnHover);
-    servicesDropdown.addEventListener('focusout', maybeCloseHover);
-
-    if (!dropdownDocumentHandlerAttached) {
-        document.addEventListener('click', (event) => {
-            if (
-                isDropdownOpen &&
-                !servicesButton.contains(event.target) &&
-                !servicesDropdown.contains(event.target)
-            ) {
-                isDropdownOpen = false;
-                hideDropdown();
-            }
-        });
-        dropdownDocumentHandlerAttached = true;
-    }
-
+    // Mobile menu functionality
     const iconPath = mobileMenuButton.querySelector('svg path');
 
     mobileMenuButton.addEventListener('click', () => {
@@ -154,6 +178,7 @@ function initHeaderEnhancements() {
         }
     });
 
+    // Close mobile menu on link click
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
@@ -163,30 +188,27 @@ function initHeaderEnhancements() {
         });
     });
 
-    const updateHeaderShadow = () => {
+    // Header shadow on scroll
+    function updateHeaderShadow() {
         if (window.pageYOffset > 100) {
             header.classList.add('shadow-lg');
         } else {
             header.classList.remove('shadow-lg');
         }
-    };
+    }
 
     window.addEventListener('scroll', updateHeaderShadow);
     updateHeaderShadow();
-
-    // Maintain placement on resize/scroll
-    const reflowPosition = () => {
-        if (isDropdownOpen) {
-            computeAndPlace();
-        }
-    };
-    window.addEventListener('resize', reflowPosition);
-    window.addEventListener('scroll', reflowPosition, { passive: true });
 }
 
+// Initialize everything on DOM ready
 document.addEventListener('DOMContentLoaded', function() {
     console.log('MMC Website Loaded');
     
+    // Initialize contact modal
+    initContactModal();
+    
+    // Initialize AOS animations
     if (typeof AOS !== 'undefined') {
         setTimeout(() => {
             AOS.init({
@@ -198,7 +220,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
     }
 
-    document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (event) {
             const href = this.getAttribute('href');
             if (href && href !== '#' && href.length > 1) {
@@ -214,32 +237,78 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Initialize header enhancements
     initHeaderEnhancements();
 
+    // Start slideshow if function exists
     if (typeof showSlides === 'function') {
         showSlides();
     }
 });
 
+// Re-initialize on header load
 document.addEventListener('mmc:header-ready', initHeaderEnhancements);
 
-// Expose test function for debugging
+// Contact Modal Functionality
+function initContactModal() {
+    const modal = document.getElementById('contact-modal');
+    const triggers = document.querySelectorAll('[data-contact-trigger]');
+    const closeButtons = document.querySelectorAll('[data-contact-close]');
+    
+    if (!modal) return;
+    
+    // Open modal
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // Close modal
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+    
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
+// Initialize contact modal
+document.addEventListener('DOMContentLoaded', initContactModal);
+document.addEventListener('mmc:header-ready', initContactModal);
+
+// Debug function for testing
 window.testDropdown = function() {
     const dropdown = document.getElementById('services-dropdown');
     if (dropdown) {
         console.log('Testing dropdown visibility...');
-        dropdown.style.cssText = `
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-            transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
-            -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
-        `;
+        dropdown.classList.add('show');
+        dropdown.style.display = 'block';
+        dropdown.style.opacity = '1';
+        dropdown.style.visibility = 'visible';
+        dropdown.style.pointerEvents = 'auto';
         console.log('Dropdown should now be visible');
         
         const links = dropdown.querySelectorAll('.dropdown-link');
-        console.log(\`Found \${links.length} dropdown links:\`);
+        console.log(`Found ${links.length} dropdown links:`);
         links.forEach(link => console.log('- ' + link.textContent.trim()));
     } else {
         console.error('Dropdown element not found!');

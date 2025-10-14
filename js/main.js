@@ -1,4 +1,4 @@
-// Montgomery Medical Clinic - Main JavaScript
+// Montgomery Medical Clinic - Main JavaScript with Perfect Dropdown
 
 let dropdownInitialized = false;
 let headerFeaturesInitialized = false;
@@ -16,156 +16,134 @@ function initDropdown() {
         return false;
     }
 
-    const newWrapper = servicesWrapper.cloneNode(true);
-    servicesWrapper.parentNode.replaceChild(newWrapper, servicesWrapper);
-
-    const wrapper = document.querySelector('.services-dropdown-wrapper');
-    const button = document.getElementById('services-button');
-    const dropdown = document.getElementById('services-dropdown');
-
-    const hiddenTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px)';
-    const visibleTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0)';
-
-    // Align JS-applied baseline with CSS in css/dropdown-fix.css
-    dropdown.style.cssText = `
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: ${hiddenTransform};
-        -webkit-transform: ${hiddenTransform};
-        width: 380px;
-        max-width: 90vw;
-        background: linear-gradient(to bottom, #ffffff, #f8fbff);
-        border-radius: 16px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(13, 71, 161, 0.1);
-        border: 2px solid #0d47a1;
-        z-index: 999999;
-        margin-top: 0.5rem;
-        padding: 0.75rem 0;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
-        display: none;
-        -webkit-font-smoothing: antialiased;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-    `;
-
     let isOpen = false;
     let closeTimer = null;
 
-    function computeAndPlace() {
-        // Ensure fixed mode to avoid ancestor clipping
-        dropdown.classList.add('is-fixed');
-
-        // Temporarily show invisibly to measure
-        const prev = {
-            display: dropdown.style.display,
-            opacity: dropdown.style.opacity,
-            visibility: dropdown.style.visibility,
-            left: dropdown.style.left,
-            top: dropdown.style.top,
-        };
-        dropdown.style.display = 'block';
-        dropdown.style.opacity = '0';
-        dropdown.style.visibility = 'hidden';
-        dropdown.style.left = '50%';
-
-        const btnRect = button.getBoundingClientRect();
-        const ddWidth = dropdown.offsetWidth || 380;
-        const centerX = btnRect.left + (btnRect.width / 2);
-        const pad = 12; // viewport padding
-        const minCenter = pad + ddWidth / 2;
-        const maxCenter = window.innerWidth - pad - ddWidth / 2;
-        const clampedCenter = Math.min(Math.max(centerX, minCenter), maxCenter);
-
-        dropdown.style.left = `${clampedCenter}px`;
-        dropdown.style.top = `${Math.round(btnRect.bottom + 8)}px`;
-
-        // Restore visibility; keep display so open anim is smooth
-        dropdown.style.display = prev.display !== undefined ? prev.display : '';
-        dropdown.style.opacity = prev.opacity !== undefined ? prev.opacity : '';
-        dropdown.style.visibility = prev.visibility !== undefined ? prev.visibility : '';
+    // Position dropdown using fixed positioning
+    function positionDropdown() {
+        const buttonRect = servicesButton.getBoundingClientRect();
+        const dropdownWidth = servicesDropdown.offsetWidth || 360;
+        
+        // Calculate center position
+        const buttonCenter = buttonRect.left + (buttonRect.width / 2);
+        
+        // Calculate dropdown left position (centered under button)
+        let dropdownLeft = buttonCenter - (dropdownWidth / 2);
+        
+        // Ensure dropdown doesn't go off screen
+        const minLeft = 16;
+        const maxLeft = window.innerWidth - dropdownWidth - 16;
+        dropdownLeft = Math.max(minLeft, Math.min(dropdownLeft, maxLeft));
+        
+        // Position directly below button
+        const dropdownTop = buttonRect.bottom + 8;
+        
+        // Apply positioning
+        servicesDropdown.style.left = `${dropdownLeft}px`;
+        servicesDropdown.style.top = `${dropdownTop}px`;
     }
 
     function openDropdown() {
         clearTimeout(closeTimer);
-        computeAndPlace();
-        dropdown.style.display = 'block';
-        dropdown.offsetHeight; // Force reflow
-        dropdown.style.opacity = '1';
-        dropdown.style.visibility = 'visible';
-        dropdown.style.pointerEvents = 'auto';
-        dropdown.style.transform = visibleTransform;
-        dropdown.style.webkitTransform = visibleTransform;
+        positionDropdown();
+        
+        servicesDropdown.classList.add('show');
+        servicesDropdown.style.display = 'block';
+        servicesDropdown.offsetHeight; // Force reflow
+        servicesDropdown.style.opacity = '1';
+        servicesDropdown.style.visibility = 'visible';
+        servicesDropdown.style.pointerEvents = 'auto';
+        
         isOpen = true;
     }
 
     function closeDropdown() {
-        dropdown.style.opacity = '0';
-        dropdown.style.visibility = 'hidden';
-        dropdown.style.pointerEvents = 'none';
-        dropdown.style.transform = hiddenTransform;
-        dropdown.style.webkitTransform = hiddenTransform;
+        servicesDropdown.classList.remove('show');
+        servicesDropdown.style.opacity = '0';
+        servicesDropdown.style.visibility = 'hidden';
+        servicesDropdown.style.pointerEvents = 'none';
+        
         closeTimer = setTimeout(() => {
-            dropdown.style.display = 'none';
-        }, 220);
+            if (!isOpen) {
+                servicesDropdown.style.display = 'none';
+            }
+        }, 300);
+        
         isOpen = false;
     }
 
-    wrapper.addEventListener('mouseenter', openDropdown);
-
-    wrapper.addEventListener('mouseleave', (event) => {
-        const toElement = event.relatedTarget;
-        if (!dropdown.contains(toElement)) {
-            closeDropdown();
-        }
-    });
-
-    dropdown.addEventListener('mouseenter', () => {
-        clearTimeout(closeTimer);
-    });
-
-    dropdown.addEventListener('mouseleave', (event) => {
-        const toElement = event.relatedTarget;
-        if (!wrapper.contains(toElement)) {
-            closeDropdown();
-        }
-    });
-
-    button.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        if (isOpen) {
-            closeDropdown();
-        } else {
+    // Desktop hover
+    servicesWrapper.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 1024) {
             openDropdown();
         }
     });
 
+    servicesWrapper.addEventListener('mouseleave', (event) => {
+        if (window.innerWidth > 1024) {
+            const toElement = event.relatedTarget;
+            if (!servicesDropdown.contains(toElement)) {
+                closeDropdown();
+            }
+        }
+    });
+
+    servicesDropdown.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 1024) {
+            clearTimeout(closeTimer);
+        }
+    });
+
+    servicesDropdown.addEventListener('mouseleave', (event) => {
+        if (window.innerWidth > 1024) {
+            const toElement = event.relatedTarget;
+            if (!servicesWrapper.contains(toElement)) {
+                closeDropdown();
+            }
+        }
+    });
+
+    // Mobile/tablet click
+    servicesButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if (window.innerWidth <= 1024) {
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        }
+    });
+
+    // Close on outside click
     document.addEventListener('click', (event) => {
-        if (!wrapper.contains(event.target) && !dropdown.contains(event.target)) {
+        if (!servicesWrapper.contains(event.target) && !servicesDropdown.contains(event.target)) {
             if (isOpen) {
                 closeDropdown();
             }
         }
     });
 
+    // Close on Escape
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && isOpen) {
             closeDropdown();
         }
     });
 
-    // Keep position correct across resize/scroll while open
-    const reflowPosition = () => {
+    // Reposition on scroll/resize
+    let repositionTimer;
+    function handleRepositioning() {
         if (isOpen) {
-            computeAndPlace();
+            clearTimeout(repositionTimer);
+            repositionTimer = setTimeout(positionDropdown, 10);
         }
-    };
-    window.addEventListener('resize', reflowPosition);
-    window.addEventListener('scroll', reflowPosition, { passive: true });
+    }
+    
+    window.addEventListener('resize', handleRepositioning);
+    window.addEventListener('scroll', handleRepositioning, { passive: true });
 
     dropdownInitialized = true;
     return true;
@@ -224,7 +202,7 @@ function initHeaderFeatures() {
 }
 
 function setupSmoothScroll() {
-    document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(event) {
             const href = this.getAttribute('href');
             if (!href || href === '#' || href.length === 0) {
