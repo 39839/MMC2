@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Occupational Health services at Montgomery Medical Clinic - pre-employment physicals, injury treatment, and workplace health programs in Gaithersburg, MD.">
+    <title>Occupational Health | Montgomery Medical Clinic</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dropdown-fix.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        'brand-blue': '#0d47a1',
+                        'brand-orange': '#ff8f00',
+                        'light-gray': '#fdfdff',
+                        'dark-gray': '#1a1d23',
+                        'medium-gray': '#5a6474',
+                        'light-blue-bg': '#f5f9ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Force dropdown alignment to match home page */
+        #services-dropdown {
+            left: 0 !important;
+            right: auto !important;
+            transform: translateY(-10px) !important;
+        }
+        
+        .services-dropdown-wrapper:hover #services-dropdown {
+            transform: translateY(0) !important;
+        }
+
+        /* Comprehensive fix for hover cutoff issues */
+        section, .container {
+            overflow: visible;
+        }
+
+        /* Add padding to grid containers to make space for hover effects */
+        .occupational-services-grid,
+        .specialized-services-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            overflow: visible; /* Allow hover state to render outside the grid */
+        }
+
+        /* Ensure individual grid items don't get cut off */
+        .occupational-services-grid > .group,
+        .specialized-services-container > .expandable-section {
+            overflow: visible;
+            position: relative; /* Needed for z-index to work on hover */
+        }
+        
+        /* Ensure inner relative containers also allow overflow */
+        .group > .relative,
+        .expandable-section > button,
+        .expandable-section > div {
+            overflow: visible;
+        }
+
+        /* Override global AOS overflow clipping for these interactive sections */
+        .occupational-services-grid > .group[data-aos],
+        .specialized-services-container[data-aos] {
+            overflow: visible !important;
+        }
+
+        /* Ensure icon rows allow shadows to render */
+        .occupational-feature-header {
+            overflow: visible;
+        }
+
+        .occupational-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: linear-gradient(135deg, var(--medical-blue, #0d47a1) 0%, #1e63c6 100%);
+            border: 1px solid var(--icon-border, rgba(13, 71, 161, 0.22));
+            box-shadow: var(--icon-shadow, 0 16px 26px rgba(13, 71, 161, 0.18));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: visible;
+        }
+
+        .occupational-icon svg {
+            width: 2.25rem;
+            height: 2.25rem;
+            color: currentColor;
+        }
+
+        .occupational-icon--blue {
+            background: linear-gradient(135deg, #0d47a1 0%, #1e63c6 100%);
+            --icon-border: rgba(13, 71, 161, 0.28);
+            --icon-shadow: 0 18px 32px rgba(13, 71, 161, 0.2);
+            --icon-shadow-hover: 0 24px 44px rgba(13, 71, 161, 0.32);
+        }
+
+        .occupational-icon--orange {
+            background: linear-gradient(135deg, #ff8f00 0%, #ffb74d 100%);
+            --icon-border: rgba(255, 143, 0, 0.3);
+            --icon-shadow: 0 18px 32px rgba(255, 143, 0, 0.24);
+            --icon-shadow-hover: 0 24px 44px rgba(255, 143, 0, 0.34);
+        }
+
+        .occupational-icon--purple {
+            background: linear-gradient(135deg, #3949ab 0%, #5c6bc0 100%);
+            --icon-border: rgba(70, 86, 192, 0.28);
+            --icon-shadow: 0 18px 32px rgba(69, 90, 168, 0.22);
+            --icon-shadow-hover: 0 24px 44px rgba(69, 90, 168, 0.32);
+        }
+
+        .occupational-icon--green {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            --icon-border: rgba(46, 125, 50, 0.26);
+            --icon-shadow: 0 18px 32px rgba(46, 125, 50, 0.22);
+            --icon-shadow-hover: 0 24px 44px rgba(46, 125, 50, 0.32);
+        }
+
+        .group:hover .occupational-icon,
+        .expandable-section:hover .occupational-icon,
+        .expandable-section button:hover .occupational-icon {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: var(--icon-shadow-hover, 0 22px 36px rgba(13, 71, 161, 0.28));
+        }
+
+        /* Bring hovered items to the front */
+        .group:hover,
+        .expandable-section:hover {
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-light-gray text-dark-gray">
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+
+
+    <section class="page-header">
+        <div class="container mx-auto px-6 lg:px-8 relative z-10">
+            <div class="breadcrumb" data-aos="fade-right">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Occupational Health</span>
+            </div>
+            <h1 class="text-5xl lg:text-6xl font-black mb-6" data-aos="fade-up">Occupational Health Services</h1>
+            <p class="text-xl lg:text-2xl text-white/90 max-w-3xl" data-aos="fade-up" data-aos-delay="100">
+                Comprehensive workplace health solutions and immigration medical services.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 lg:py-32 bg-white">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 max-w-4xl mx-auto" data-aos="fade-up">
+                <h2 class="text-3xl lg:text-4xl font-black text-dark-gray mb-6">Partnering with Businesses for Employee Health</h2>
+                <p class="section-subtitle">We provide comprehensive occupational health services to ensure a safe, healthy, and compliant workforce. From pre-employment screenings to injury treatment, we're your trusted healthcare partner.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-24 max-w-5xl mx-auto occupational-services-grid">
+                <div class="group" data-aos="fade-up">
+                    <div class="relative h-full bg-gradient-to-br from-blue-50 via-white to-blue-50 p-8 lg:p-10 rounded-3xl border-2 border-blue-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-6 mb-6 occupational-feature-header">
+                            <div class="flex-shrink-0 occupational-icon occupational-icon--blue">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black text-brand-blue mb-2 group-hover:text-brand-orange transition-colors">Work Injury Treatment</h3>
+                                <div class="w-16 h-1 bg-brand-orange rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-lg text-medium-gray leading-relaxed">Prompt evaluation and treatment of workplace injuries with focus on quick recovery and return to work.</p>
+                    </div>
+                </div>
+
+                <div class="group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-full bg-gradient-to-br from-orange-50 via-white to-orange-50 p-8 lg:p-10 rounded-3xl border-2 border-orange-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-6 mb-6 occupational-feature-header">
+                            <div class="flex-shrink-0 occupational-icon occupational-icon--orange">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black text-brand-blue mb-2 group-hover:text-brand-orange transition-colors">Drug & Alcohol Testing</h3>
+                                <div class="w-16 h-1 bg-brand-orange rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-lg text-medium-gray leading-relaxed">DOT and non-DOT testing services with quick turnaround times and accurate results.</p>
+                    </div>
+                </div>
+
+                <div class="group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-full bg-gradient-to-br from-purple-50 via-white to-purple-50 p-8 lg:p-10 rounded-3xl border-2 border-purple-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-6 mb-6 occupational-feature-header">
+                            <div class="flex-shrink-0 occupational-icon occupational-icon--purple">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black text-brand-blue mb-2 group-hover:text-brand-orange transition-colors">Fitness for Duty Exams</h3>
+                                <div class="w-16 h-1 bg-brand-orange rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-lg text-medium-gray leading-relaxed">Assessments to determine if employees can safely perform their job functions after illness or injury.</p>
+                    </div>
+                </div>
+
+                <div class="group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-full bg-gradient-to-br from-green-50 via-white to-green-50 p-8 lg:p-10 rounded-3xl border-2 border-green-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex items-start gap-6 mb-6 occupational-feature-header">
+                            <div class="flex-shrink-0 occupational-icon occupational-icon--green">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-black text-brand-blue mb-2 group-hover:text-brand-orange transition-colors">Employee Wellness Programs</h3>
+                                <div class="w-16 h-1 bg-brand-orange rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-lg text-medium-gray leading-relaxed">Customized wellness programs to promote employee health and reduce healthcare costs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto space-y-6 specialized-services-container" data-aos="fade-up">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-brand-orange text-white px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wider mb-4">Specialized Services</span>
+                    <h2 class="text-3xl lg:text-4xl font-black text-brand-blue">Additional Expert Services</h2>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 transition-all hover:shadow-xl expandable-section">
+                    <button onclick="toggleDropdown('faa')" class="w-full flex items-center justify-between p-8 lg:p-10 text-left hover:bg-blue-50 transition-all group">
+                        <div class="flex items-center gap-6 flex-1 occupational-feature-header">
+                            <div class="flex-shrink-0 occupational-icon occupational-icon--blue">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl lg:text-3xl font-black text-brand-blue mb-2 group-hover:text-brand-orange transition-colors">FAA Physical Examinations</h3>
+                                <p class="text-medium-gray text-base lg:text-lg">Authorized Aviation Medical Examiner - All Three Classes</p>
+                            </div>
+                        </div>
+                        <svg id="faa-arrow" class="w-8 h-8 text-brand-blue flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="faa-content" class="hidden px-8 lg:px-10 pb-8 lg:pb-10">
+                        <div class="pt-6 border-t-2 border-blue-100 space-y-8">
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">What is an FAA Physical and who needs one?</h4>
+                                <p class="text-medium-gray leading-relaxed mb-4">
+                                    In order to determine that you are fit to pilot an aircraft, the Federal Aviation Administration requires that pilots take an FAA physical. This physical will inspect your physical and mental health and look at your medical history.
+                                </p>
+                                <p class="text-medium-gray leading-relaxed">
+                                    FAA physicals must be conducted by an authorized Aviation Medical Examiner (AME). Dr. Efi Kessous is an authorized AME and has a wealth of experience performing these physicals.
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 lg:p-8 rounded-2xl">
+                                <h4 class="text-xl font-bold text-brand-blue mb-4">Three Classes of FAA Physicals - We Offer All Classes</h4>
+                                <p class="text-medium-gray mb-4">Dr. Efi Kessous performs all three classes of FAA physicals:</p>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-4">
+                                        <span class="text-2xl font-black text-brand-orange">1st</span>
+                                        <p class="text-medium-gray pt-1">Class - For Airline Transport Pilots</p>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <span class="text-2xl font-black text-brand-orange">2nd</span>
+                                        <p class="text-medium-gray pt-1">Class - For Commercial Pilots</p>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <span class="text-2xl font-black text-brand-orange">3rd</span>
+                                        <p class="text-medium-gray pt-1">Class - For Student and Recreational Pilots</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">How should I prepare for my FAA physical?</h4>
+                                <p class="text-medium-gray leading-relaxed mb-4">
+                                    To ensure that your physical goes smoothly, you'll want to register an account on the FAA's MedXPress system and complete the appropriate electronic form. During the physical, you can expect to take a hearing test, a vision test, and an echocardiogram (for a first class physical over a certain age). You will also be asked to provide a urine sample.
+                                </p>
+                                <p class="text-medium-gray leading-relaxed">
+                                    We also recommend that you review the FAA's full list of minimum requirements as well as the AMAS Medication Database if you are currently taking any medication.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">How often does my FAA physical need to be repeated?</h4>
+                                <p class="text-medium-gray leading-relaxed">
+                                    Depending on your age and the type of medical certificate that you have, you will need to repeat the FAA physical anywhere from every 6 months to every 60 months.
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 lg:p-8 rounded-2xl">
+                                <h4 class="text-xl font-bold text-brand-blue mb-3">Our Partnership</h4>
+                                <p class="text-medium-gray leading-relaxed">
+                                    Montgomery Medical Clinic is proud to work with the Washington International Flight Academy in Washington, DC.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-lg border-2 border-green-100 transition-all hover:shadow-xl expandable-section">
+                    <button onclick="toggleDropdown('immigration')" class="w-full flex items-center justify-between p-8 lg:p-10 text-left hover:bg-green-50 transition-all group">
+                        <div class="flex items-center gap-6 flex-1 occupational-feature-header">
+                            <div class="flex-shrink-0 occupational-icon occupational-icon--green">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl lg:text-3xl font-black text-brand-blue mb-2 group-hover:text-brand-orange transition-colors">Immigration Medical Examinations</h3>
+                                <p class="text-medium-gray text-base lg:text-lg">USCIS-Authorized Civil Surgeon</p>
+                            </div>
+                        </div>
+                        <svg id="immigration-arrow" class="w-8 h-8 text-brand-blue flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="immigration-content" class="hidden px-8 lg:px-10 pb-8 lg:pb-10">
+                        <div class="pt-6 border-t-2 border-green-100 space-y-8">
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">What is an Immigration Physical and who needs one?</h4>
+                                <p class="text-medium-gray leading-relaxed mb-4">
+                                    Individuals applying for a green card (lawful permanent residence) must undergo a physical examination by a licensed medical professional who has been authorized by the United States Citizenship and Immigration Service (USCIS). The purpose of this physical is to check green card applicants for pre-existing conditions that would preclude their applications from being approved.
+                                </p>
+                                <p class="text-medium-gray leading-relaxed">
+                                    During the physical, the physician will check for communicable diseases and provide any required vaccinations that have not yet been received.
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 lg:p-8 rounded-2xl">
+                                <h4 class="text-xl font-bold text-brand-blue mb-3">Dr. Efi Kessous is an Authorized USCIS Physician</h4>
+                                <p class="text-medium-gray leading-relaxed">
+                                    Dr. Kessous is a USCIS-designated civil surgeon with extensive experience conducting immigration medical examinations.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">Vaccination Requirements</h4>
+                                <p class="text-medium-gray leading-relaxed mb-4">
+                                    If you are unsure of the current vaccination requirements, you can review the CDC's comprehensive vaccination requirements for civil surgeons.
+                                </p>
+                                <a href="https://www.cdc.gov/immigrant-refugee-health/hcp/civil-surgeons/vaccination.html" target="_blank" class="inline-flex items-center gap-2 text-brand-orange hover:text-brand-blue font-semibold transition-colors">
+                                    View Vaccination Requirements
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">What should I bring to my Immigration Physical?</h4>
+                                <div class="bg-blue-50 p-6 lg:p-8 rounded-2xl">
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start gap-4">
+                                            <svg class="w-6 h-6 text-brand-orange flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            <span class="text-medium-gray">A government issued ID, such as a driving license or passport</span>
+                                        </li>
+                                        <li class="flex items-start gap-4">
+                                            <svg class="w-6 h-6 text-brand-orange flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            <span class="text-medium-gray">A copy of your immunization records</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-blue mb-4">How long does it take to get the paperwork?</h4>
+                                <p class="text-medium-gray leading-relaxed">
+                                    If all the test results come back normal, you can typically expect a call within 1-2 weeks to let you know that the paperwork is ready to collect.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 lg:py-32 bg-light-blue-bg">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="bg-gradient-blue text-white rounded-3xl p-12 lg:p-20 text-center shadow-2xl" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-black mb-6">Ready to Partner with Us?</h2>
+                <p class="text-xl mb-10 text-white/90 max-w-2xl mx-auto">Contact us to learn more about our occupational health services and how we can support your business.</p>
+                <a href="tel:3012082273" class="btn btn-secondary px-12 py-5 text-lg inline-flex">
+                    Call (301) 208-2273
+                </a>
+            </div>
+        </div>
+    </section>
+
+            <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/header-footer-loader.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    </script>
+
+</body>
+</html>

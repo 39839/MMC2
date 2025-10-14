@@ -1,0 +1,1225 @@
+/* ===== SERVICES SECTION - PREVENT CUTOFF ===== */
+#services {
+    overflow: visible;
+}
+
+#services .container {
+    overflow: visible;
+}
+
+/* Grid container needs to accommodate hover effects */
+#services .grid {
+    padding: 1rem 0;
+}
+
+/* Individual service cards */
+#services .card {
+    margin: 0.75rem;
+}/*
+    Montgomery Medical Clinic - Medical Professional Stylesheet
+    Hospital-Grade Design with Brand Colors (Blue & Orange)
+*/
+
+/* ===== COMPREHENSIVE GRID FIX FOR ALL PAGES ===== */
+/* Ensure all grid containers can accommodate hover transforms */
+section {
+    overflow: visible;
+}
+
+section > .container {
+    overflow: visible;
+}
+
+.grid {
+    overflow: visible;
+    padding: 1rem 0; /* Breathing room for hover effects */
+}
+
+/* Ensure grid items have proper spacing */
+.grid > * {
+    overflow: visible;
+}
+
+/* ===== ROOT VARIABLES - MEDICAL BRAND THEME ===== */
+:root {
+    /* Brand Medical Color Palette */
+    --medical-blue: #0d47a1;        /* Brand Blue - Primary Medical */
+    --deep-blue: #002171;           /* Deep Authority Blue */
+    --light-medical-blue: #1976d2;  /* Light Medical Blue */
+    --medical-orange: #ff8f00;      /* Brand Orange - Energy & Care */
+    --light-orange: #ffb300;        /* Light Orange Accent */
+    
+    /* Professional Medical Grays */
+    --clinical-white: #ffffff;
+    --off-white: #fafafa;
+    --light-gray: #f5f5f5;
+    --border-gray: #e0e0e0;
+    --medium-gray: #616161;
+    --dark-gray: #212121;
+    --charcoal: #1a1a1a;
+    
+    /* Medical UI */
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 2px 8px rgba(13, 71, 161, 0.08);
+    --shadow-elevated: 0 8px 16px rgba(13, 71, 161, 0.12);
+    --shadow-strong: 0 12px 24px rgba(13, 71, 161, 0.15);
+    
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: 0em;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+    --top-contact-bar-height: 56px;
+}
+
+/* ===== CRITICAL: PREVENT ALL HORIZONTAL OVERFLOW ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* COMPREHENSIVE SCROLL FIX - Prevents AOS animation overflow */
+html, body {
+    max-width: 100vw;
+    overflow-x: clip; /* Modern browsers: doesn't create scroll context */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--dark-gray);
+    background: var(--off-white);
+    font-size: 16px;
+    position: relative;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* Prevent horizontal overflow on all containers */
+section, div, footer {
+    max-width: 100%;
+    overflow-x: clip; /* Use clip instead of hidden */
+}
+
+/* Exception: header must allow dropdown to overflow */
+header {
+    max-width: 100%;
+    overflow: visible !important; /* Critical: Prevents dropdown clipping */
+}
+
+/* Ensure header tag specifically allows overflow */
+header.glass-effect {
+    overflow: visible !important;
+}
+
+/* Specifically target sections with AOS animations */
+section[data-aos], div[data-aos] {
+    overflow: clip;
+}
+
+/* ===== STICKY TOP CONTACT BAR ===== */
+.top-contact-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10010;
+    width: 100%;
+    background: #0d47a1; /* Brand blue fallback */
+}
+
+/* Ensure contact bar text color */
+.bg-brand-blue {
+    background-color: #0d47a1 !important;
+}
+
+.border-brand-orange {
+    border-color: #ff8f00 !important;
+}
+
+/* ===== HOSPITAL HEADER STYLING ===== */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+    max-width: 100vw;
+    position: sticky;
+    top: var(--top-contact-bar-height, 56px);
+    z-index: 9999;
+    overflow: visible !important;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Ensure nav allows dropdown to extend */
+header nav {
+    position: relative;
+    z-index: 1001;
+    overflow: visible !important;
+}
+
+.nav-link {
+    position: relative;
+    font-weight: 600;
+    color: var(--dark-gray);
+    padding: 1rem 0.25rem;
+    padding-bottom: 0.75rem; /* Less bottom padding so line is lower */
+    font-size: 1.05rem;
+    letter-spacing: var(--letter-spacing-normal);
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0px; /* Below the element to match Home positioning */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--medical-blue);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--medical-blue);
+}
+
+.nav-link:hover::after {
+    width: 100%; /* Full width on hover */
+}
+
+.nav-link.active {
+    color: var(--medical-blue);
+    font-weight: 700;
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: var(--medical-orange);
+}
+
+/* Dropdown link styling */
+.dropdown-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    transition: all 0.2s ease-in-out;
+    color: var(--dark-gray);
+    font-weight: 600;
+    border-left: 4px solid transparent;
+}
+
+.dropdown-link:hover {
+    background-color: var(--light-gray);
+    color: var(--medical-blue);
+    border-left-color: var(--medical-orange);
+    transform: translateX(4px);
+}
+
+/* ===== MEDICAL HERO SECTION ===== */
+.hero-bg {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Explicitly low z-index to stay below header and dropdown */
+    isolation: isolate; /* Create new stacking context to prevent z-index conflicts */
+}
+
+/* Medical Grid Pattern */
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(to right, rgba(13, 71, 161, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(13, 71, 161, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.5;
+}
+
+/* Medical Cross Accent */
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(13, 71, 161, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+/* ===== HOSPITAL-GRADE CARDS ===== */
+.card {
+    background: var(--clinical-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-gray);
+    border-top: 4px solid var(--medical-blue);
+    overflow: visible; /* Allow shadow to show */
+    position: relative;
+    /* Add padding to container to prevent cutoff */
+    margin: 4px;
+}
+
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: var(--shadow-strong);
+        border-top-color: var(--medical-orange);
+        z-index: 10; /* Ensure hover state appears above siblings */
+    }
+}
+
+@media (hover: none) {
+    .card:active {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-elevated);
+    }
+}
+
+/* Department Color Coding with Brand Colors */
+.card[data-service="primary"] {
+    border-top: 4px solid var(--medical-blue);
+}
+
+.card[data-service="primary"]:hover {
+    box-shadow: 0 12px 24px rgba(13, 71, 161, 0.2);
+}
+
+.card[data-service="sports"] {
+    border-top: 4px solid #1976d2;
+}
+
+.card[data-service="sports"]:hover {
+    box-shadow: 0 12px 24px rgba(25, 118, 210, 0.2);
+}
+
+.card[data-service="derma"] {
+    border-top: 4px solid var(--medical-orange);
+}
+
+.card[data-service="derma"]:hover {
+    box-shadow: 0 12px 24px rgba(255, 143, 0, 0.2);
+}
+
+.card[data-service="nutrition"] {
+    border-top: 4px solid #ffb300;
+}
+
+.card[data-service="nutrition"]:hover {
+    box-shadow: 0 12px 24px rgba(255, 179, 0, 0.2);
+}
+
+.card[data-service="occupational"] {
+    border-top: 4px solid #002171;
+}
+
+.card[data-service="occupational"]:hover {
+    box-shadow: 0 12px 24px rgba(0, 33, 113, 0.2);
+}
+
+.card[data-service="acupuncture"] {
+    border-top: 4px solid #4caf50;
+}
+
+.card[data-service="acupuncture"]:hover {
+    box-shadow: 0 12px 24px rgba(76, 175, 80, 0.2);
+}
+
+/* Medical Icon Styling with Brand Colors */
+.icon-wrap {
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-subtle);
+    width: fit-content;
+}
+
+/* New Icon Wrapper for Custom PNG Icons */
+.icon-wrap-new {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    width: fit-content;
+    border: 2px solid transparent;
+    /* Ensure parent can accommodate scale */
+    position: relative;
+}
+
+@media (hover: hover) {
+    .card:hover .icon-wrap-new {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-color: var(--medical-blue);
+    }
+}
+
+/* Ensure card containers have enough padding for hover states */
+.card {
+    padding: 0.5rem; /* Add breathing room */
+}
+
+.card > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (hover: none) {
+    .card:active .icon-wrap-new {
+        transform: scale(0.98);
+    }
+}
+
+.card[data-service="primary"] .icon-wrap {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, #1976d2 100%);
+}
+
+.card[data-service="sports"] .icon-wrap {
+    background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+}
+
+.card[data-service="derma"] .icon-wrap {
+    background: linear-gradient(135deg, var(--medical-orange) 0%, #ffb300 100%);
+}
+
+.card[data-service="nutrition"] .icon-wrap {
+    background: linear-gradient(135deg, #ffb300 0%, #ffc107 100%);
+}
+
+.card[data-service="occupational"] .icon-wrap {
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--medical-blue) 100%);
+}
+
+.card[data-service="acupuncture"] .icon-wrap {
+    background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+}
+
+@media (hover: hover) {
+    .card:hover .icon-wrap {
+        transform: scale(1.08);
+        box-shadow: var(--shadow-card);
+    }
+}
+
+/* ===== HOSPITAL BUTTONS ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: var(--letter-spacing-wide);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    min-height: 44px; /* Touch target size for mobile */
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, #1565c0 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+}
+
+@media (hover: hover) {
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--deep-blue) 0%, var(--medical-blue) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
+    }
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--medical-orange) 0%, #f57c00 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 143, 0, 0.3);
+}
+
+@media (hover: hover) {
+    .btn-secondary:hover {
+        background: linear-gradient(135deg, #f57c00 0%, var(--medical-orange) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 143, 0, 0.4);
+    }
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--medical-blue);
+    color: var(--medical-blue);
+    font-weight: 700;
+}
+
+@media (hover: hover) {
+    .btn-outline:hover {
+        background: var(--medical-blue);
+        color: white;
+        box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+    }
+}
+
+@media (hover: none) {
+    .btn-primary:active, .btn-secondary:active, .btn-outline:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ===== MEDICAL PAGE HEADER ===== */
+.page-header {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, var(--deep-blue) 100%);
+    color: white;
+    padding: 7rem 0 4.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header h1 {
+    line-height: 1.3;
+    padding-bottom: 0.5rem;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 143, 0, 0.1) 100%);
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+/* ===== PROFESSIONAL TYPOGRAPHY ===== */
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: var(--dark-gray);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--medium-gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* ===== STATS SECTION - HOSPITAL STYLE ===== */
+.stat-card {
+    text-align: center;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+}
+
+/* ===== MEDICAL GRADIENT BACKGROUNDS ===== */
+.bg-gradient-blue {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, var(--deep-blue) 100%);
+    position: relative;
+}
+
+.bg-gradient-blue::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 143, 0, 0.15) 100%);
+    pointer-events: none;
+}
+
+.gradient-blue {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, #1976d2 100%);
+}
+
+/* ===== DOCTOR CARDS - HOSPITAL PROFESSIONAL ===== */
+.doctor-card {
+    background: var(--clinical-white);
+    border-radius: 8px;
+    overflow: visible; /* Allow shadow expansion */
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-gray);
+    border-top: 4px solid var(--medical-blue);
+    margin: 0.5rem; /* Prevent cutoff */
+    position: relative;
+}
+
+.doctor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-strong);
+    border-top-color: var(--medical-orange);
+    z-index: 10;
+}
+
+.doctor-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--medical-blue);
+    margin-bottom: 0.5rem;
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.doctor-title {
+    color: var(--medical-orange);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+/* ===== BREADCRUMB - MEDICAL STYLE ===== */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: var(--medical-orange);
+}
+
+/* ===== TRUST BADGES & ACCREDITATION ===== */
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.75rem;
+    background: white;
+    border: 2px solid var(--medical-blue);
+    border-radius: 6px;
+    color: var(--medical-blue);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: var(--letter-spacing-wide);
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+}
+
+.trust-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+    border-color: var(--medical-orange);
+    color: var(--medical-orange);
+}
+
+/* ===== FOOTER - PROFESSIONAL ===== */
+footer {
+    background: var(--charcoal);
+    color: #e0e0e0;
+}
+
+footer a:hover {
+    color: var(--medical-orange);
+}
+
+/* ===== FLOATING SUBTLE ANIMATION ===== */
+@media (prefers-reduced-motion: no-preference) {
+    .floating {
+        animation: floating 6s ease-in-out infinite;
+    }
+}
+
+@keyframes floating {
+    0%, 100% { 
+        transform: translateY(0px);
+    }
+    50% { 
+        transform: translateY(-15px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .floating {
+        animation: none;
+    }
+}
+
+/* ===== MEDICAL ACCENTS ===== */
+.medical-accent {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.medical-accent::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--medical-blue) 0%, var(--medical-orange) 100%);
+    border-radius: 3px;
+}
+
+/* Medical Cross Icon */
+.medical-cross {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+
+.medical-cross::before,
+.medical-cross::after {
+    content: '';
+    position: absolute;
+    background: var(--medical-blue);
+}
+
+.medical-cross::before {
+    width: 100%;
+    height: 30%;
+    top: 35%;
+}
+
+.medical-cross::after {
+    width: 30%;
+    height: 100%;
+    left: 35%;
+}
+
+/* ===== RESPONSIVE CONTAINER FIX ===== */
+.container {
+    width: 100%;
+    max-width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ensure slideshow never overflows */
+.slideshow-container {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 1024px) {
+    .section-title {
+        font-size: 2.25rem;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+    }
+    
+    /* Ensure hover effects work on tablets */
+    .card, .feature-item, .hospital-card {
+        margin: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.875rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .page-header {
+        padding: 4rem 0 3rem;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .card {
+        border-radius: 12px;
+        margin: 0.25rem; /* Less margin on mobile */
+    }
+    
+    .doctor-name {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9375rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.875rem;
+    }
+    
+    .card {
+        border-top-width: 3px;
+    }
+    
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.8125rem;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-medical-blue {
+    color: var(--medical-blue);
+}
+
+.text-medical-orange {
+    color: var(--medical-orange);
+}
+
+.bg-clinical-white {
+    background: var(--clinical-white);
+}
+
+.border-medical {
+    border-color: var(--medical-blue);
+}
+
+/* ===== SMOOTH TRANSITIONS ===== */
+html {
+    scroll-padding-top: 100px;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== HOSPITAL CARD ===== */
+.hospital-card {
+    background: var(--clinical-white);
+    border-left: 5px solid var(--medical-blue);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin: 0.5rem 0; /* Prevent cutoff */
+    overflow: visible;
+    position: relative;
+}
+
+.hospital-card:hover {
+    border-left-color: var(--medical-orange);
+    box-shadow: var(--shadow-elevated);
+    transform: translateX(4px);
+    z-index: 10;
+}
+
+/* Medical Divider */
+.medical-divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--medical-blue) 0%, var(--medical-orange) 100%);
+    border-radius: 2px;
+    margin: 2rem 0;
+}
+
+/* Clinical Badge */
+.clinical-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(13, 71, 161, 0.1);
+    color: var(--medical-blue);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    border-radius: 4px;
+    border: 1px solid rgba(13, 71, 161, 0.2);
+}
+
+/* ===== PROFESSIONAL HOVER EFFECTS ===== */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0.5rem; /* Room for expansion */
+    overflow: visible;
+    position: relative;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+    z-index: 10;
+}
+
+/* ===== MEDICAL ICONS & SYMBOLS ===== */
+.medical-symbol {
+    color: var(--medical-blue);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* ===== FEATURE ITEMS ===== */
+.feature-item {
+    background: var(--clinical-white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-gray);
+    margin: 0.5rem; /* Room for hover */
+    overflow: visible;
+    position: relative;
+}
+
+.feature-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+    z-index: 10;
+}
+
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--medical-blue) 0%, #1976d2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.2);
+}
+
+/* ===== SERVICES DROPDOWN - Base Button Styles ===== */
+/* Note: Main dropdown styles are in dropdown-fix.css for Safari compatibility */
+
+#services-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0.25rem 0.75rem;
+    font-weight: inherit;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* Make Services button underline match other nav links */
+.services-dropdown-wrapper {
+    position: relative;
+}
+
+/* Remove duplicate underline - nav-link class already handles it */
+
+/* ===== ANIMATION SCROLLING FIX ===== */
+/* Prevent AOS elements from creating unwanted scroll areas */
+[data-aos] {
+    /* Clip overflow during transforms without affecting content */
+    overflow: clip;
+}
+
+/* During animation, ensure no scrollable overflow */
+[data-aos].aos-animate {
+    overflow: clip !important;
+}
+
+/* After animation completes, restore normal overflow */
+[data-aos].aos-animate.aos-initialized {
+    overflow: visible;
+}
+
+/* Ensure dropdown stays on top of everything */
+.services-dropdown {
+    z-index: 10000 !important;
+}
+
+/* Ensure wrapper allows dropdown to extend beyond */
+.services-dropdown-wrapper {
+    position: relative;
+    z-index: auto; /* Don't create new stacking context */
+}
+
+/* ===== CONTACT MODAL ===== */
+.contact-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10020;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    animation: contact-overlay-fade 0.3s ease;
+}
+
+.contact-modal.active {
+    display: flex;
+}
+
+.contact-modal-content {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    max-width: 520px;
+    width: min(100%, 520px);
+    box-shadow: 0 20px 60px rgba(13, 71, 161, 0.3);
+    position: relative;
+    animation: contact-modal-rise 0.3s ease;
+}
+
+.contact-modal-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.contact-modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--medical-blue);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.contact-modal-subtitle {
+    margin-top: 0.5rem;
+    color: var(--medium-gray);
+    line-height: 1.5;
+}
+
+.contact-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--medium-gray);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: color 0.3s ease;
+}
+
+.contact-close:hover,
+.contact-close:focus {
+    color: var(--medical-blue);
+}
+
+.contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-option {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.contact-option:hover,
+.contact-option:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.15);
+    border-color: var(--medical-blue);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.contact-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.contact-icon.phone {
+    background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+}
+
+.contact-icon.text {
+    background: linear-gradient(135deg, #ff8f00 0%, #ffb300 100%);
+}
+
+.contact-icon.email {
+    background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+}
+
+.contact-option-details h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 0.25rem;
+}
+
+.contact-option-details p {
+    color: var(--medium-gray);
+    line-height: 1.4;
+}
+
+.contact-hours {
+    margin-top: 0.5rem;
+    font-weight: 600;
+    color: var(--medical-blue);
+}
+
+@keyframes contact-overlay-fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes contact-modal-rise {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-modal-content {
+        padding: 2rem 1.75rem;
+    }
+
+    .contact-option {
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Montgomery Medical Clinic - Premier multi-specialty healthcare in Gaithersburg, MD. Urgent care, primary care, sports medicine, dermatology, and more.">
+    <title>Montgomery Medical Clinic | Premier Healthcare in Gaithersburg, MD</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dropdown-fix.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        'brand-blue': '#0d47a1',
+                        'brand-orange': '#ff8f00',
+                        'light-gray': '#fafafa',
+                        'dark-gray': '#212121',
+                        'medium-gray': '#616161',
+                        'light-blue-bg': '#f5f9ff',
+                        'deep-blue': '#002171',
+                        'light-blue': '#1976d2',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Prevent horizontal overflow at all zoom levels */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .slideshow-container .slide {
+            display: none;
+            animation: fadeIn 1.5s;
+        }
+        .slideshow-container .slide.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Clean & Aesthetic Slideshow Container */
+        .slideshow-container {
+            background: white;
+            border: 1px solid #e5e7eb; /* tailwind's gray-200 */
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Slideshow Navigation Dots */
+        .slideshow-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        @media (min-width: 768px) {
+            .slideshow-dots {
+                gap: 8px;
+            }
+        }
+        
+        .slideshow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .slideshow-dot {
+                width: 9px;
+                height: 9px;
+            }
+        }
+        
+        .slideshow-dot.active {
+            background: #0d47a1;
+            transform: scale(1.1);
+        }
+        
+        .slideshow-dot:hover {
+            background: #1976d2;
+        }
+        
+        /* Fix service cards hover cutoff */
+        #services {
+            overflow: visible;
+        }
+        
+        #services .container {
+            overflow: visible;
+        }
+        
+        #services .grid {
+            padding: 1.5rem 0;
+            overflow: visible;
+        }
+        
+        /* Individual cards need room for hover effects */
+        #services .card {
+            margin: 0.75rem;
+        }
+    </style>
+</head>
+<body class="bg-light-gray text-dark-gray">
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+
+
+
+    <section class="relative text-white min-h-[50vh] md:min-h-[65vh] lg:min-h-[85vh] flex items-center py-12 md:py-20" style="z-index: 1; position: relative; isolation: isolate;" data-aos="fade-in">
+        <img src="images/PhotoWide.jpeg" alt="Team of doctors at Montgomery Medical Clinic" class="absolute inset-0 w-full h-full object-cover z-0">
+        
+        <div class="absolute inset-0 bg-gradient-to-r from-dark-gray/80 via-dark-gray/60 via-30% to-transparent" style="z-index: 10;"></div>
+        
+        <div class="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-md lg:max-w-lg text-left">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight leading-tight">
+                    Compassionate,
+                    <span class="text-brand-orange">Personalized</span>
+                    Healthcare.
+                </h1>
+                <p class="mt-4 sm:mt-6 text-gray-200 leading-relaxed" style="font-size: calc(1rem + 2px);">
+                    We are committed to a patient-centered approach, ensuring your health needs are understood and addressed. Our team provides integrated, comprehensive care you can trust.
+                </p>
+                <p class="mt-3 text-white/90 text-lg font-semibold">
+                    Proudly serving Gaithersburg, Montgomery County, and the surrounding areas.
+                </p>
+                <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-6 sm:px-10 py-4 sm:py-5 text-base sm:text-lg">
+                        Schedule Your Visit
+                    </a>
+                    <a href="#services" class="btn btn-outline border-2 border-white text-white hover:bg-white hover:text-dark-gray px-6 sm:px-10 py-4 sm:py-5 text-base sm:text-lg">
+                        Explore Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-gradient-to-b from-white to-light-blue-bg">
+        <div class="container mx-auto px-6 lg:px-8" data-aos="fade-up">
+            <div class="slideshow-container relative overflow-hidden rounded-2xl p-8 lg:p-12 max-w-6xl mx-auto">
+                
+                <!-- Navigation Arrows -->
+                <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-brand-blue/80 hover:bg-brand-blue text-white rounded-full p-2.5 shadow-md transition-all hover:scale-105" aria-label="Previous slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-brand-blue/80 hover:bg-brand-blue text-white rounded-full p-2.5 shadow-md transition-all hover:scale-105" aria-label="Next slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                
+                <div class="slide active flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-12">
+                    <div class="shrink-0 relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-purple-300 rounded-full blur-lg opacity-50"></div>
+                        <div class="relative w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
+                            <img src="icons/syringe.png" class="h-10 w-10" alt="Flu shot vaccine icon"/>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <span class="inline-block bg-orange-300 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">Available Today</span>
+                        <h3 class="text-2xl lg:text-3xl font-extrabold text-dark-gray mb-3 leading-tight">
+                            Seasonal <span class="text-brand-blue">Flu Shots</span> Are Here
+                        </h3>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 flex-wrap">
+                            <span class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-4 py-2 rounded-lg text-sm shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Walk-ins Welcome
+                            </span>
+                            <span class="text-medium-gray font-medium text-sm">Protect yourself this season</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-12">
+                    <div class="shrink-0 relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-sky-300 to-indigo-300 rounded-full blur-lg opacity-50"></div>
+                        <div class="relative w-20 h-20 bg-gradient-to-br from-sky-500 to-indigo-600 rounded-full flex items-center justify-center shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V9h14v10zM7 11h5v5H7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <span class="inline-block bg-orange-300 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">Available Today</span>
+                        <h3 class="text-2xl lg:text-3xl font-extrabold text-dark-gray mb-3 leading-tight">
+                            Same Day <span class="text-brand-blue">Urgent Care</span> Appointments
+                        </h3>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 flex-wrap">
+                            <span class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-4 py-2 rounded-lg text-sm shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Walk-In Basis
+                            </span>
+                            <span class="text-medium-gray font-medium text-sm">No appointment needed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-12">
+                    <div class="shrink-0 relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-amber-200 rounded-full blur-lg opacity-50"></div>
+                        <div class="relative w-20 h-20 bg-gradient-to-br from-blue-500 to-deep-blue rounded-full flex items-center justify-center shadow-md">
+                            <img src="icons/hospital.png" class="h-10 w-10" alt="Medical facility comprehensive care icon"/>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl lg:text-3xl font-extrabold text-dark-gray mb-3 leading-tight">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-orange">One Stop</span> For All Your Medical Needs
+                        </h3>
+                        <p class="text-medium-gray font-medium text-base mb-4">Comprehensive multi-specialty care under one roof.</p>
+                        <div class="flex items-center justify-center lg:justify-start">
+                            <a href="#services" class="inline-flex items-center gap-2 bg-white text-dark-gray font-bold px-4 py-2 rounded-lg text-sm shadow-md border border-gray-300 hover:bg-gray-100 transition-all">
+                                Explore Our Services
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slideshow-dots relative z-10 mt-4">
+                    <span class="slideshow-dot active" onclick="currentSlide(1)"></span>
+                    <span class="slideshow-dot" onclick="currentSlide(2)"></span>
+                    <span class="slideshow-dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-blue text-white py-16">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="stat-card" data-aos="fade-up">
+                    <div class="stat-number text-white">70+</div>
+                    <div class="stat-label text-white/90">Patients Seen Daily</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number text-white">7</div>
+                    <div class="stat-label text-white/90">Departments</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number text-white">10K+</div>
+                    <div class="stat-label text-white/90">Patients Served Annually</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 lg:py-32 bg-white">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 max-w-3xl mx-auto" data-aos="fade-up">
+                <h2 class="section-title text-dark-gray mb-6">Our Departments</h2>
+                <p class="section-subtitle">Comprehensive healthcare services tailored to your unique needs, delivered by board-certified specialists.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                <a href="pages/urgent-primary-care.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="primary" data-aos="fade-up">
+                    <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
+                        <img src="icons/PrimaryCare.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Urgent and Primary Care medical services icon"/>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Urgent & Primary Care</h3>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Your foundation for lifelong health, from routine check-ups to immediate care needs.</p>
+                    <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
+                        Explore Urgent Care
+                    </span>
+                </a>
+
+                <a href="pages/sports-medicine.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="sports" data-aos="fade-up" data-aos-delay="50">
+                    <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
+                        <img src="icons/PhysicalTherapy.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Sports Medicine and Physical Therapy rehabilitation icon"/>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Sports Medicine & Physical Therapy</h3>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Comprehensive rehabilitation and sports injury care to get you back in the game, stronger than before.</p>
+                    <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
+                        Explore Sports Medicine
+                    </span>
+                </a>
+
+                <a href="pages/dermatology.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="derma" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
+                        <img src="icons/Dermatology.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Dermatology skin care services icon"/>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Dermatology</h3>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Advanced solutions for skin health, from managing conditions to aesthetic treatments.</p>
+                    <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
+                        Explore Dermatology
+                    </span>
+                </a>
+
+                <a href="pages/nutrition-wellness.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="nutrition" data-aos="fade-up" data-aos-delay="150">
+                    <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
+                        <img src="icons/Nutrition.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Nutrition and Wellness Center services icon"/>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Wellness Center</h3>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Nutrition and personal training to fuel your body and mind for optimal performance.</p>
+                    <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
+                        Explore Wellness
+                    </span>
+                </a>
+
+                <a href="pages/occupational-health.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="occupational" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
+                        <img src="icons/OccupationalHealth.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Occupational Health and workplace safety services icon"/>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Occupational Health</h3>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Partnering with businesses to ensure a safe, healthy and compliant workforce- offering expert occupational health and immigration medical services.</p>
+                    <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
+                        Explore Occupational Health
+                    </span>
+                </a>
+
+                <a href="#" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="acupuncture" data-aos="fade-up" data-aos-delay="250">
+                    <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
+                        <img src="icons/Accupuncture.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Acupuncture traditional Chinese medicine services icon"/>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Acupuncture</h3>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Traditional Chinese medicine approach to healing and wellness through precise needle placement.</p>
+                    <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
+                        Explore Acupuncture
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 lg:py-32 bg-light-blue-bg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
+                <div class="floating" data-aos="fade-right">
+                    <img src="images/CurrentPhoto1.png" alt="Montgomery Medical Clinic modern facility with board-certified medical professionals providing patient care" class="rounded-3xl shadow-2xl w-full">
+                </div>
+                <div class="mt-10 lg:mt-0 space-y-4 md:space-y-6" data-aos="fade-left">
+                    <span class="text-brand-blue font-bold uppercase tracking-widest text-sm">WHO WE ARE</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black">About Us</h2>
+                    <p class="text-base md:text-lg text-medium-gray leading-relaxed">
+                        Our facility is equipped with top-of-the-line technology, including an in-house radiology center and physical therapy unit, ensuring seamless care under one roof.
+                    </p>
+                    <p class="text-base md:text-lg text-medium-gray leading-relaxed">
+                        With over five decades of combined experience, our board-certified physicians build lasting relationships based on trust and personalized attention.
+                    </p>
+                    <a href="pages/about.html" class="btn btn-primary inline-flex mt-6">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="insurance" class="py-16 md:py-24 lg:py-32 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16 max-w-4xl mx-auto" data-aos="fade-up">
+                <h2 class="section-title text-dark-gray mb-6">Insurance Information</h2>
+                <p class="section-subtitle">We accept a wide variety of insurance plans to make quality healthcare accessible.</p>
+                <a href="pages/insurance.html" class="btn btn-primary mt-8 inline-flex">
+                    View All Accepted Insurance Plans
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 md:py-24 lg:py-32 bg-light-blue-bg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-blue text-white rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-20 text-center shadow-2xl" data-aos="fade-up">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">Ready to Experience the Difference?</h2>
+                <p class="text-base sm:text-lg md:text-xl mb-8 md:mb-10 text-white/90 max-w-2xl mx-auto">Join thousands of satisfied patients who trust Montgomery Medical Clinic for their healthcare needs.</p>
+                <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg inline-flex">
+                    Schedule Appointment
+                </a>
+            </div>
+        </div>
+    </section>
+
+            <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/header-footer-loader.js"></script>
+    <script src="js/main-simple.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Enhanced Slideshow functionality with dots
+        let slideIndex = 0;
+        let slideTimeout;
+
+        function showSlides() {
+            clearTimeout(slideTimeout);
+            let slides = document.querySelectorAll(".slideshow-container .slide");
+            let dots = document.querySelectorAll(".slideshow-dot");
+            
+            if (slides.length > 0) {
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove("active");
+                }
+                
+                for (let i = 0; i < dots.length; i++) {
+                    dots[i].classList.remove("active");
+                }
+                
+                slideIndex++;
+                if (slideIndex > slides.length) {slideIndex = 1}
+                
+                slides[slideIndex-1].classList.add("active");
+                if (dots[slideIndex-1]) {
+                    dots[slideIndex-1].classList.add("active");
+                }
+                
+                slideTimeout = setTimeout(showSlides, 12000);
+            }
+        }
+        
+        function currentSlide(n) {
+            slideIndex = n - 1;
+            showSlides();
+        }
+        
+        function changeSlide(direction) {
+            clearTimeout(slideTimeout);
+            let slides = document.querySelectorAll(".slideshow-container .slide");
+            let dots = document.querySelectorAll(".slideshow-dot");
+            
+            slides[slideIndex-1].classList.remove("active");
+            if (dots[slideIndex-1]) {
+                dots[slideIndex-1].classList.remove("active");
+            }
+            
+            slideIndex += direction;
+            
+            if (slideIndex > slides.length) {slideIndex = 1}
+            if (slideIndex < 1) {slideIndex = slides.length}
+            
+            slides[slideIndex-1].classList.add("active");
+            if (dots[slideIndex-1]) {
+                dots[slideIndex-1].classList.add("active");
+            }
+            
+            slideTimeout = setTimeout(showSlides, 12000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            showSlides();
+        });
+    </script>
+
+</body>
+</html>
