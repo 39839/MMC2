@@ -211,6 +211,10 @@ function initializeContactModal() {
         return;
     }
 
+    if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+    }
+
     if (modal.dataset.modalInitialized === 'true') {
         return;
     }
