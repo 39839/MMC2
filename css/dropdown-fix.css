@@ -15,6 +15,14 @@ header.glass-effect {
     -webkit-backface-visibility: hidden;
 }
 
+/* Ensure all immediate header containers don’t clip horizontally */
+#header-placeholder,
+header.glass-effect .container,
+header.glass-effect .container > nav {
+    overflow: visible !important;
+    overflow-x: visible !important;
+}
+
 /* 2. Header Navigation Container - Maintain Visibility */
 header nav {
     position: relative;
