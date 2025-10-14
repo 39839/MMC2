@@ -5,9 +5,10 @@
 /* 1. CRITICAL: Force Header to Top Stacking Layer - Safari Compatible */
 header.glass-effect {
     position: sticky !important;
-    top: 0;
-    z-index: 9999 !important;
+    top: var(--top-contact-bar-height, 0px) !important;
+    z-index: 10005 !important;
     overflow: visible !important;
+    isolation: isolate;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -38,8 +39,9 @@ header nav {
     top: 100%;
     /* Center dropdown under button for consistent positioning across all pages */
     left: 50%;
+    right: auto;
     transform: translateX(-50%) translateY(-10px);
-    -webkit-transform: translateX(-50%) translateY(-10px) translateZ(9999px);
+    -webkit-transform: translateX(-50%) translateY(-10px);
     
     /* IMPORTANT: Wide enough for all medical terms */
     width: 380px;
@@ -88,7 +90,7 @@ section.relative.text-white,
 section[class*="hero"],
 .hero-bg {
     position: relative;
-    z-index: 1 !important;
+    z-index: 0 !important;
     isolation: isolate;
 }
 
@@ -99,7 +101,7 @@ section[class*="hero"],
     visibility: visible !important;
     pointer-events: auto !important;
     transform: translateX(-50%) translateY(0) !important;
-    -webkit-transform: translateX(-50%) translateY(0) translateZ(9999px) !important;
+    -webkit-transform: translateX(-50%) translateY(0) !important;
     transition: opacity 0.2s ease 0s, 
                 visibility 0s linear 0s,
                 transform 0.2s ease 0s !important;
