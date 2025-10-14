@@ -166,42 +166,121 @@ function initializeMobileMenu() {
     }
 }
 
-// Initialize services dropdown functionality
-function initializeServicesDropdown() {
-    const servicesButton = document.getElementById('services-button');
-    const servicesDropdown = document.getElementById('services-dropdown');
-    const servicesArrow = document.getElementById('services-arrow');
-    const dropdownWrapper = document.querySelector('.services-dropdown-wrapper');
-    
-    if (servicesButton && servicesDropdown && dropdownWrapper) {
-        // Toggle dropdown on button click
-        servicesButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            servicesDropdown.classList.toggle('active');
-            servicesArrow.classList.toggle('rotate-180');
-        });
-        
-        // Show dropdown on hover
-        dropdownWrapper.addEventListener('mouseenter', function() {
-            servicesDropdown.classList.add('active');
-            servicesArrow.classList.add('rotate-180');
-        });
-        
-        // Hide dropdown on mouse leave
-        dropdownWrapper.addEventListener('mouseleave', function() {
-            servicesDropdown.classList.remove('active');
-            servicesArrow.classList.remove('rotate-180');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!dropdownWrapper.contains(e.target)) {
-                servicesDropdown.classList.remove('active');
-                servicesArrow.classList.remove('rotate-180');
+        // Initialize services dropdown functionality
+        function initializeServicesDropdown() {
+            const servicesButton = document.getElementById('services-button');
+            const servicesDropdown = document.getElementById('services-dropdown');
+            const servicesArrow = document.getElementById('services-arrow');
+            const dropdownWrapper = document.querySelector('.services-dropdown-wrapper');
+            
+            if (!servicesButton || !servicesDropdown || !dropdownWrapper) {
+                console.warn('Dropdown elements not found, retrying in 100ms...');
+                setTimeout(initializeServicesDropdown, 100);
+                return;
             }
-        });
-    }
-}
+            
+            let isOpen = false;
+            let hoverTimeout = null;
+            
+            // Function to show dropdown
+            function showDropdown() {
+                clearTimeout(hoverTimeout);
+                servicesDropdown.classList.add('active');
+                if (servicesArrow) {
+                    servicesArrow.classList.add('rotate-180');
+                }
+                isOpen = true;
+            }
+            
+            // Function to hide dropdown
+            function hideDropdown() {
+                hoverTimeout = setTimeout(() => {
+                    servicesDropdown.classList.remove('active');
+                    if (servicesArrow) {
+                        servicesArrow.classList.remove('rotate-180');
+                    }
+                    isOpen = false;
+                }, 150);
+            }
+            
+            // Desktop hover events
+            dropdownWrapper.addEventListener('mouseenter', function() {
+                if (window.innerWidth > 1024) {
+                    showDropdown();
+                }
+            });
+            
+            dropdownWrapper.addEventListener('mouseleave', function() {
+                if (window.innerWidth > 1024) {
+                    hideDropdown();
+                }
+            });
+            
+            // Keep dropdown open when hovering over it
+            servicesDropdown.addEventListener('mouseenter', function() {
+                if (window.innerWidth > 1024) {
+                    clearTimeout(hoverTimeout);
+                }
+            });
+            
+            servicesDropdown.addEventListener('mouseleave', function() {
+                if (window.innerWidth > 1024) {
+                    hideDropdown();
+                }
+            });
+            
+            // Mobile/tablet click events
+            servicesButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (window.innerWidth <= 1024) {
+                    if (isOpen) {
+                        hideDropdown();
+                    } else {
+                        showDropdown();
+                    }
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdownWrapper.contains(e.target) && !servicesDropdown.contains(e.target)) {
+                    if (isOpen) {
+                        servicesDropdown.classList.remove('active');
+                        if (servicesArrow) {
+                            servicesArrow.classList.remove('rotate-180');
+                        }
+                        isOpen = false;
+                    }
+                }
+            });
+            
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isOpen) {
+                    servicesDropdown.classList.remove('active');
+                    if (servicesArrow) {
+                        servicesArrow.classList.remove('rotate-180');
+                    }
+                    isOpen = false;
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 1024 && isOpen) {
+                    // On desktop, rely on CSS hover states
+                    servicesDropdown.classList.remove('active');
+                    if (servicesArrow) {
+                        servicesArrow.classList.remove('rotate-180');
+                    }
+                    isOpen = false;
+                }
+            });
+            
+            console.log('Services dropdown initialized successfully');
+        }
 
 function initializeContactModal() {
     const modal = document.getElementById('contact-modal');

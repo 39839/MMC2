@@ -11,108 +11,72 @@ function initDropdown() {
     const servicesWrapper = document.querySelector('.services-dropdown-wrapper');
     const servicesButton = document.getElementById('services-button');
     const servicesDropdown = document.getElementById('services-dropdown');
+    const servicesArrow = document.getElementById('services-arrow');
 
     if (!servicesWrapper || !servicesButton || !servicesDropdown) {
         return false;
     }
 
     let isOpen = false;
-    let closeTimer = null;
+    let hoverTimeout = null;
 
-    // Position dropdown using fixed positioning
-    function positionDropdown() {
-        const buttonRect = servicesButton.getBoundingClientRect();
-        const dropdownWidth = servicesDropdown.offsetWidth || 360;
-        
-        // Calculate center position
-        const buttonCenter = buttonRect.left + (buttonRect.width / 2);
-        
-        // Calculate dropdown left position (centered under button)
-        let dropdownLeft = buttonCenter - (dropdownWidth / 2);
-        
-        // Ensure dropdown doesn't go off screen
-        const minLeft = 16;
-        const maxLeft = window.innerWidth - dropdownWidth - 16;
-        dropdownLeft = Math.max(minLeft, Math.min(dropdownLeft, maxLeft));
-        
-        // Position directly below button
-        const dropdownTop = buttonRect.bottom + 8;
-        
-        // Apply positioning
-        servicesDropdown.style.left = `${dropdownLeft}px`;
-        servicesDropdown.style.top = `${dropdownTop}px`;
-    }
-
-    function openDropdown() {
-        clearTimeout(closeTimer);
-        positionDropdown();
-        
-        servicesDropdown.classList.add('show');
-        servicesDropdown.style.display = 'block';
-        servicesDropdown.offsetHeight; // Force reflow
-        servicesDropdown.style.opacity = '1';
-        servicesDropdown.style.visibility = 'visible';
-        servicesDropdown.style.pointerEvents = 'auto';
-        
+    // Function to show dropdown
+    function showDropdown() {
+        clearTimeout(hoverTimeout);
+        servicesDropdown.classList.add('active');
+        if (servicesArrow) {
+            servicesArrow.style.transform = 'rotate(180deg)';
+        }
         isOpen = true;
     }
 
-    function closeDropdown() {
-        servicesDropdown.classList.remove('show');
-        servicesDropdown.style.opacity = '0';
-        servicesDropdown.style.visibility = 'hidden';
-        servicesDropdown.style.pointerEvents = 'none';
-        
-        closeTimer = setTimeout(() => {
-            if (!isOpen) {
-                servicesDropdown.style.display = 'none';
+    // Function to hide dropdown
+    function hideDropdown() {
+        hoverTimeout = setTimeout(() => {
+            servicesDropdown.classList.remove('active');
+            if (servicesArrow) {
+                servicesArrow.style.transform = 'rotate(0deg)';
             }
-        }, 300);
-        
-        isOpen = false;
+            isOpen = false;
+        }, 150);
     }
 
-    // Desktop hover
+    // Desktop hover events
     servicesWrapper.addEventListener('mouseenter', () => {
         if (window.innerWidth > 1024) {
-            openDropdown();
+            showDropdown();
         }
     });
 
-    servicesWrapper.addEventListener('mouseleave', (event) => {
+    servicesWrapper.addEventListener('mouseleave', () => {
         if (window.innerWidth > 1024) {
-            const toElement = event.relatedTarget;
-            if (!servicesDropdown.contains(toElement)) {
-                closeDropdown();
-            }
+            hideDropdown();
         }
     });
 
+    // Keep dropdown open when hovering over it
     servicesDropdown.addEventListener('mouseenter', () => {
         if (window.innerWidth > 1024) {
-            clearTimeout(closeTimer);
+            clearTimeout(hoverTimeout);
         }
     });
 
-    servicesDropdown.addEventListener('mouseleave', (event) => {
+    servicesDropdown.addEventListener('mouseleave', () => {
         if (window.innerWidth > 1024) {
-            const toElement = event.relatedTarget;
-            if (!servicesWrapper.contains(toElement)) {
-                closeDropdown();
-            }
+            hideDropdown();
         }
     });
 
-    // Mobile/tablet click
+    // Mobile/tablet click events
     servicesButton.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
         
         if (window.innerWidth <= 1024) {
             if (isOpen) {
-                closeDropdown();
+                hideDropdown();
             } else {
-                openDropdown();
+                showDropdown();
             }
         }
     });
@@ -121,7 +85,11 @@ function initDropdown() {
     document.addEventListener('click', (event) => {
         if (!servicesWrapper.contains(event.target) && !servicesDropdown.contains(event.target)) {
             if (isOpen) {
-                closeDropdown();
+                servicesDropdown.classList.remove('active');
+                if (servicesArrow) {
+                    servicesArrow.style.transform = 'rotate(0deg)';
+                }
+                isOpen = false;
             }
         }
     });
@@ -129,21 +97,24 @@ function initDropdown() {
     // Close on Escape
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && isOpen) {
-            closeDropdown();
+            servicesDropdown.classList.remove('active');
+            if (servicesArrow) {
+                servicesArrow.style.transform = 'rotate(0deg)';
+            }
+            isOpen = false;
         }
     });
 
-    // Reposition on scroll/resize
-    let repositionTimer;
-    function handleRepositioning() {
-        if (isOpen) {
-            clearTimeout(repositionTimer);
-            repositionTimer = setTimeout(positionDropdown, 10);
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1024 && isOpen) {
+            servicesDropdown.classList.remove('active');
+            if (servicesArrow) {
+                servicesArrow.style.transform = 'rotate(0deg)';
+            }
+            isOpen = false;
         }
-    }
-    
-    window.addEventListener('resize', handleRepositioning);
-    window.addEventListener('scroll', handleRepositioning, { passive: true });
+    });
 
     dropdownInitialized = true;
     return true;
