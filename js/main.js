@@ -23,12 +23,16 @@ function initDropdown() {
     const button = document.getElementById('services-button');
     const dropdown = document.getElementById('services-dropdown');
 
+    const hiddenTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px)';
+    const visibleTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0)';
+
     // Align JS-applied baseline with CSS in css/dropdown-fix.css
     dropdown.style.cssText = `
         position: absolute;
         top: 100%;
         left: 50%;
-        transform: translateX(-50%) translateY(-10px);
+        transform: ${hiddenTransform};
+        -webkit-transform: ${hiddenTransform};
         width: 380px;
         max-width: 90vw;
         background: linear-gradient(to bottom, #ffffff, #f8fbff);
@@ -93,7 +97,8 @@ function initDropdown() {
         dropdown.style.opacity = '1';
         dropdown.style.visibility = 'visible';
         dropdown.style.pointerEvents = 'auto';
-        dropdown.style.transform = 'translateX(-50%) translateY(0)';
+        dropdown.style.transform = visibleTransform;
+        dropdown.style.webkitTransform = visibleTransform;
         isOpen = true;
     }
 
@@ -101,7 +106,8 @@ function initDropdown() {
         dropdown.style.opacity = '0';
         dropdown.style.visibility = 'hidden';
         dropdown.style.pointerEvents = 'none';
-        dropdown.style.transform = 'translateX(-50%) translateY(-10px)';
+        dropdown.style.transform = hiddenTransform;
+        dropdown.style.webkitTransform = hiddenTransform;
         closeTimer = setTimeout(() => {
             dropdown.style.display = 'none';
         }, 220);

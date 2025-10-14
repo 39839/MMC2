@@ -13,6 +13,8 @@ function initHeaderEnhancements() {
     const mobileMenuButton = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const header = document.querySelector('header');
+    const hiddenTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px)';
+    const visibleTransform = 'translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0)';
 
     if (!servicesButton || !servicesDropdown || !mobileMenuButton || !mobileMenu || !header) {
         return;
@@ -62,14 +64,16 @@ function initHeaderEnhancements() {
         servicesDropdown.style.opacity = '1';
         servicesDropdown.style.visibility = 'visible';
         servicesDropdown.style.pointerEvents = 'auto';
-        servicesDropdown.style.transform = 'translateX(-50%) translateY(0)';
+        servicesDropdown.style.transform = visibleTransform;
+        servicesDropdown.style.webkitTransform = visibleTransform;
     };
 
     const hideDropdown = () => {
         servicesDropdown.style.opacity = '0';
         servicesDropdown.style.visibility = 'hidden';
         servicesDropdown.style.pointerEvents = 'none';
-        servicesDropdown.style.transform = 'translateX(-50%) translateY(-10px)';
+        servicesDropdown.style.transform = hiddenTransform;
+        servicesDropdown.style.webkitTransform = hiddenTransform;
         setTimeout(() => {
             if (!isDropdownOpen) {
                 servicesDropdown.style.display = '';
@@ -229,7 +233,8 @@ window.testDropdown = function() {
             opacity: 1 !important;
             visibility: visible !important;
             pointer-events: auto !important;
-            transform: translateX(-50%) translateY(0) !important;
+            transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
+            -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
         `;
         console.log('Dropdown should now be visible');
         
