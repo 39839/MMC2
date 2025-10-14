@@ -36,19 +36,29 @@ header nav {
 
 /* 3. Dropdown Wrapper - Must Allow Overflow */
 .services-dropdown-wrapper {
-    position: relative;
+    position: relative !important;
     overflow: visible !important;
     z-index: 10021 !important; /* Higher than header to allow dropdown to show */
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     /* NO extra padding - keep original position */
+    /* CRITICAL: This creates the positioning context for the dropdown */
+    isolation: isolate;
+}
+
+/* Ensure button has consistent height */
+#services-button {
+    margin: 0 !important;
+    position: relative !important;
 }
 
 
 /* 4. CRITICAL: Dropdown Menu - Consistently positioned relative to button */
 #services-dropdown {
-    position: fixed !important; /* Use fixed positioning to escape any container issues */
-    /* Position will be calculated by JavaScript */
+    position: absolute !important;
+    top: 100% !important; /* Directly below the button */
+    margin-top: 4px !important; /* Small gap between button and dropdown */
+    /* Center dropdown under button for consistent positioning across all pages */
     left: 50%;
     transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px)));
     -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px)));
@@ -144,15 +154,15 @@ section[class*="hero"],
 #services-dropdown::before {
     content: '';
     position: absolute;
-    top: -10px;
+    top: -8px; /* Account for margin-top on dropdown */
     /* Center the arrow */
     left: calc(50% - var(--services-dropdown-offset-x, 0px));
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #0d47a1;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #0d47a1;
     filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.1));
     z-index: 1;
 }

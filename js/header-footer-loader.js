@@ -174,29 +174,15 @@ function initializeServicesDropdown() {
     const dropdownWrapper = document.querySelector('.services-dropdown-wrapper');
     
     if (servicesButton && servicesDropdown && dropdownWrapper) {
-        // Function to position dropdown below button
-        function positionDropdown() {
-            const buttonRect = servicesButton.getBoundingClientRect();
-            const dropdownTop = buttonRect.bottom + 4; // 4px gap below button
-            servicesDropdown.style.top = dropdownTop + 'px';
-        }
-        
-        // Position on load and resize
-        positionDropdown();
-        window.addEventListener('resize', positionDropdown);
-        window.addEventListener('scroll', positionDropdown);
-        
         // Toggle dropdown on button click
         servicesButton.addEventListener('click', function(e) {
             e.stopPropagation();
-            positionDropdown(); // Update position before showing
             servicesDropdown.classList.toggle('active');
             servicesArrow.classList.toggle('rotate-180');
         });
         
         // Show dropdown on hover
         dropdownWrapper.addEventListener('mouseenter', function() {
-            positionDropdown(); // Update position before showing
             servicesDropdown.classList.add('active');
             servicesArrow.classList.add('rotate-180');
         });
