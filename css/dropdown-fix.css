@@ -1,52 +1,89 @@
 /* ==================================================================
-   DROPDOWN FIX - NO LOGO OVERLAP, PROFESSIONAL POSITIONING
+   DROPDOWN FIX - COMPREHENSIVE SOLUTION FOR ALL PAGES
+   Fixes: Stacking issues, consistent centering, no inline styles needed
    ================================================================== */
 
-/* 1. CRITICAL: Force Header to Top Stacking Layer - Safari Compatible */
+/* ============================================================
+   PART 1: CRITICAL STACKING CONTEXT FIXES
+   ============================================================ */
+
+/* Force header to highest stacking layer - works on all browsers */
 header.glass-effect {
     position: sticky !important;
-    top: var(--top-contact-bar-height, 0px) !important;
-    z-index: 10005 !important;
+    top: var(--top-contact-bar-height, 56px);
+    z-index: 9999 !important;
     overflow: visible !important;
-    isolation: isolate;
+    /* Hardware acceleration for better performance */
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    /* Ensure this creates its own stacking context */
+    isolation: isolate;
 }
 
-/* 2. Header Navigation Container - Maintain Visibility */
+/* Navigation container - must allow dropdown overflow */
 header nav {
     position: relative;
     z-index: 10000;
     overflow: visible !important;
 }
 
-/* 3. Dropdown Wrapper - Must Allow Overflow */
+/* Dropdown wrapper - allows dropdown to extend beyond */
 .services-dropdown-wrapper {
     position: relative;
     overflow: visible !important;
     z-index: 10001;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    /* NO extra padding - keep original position */
 }
 
+/* ============================================================
+   PART 2: FORCE HERO/BANNER SECTIONS BELOW DROPDOWN
+   ============================================================ */
 
-/* 4. CRITICAL: Dropdown Menu - Consistently positioned relative to button */
+/* Target ALL page header/hero sections across the site */
+section.page-header,
+section.relative.text-white,
+section[class*="hero"],
+.hero-bg,
+.page-header {
+    position: relative !important;
+    z-index: 1 !important;
+    isolation: isolate !important;
+}
+
+/* Ensure hero images stay behind */
+section.page-header img,
+.hero-bg img,
+section.relative.text-white img {
+    position: relative !important;
+    z-index: 0 !important;
+}
+
+/* Override any AOS animations that might interfere */
+section[data-aos].page-header,
+section[data-aos].hero-bg {
+    z-index: 1 !important;
+}
+
+/* ============================================================
+   PART 3: DROPDOWN MENU - CENTERED & CONSISTENT
+   ============================================================ */
+
 #services-dropdown {
+    /* Positioning */
     position: absolute;
     top: 100%;
-    /* Center dropdown under button for consistent positioning across all pages */
     left: 50%;
-    right: auto;
     transform: translateX(-50%) translateY(-10px);
-    -webkit-transform: translateX(-50%) translateY(-10px);
+    -webkit-transform: translateX(-50%) translateY(-10px) translateZ(9999px);
     
-    /* IMPORTANT: Wide enough for all medical terms */
+    /* Dimensions */
     width: 380px;
     max-width: 90vw;
     
+    /* Styling */
     background: linear-gradient(to bottom, #ffffff, #f8fbff);
     border-radius: 16px;
     box-shadow: 
@@ -54,9 +91,11 @@ header nav {
         0 0 0 1px rgba(13, 71, 161, 0.1);
     border: 2px solid #0d47a1;
     
+    /* Stacking */
     z-index: 999999 !important;
     
-    margin-top: 0.5rem; /* Small gap but bridged by pseudo-element */
+    /* Spacing */
+    margin-top: 0.5rem;
     padding: 0.75rem 0;
     
     /* Hidden state */
@@ -65,43 +104,38 @@ header nav {
     visibility: hidden;
     pointer-events: none;
     
+    /* Transitions */
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     
+    /* Performance */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     will-change: transform, opacity;
     -webkit-font-smoothing: antialiased;
 }
 
-/* Invisible bridge between button and dropdown for smooth mouse movement */
+/* Invisible bridge for smooth mouse movement */
 .services-dropdown-wrapper::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    height: 20px; /* Bridge the gap */
+    height: 20px;
     z-index: 999998;
 }
 
-/* 5. CRITICAL: Force Hero/Banner Sections to Stay Behind */
-section.page-header,
-section.relative.text-white,
-section[class*="hero"],
-.hero-bg {
-    position: relative;
-    z-index: 0 !important;
-    isolation: isolate;
-}
+/* ============================================================
+   PART 4: SHOW DROPDOWN ON HOVER
+   ============================================================ */
 
-/* 6. Show Dropdown on Hover WITH SMOOTH FADE */
 .services-dropdown-wrapper:hover #services-dropdown {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
     transform: translateX(-50%) translateY(0) !important;
-    -webkit-transform: translateX(-50%) translateY(0) !important;
+    -webkit-transform: translateX(-50%) translateY(0) translateZ(9999px) !important;
     transition: opacity 0.2s ease 0s, 
                 visibility 0s linear 0s,
                 transform 0.2s ease 0s !important;
@@ -114,20 +148,21 @@ section[class*="hero"],
     pointer-events: auto !important;
 }
 
-/* Add delay before dropdown disappears - LONG DELAY FOR USER MOVEMENT */
+/* Delay before dropdown disappears - allows mouse movement */
 .services-dropdown-wrapper #services-dropdown {
-    /* Wait longer before starting to fade out - gives time to move mouse */
     transition: opacity 0.3s ease 0.6s, 
                 visibility 0s linear 0.9s,
                 transform 0.3s ease 0.6s !important;
 }
 
-/* 7. Arrow Pointer - Centered */
+/* ============================================================
+   PART 5: DROPDOWN ARROW - CENTERED
+   ============================================================ */
+
 #services-dropdown::before {
     content: '';
     position: absolute;
     top: -10px;
-    /* Center the arrow */
     left: 50%;
     transform: translateX(-50%);
     width: 0;
@@ -139,7 +174,10 @@ section[class*="hero"],
     z-index: 1;
 }
 
-/* 8. Dropdown Links - Professional & Spacious */
+/* ============================================================
+   PART 6: DROPDOWN LINKS STYLING
+   ============================================================ */
+
 #services-dropdown .dropdown-link {
     display: block;
     padding: 1.125rem 2rem;
@@ -158,8 +196,6 @@ section[class*="hero"],
     
     position: relative;
     background: transparent;
-    min-height: fit-content;
-    height: auto;
     
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -210,7 +246,10 @@ section[class*="hero"],
     border-bottom-right-radius: 14px;
 }
 
-/* 9. Arrow Rotation on Hover */
+/* ============================================================
+   PART 7: ARROW ROTATION ON HOVER
+   ============================================================ */
+
 .services-dropdown-wrapper:hover #services-arrow {
     transform: rotate(180deg);
 }
@@ -219,7 +258,10 @@ section[class*="hero"],
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 10. Mobile Responsive Adjustments */
+/* ============================================================
+   PART 8: RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+
 @media (max-width: 1280px) {
     #services-dropdown {
         width: 360px;
@@ -257,13 +299,11 @@ section[class*="hero"],
 @media (max-width: 640px) {
     #services-dropdown {
         width: calc(100vw - 2rem);
-        /* Center on mobile */
         left: 50%;
         transform: translateX(-50%) translateY(-10px);
     }
     
     #services-dropdown::before {
-        /* Center arrow on mobile */
         left: 50%;
         transform: translateX(-50%);
     }
@@ -279,14 +319,49 @@ section[class*="hero"],
     }
 }
 
-/* 11. Print Styles */
+/* ============================================================
+   PART 9: SPECIAL FIXES FOR EDGE CASES
+   ============================================================ */
+
+/* Prevent any section overflow from cutting off dropdown */
+body section,
+body .container,
+main,
+main section,
+main .container {
+    overflow: visible !important;
+}
+
+/* But allow specific elements to clip if needed (like images) */
+section img,
+.container img {
+    overflow: clip;
+}
+
+/* Ensure dropdown works even with AOS animations */
+[data-aos] {
+    overflow: visible !important;
+}
+
+/* Override any conflicting z-index from other stylesheets */
+.glass-effect {
+    z-index: 9999 !important;
+}
+
+header {
+    z-index: 9999 !important;
+}
+
+/* ============================================================
+   PART 10: PRINT & ACCESSIBILITY
+   ============================================================ */
+
 @media print {
     #services-dropdown {
         display: none !important;
     }
 }
 
-/* 12. Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
     #services-dropdown,
     #services-dropdown .dropdown-link,
@@ -295,7 +370,6 @@ section[class*="hero"],
     }
 }
 
-/* 13. High Contrast Mode Support */
 @media (prefers-contrast: high) {
     #services-dropdown {
         border-width: 3px;
@@ -306,7 +380,10 @@ section[class*="hero"],
     }
 }
 
-/* 14. Prevent any overflow */
+/* ============================================================
+   PART 11: BOX-SIZING FIX
+   ============================================================ */
+
 #services-dropdown * {
     box-sizing: border-box;
 }

@@ -896,6 +896,92 @@ footer a:hover {
     border-color: var(--medical-blue);
 }
 
+/* ===== OCCUPATIONAL HEALTH PAGE ICONS ===== */
+.occupational-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(135deg, var(--medical-blue, #0d47a1) 0%, #1e63c6 100%);
+    border: 1px solid var(--icon-border, rgba(13, 71, 161, 0.22));
+    box-shadow: var(--icon-shadow, 0 16px 26px rgba(13, 71, 161, 0.18));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
+}
+
+.occupational-icon svg {
+    width: 2.25rem;
+    height: 2.25rem;
+    color: currentColor;
+}
+
+.occupational-icon--blue {
+    background: linear-gradient(135deg, #0d47a1 0%, #1e63c6 100%);
+    --icon-border: rgba(13, 71, 161, 0.28);
+    --icon-shadow: 0 18px 32px rgba(13, 71, 161, 0.2);
+    --icon-shadow-hover: 0 24px 44px rgba(13, 71, 161, 0.32);
+}
+
+.occupational-icon--orange {
+    background: linear-gradient(135deg, #ff8f00 0%, #ffb74d 100%);
+    --icon-border: rgba(255, 143, 0, 0.3);
+    --icon-shadow: 0 18px 32px rgba(255, 143, 0, 0.24);
+    --icon-shadow-hover: 0 24px 44px rgba(255, 143, 0, 0.34);
+}
+
+.occupational-icon--purple {
+    background: linear-gradient(135deg, #3949ab 0%, #5c6bc0 100%);
+    --icon-border: rgba(70, 86, 192, 0.28);
+    --icon-shadow: 0 18px 32px rgba(69, 90, 168, 0.22);
+    --icon-shadow-hover: 0 24px 44px rgba(69, 90, 168, 0.32);
+}
+
+.occupational-icon--green {
+    background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+    --icon-border: rgba(46, 125, 50, 0.26);
+    --icon-shadow: 0 18px 32px rgba(46, 125, 50, 0.22);
+    --icon-shadow-hover: 0 24px 44px rgba(46, 125, 50, 0.32);
+}
+
+.group:hover .occupational-icon,
+.expandable-section:hover .occupational-icon,
+.expandable-section button:hover .occupational-icon {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: var(--icon-shadow-hover, 0 22px 36px rgba(13, 71, 161, 0.28));
+}
+
+.occupational-feature-header {
+    overflow: visible;
+}
+
+.occupational-services-grid,
+.specialized-services-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: visible;
+}
+
+.occupational-services-grid > .group,
+.specialized-services-container > .expandable-section {
+    overflow: visible;
+    position: relative;
+}
+
+.group > .relative,
+.expandable-section > button,
+.expandable-section > div {
+    overflow: visible;
+}
+
+/* Bring hovered items to the front */
+.group:hover,
+.expandable-section:hover {
+    z-index: 10;
+}
+
 /* ===== SMOOTH TRANSITIONS ===== */
 html {
     scroll-padding-top: 100px;
