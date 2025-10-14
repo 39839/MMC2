@@ -2,6 +2,10 @@
    DROPDOWN FIX - NO LOGO OVERLAP, PROFESSIONAL POSITIONING
    ================================================================== */
 
+:root {
+    --services-dropdown-offset-x: 25px;
+}
+
 /* 1. CRITICAL: Force Header to Top Stacking Layer - Safari Compatible */
 header.glass-effect {
     position: sticky !important;
@@ -48,8 +52,8 @@ header nav {
     /* Center dropdown under button for consistent positioning across all pages */
     left: 50%;
     right: auto;
-    transform: translateX(-50%) translateY(-10px);
-    -webkit-transform: translateX(-50%) translateY(-10px);
+    transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px);
+    -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px);
     
     /* IMPORTANT: Wide enough for all medical terms */
     width: 380px;
@@ -88,8 +92,8 @@ header nav {
     left: 50% !important;
     right: auto !important;
     /* top is set dynamically in JS to button bottom */
-    transform: translateX(-50%) translateY(-10px) !important;
-    -webkit-transform: translateX(-50%) translateY(-10px) !important;
+    transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px) !important;
+    -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px) !important;
 }
 
 /* Invisible bridge between button and dropdown for smooth mouse movement */
@@ -122,8 +126,8 @@ section[class*="hero"],
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-    transform: translateX(-50%) translateY(0) !important;
-    -webkit-transform: translateX(-50%) translateY(0) !important;
+    transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
+    -webkit-transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
     transition: opacity 0.2s ease 0s,
                 visibility 0s linear 0s,
                 transform 0.2s ease 0s !important;
@@ -150,7 +154,7 @@ section[class*="hero"],
     position: absolute;
     top: -10px;
     /* Center the arrow */
-    left: 50%;
+    left: calc(50% - var(--services-dropdown-offset-x, 0px));
     transform: translateX(-50%);
     width: 0;
     height: 0;
@@ -252,16 +256,16 @@ section[class*="hero"],
     #services-dropdown {
         width: 340px;
         left: 50%;
-        transform: translateX(-50%) translateY(-10px);
+        transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px);
     }
     
     #services-dropdown::before {
-        left: 50%;
+        left: calc(50% - var(--services-dropdown-offset-x, 0px));
         transform: translateX(-50%);
     }
     
     .services-dropdown-wrapper:hover #services-dropdown {
-        transform: translateX(-50%) translateY(0) !important;
+        transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
     }
     
     #services-dropdown .dropdown-link {
@@ -277,21 +281,25 @@ section[class*="hero"],
 }
 
 @media (max-width: 640px) {
+    :root {
+        --services-dropdown-offset-x: 0px;
+    }
+
     #services-dropdown {
         width: calc(100vw - 2rem);
         /* Center on mobile */
         left: 50%;
-        transform: translateX(-50%) translateY(-10px);
+        transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(-10px);
     }
     
     #services-dropdown::before {
         /* Center arrow on mobile */
-        left: 50%;
+        left: calc(50% - var(--services-dropdown-offset-x, 0px));
         transform: translateX(-50%);
     }
     
     .services-dropdown-wrapper:hover #services-dropdown {
-        transform: translateX(-50%) translateY(0) !important;
+        transform: translateX(calc(-50% + var(--services-dropdown-offset-x, 0px))) translateY(0) !important;
     }
     
     #services-dropdown .dropdown-link {
