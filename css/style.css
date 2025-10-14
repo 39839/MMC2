@@ -1079,12 +1079,12 @@ html {
     position: fixed;
     inset: 0;
     z-index: 10020;
-    padding: clamp(1.5rem, 4vw, 3rem);
+    padding: clamp(1rem, 3vw, 2rem);
     justify-content: center;
     align-items: center;
-    background: rgba(13, 71, 161, 0.45);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(13, 71, 161, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .contact-modal.active {
@@ -1093,12 +1093,14 @@ html {
 }
 
 .contact-modal-content {
-    width: min(680px, 100%);
-    background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
-    border-radius: 24px;
-    padding: clamp(2.5rem, 3vw + 1.5rem, 3.5rem);
-    box-shadow: 0 20px 50px rgba(13, 71, 161, 0.2), 0 0 0 1px rgba(13, 71, 161, 0.05);
-    border: 1px solid rgba(13, 71, 161, 0.12);
+    width: min(580px, 95%);
+    max-height: 85vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: clamp(1.75rem, 2.5vw + 1rem, 2.25rem);
+    box-shadow: 0 10px 30px rgba(13, 71, 161, 0.15), 0 0 0 1px rgba(13, 71, 161, 0.08);
+    border: 1px solid rgba(13, 71, 161, 0.1);
     position: relative;
     animation: contact-modal-rise 0.3s ease;
 }
@@ -1106,40 +1108,39 @@ html {
 .contact-modal-header {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.75rem;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .contact-modal-title {
-    font-size: clamp(1.9rem, 3.8vw, 2.35rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
     color: var(--dark-gray);
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
 .contact-modal-subtitle {
-    color: rgba(26, 36, 48, 0.72);
-    line-height: 1.55;
-    font-size: 1.02rem;
-    max-width: 34ch;
+    color: var(--medium-gray);
+    line-height: 1.5;
+    font-size: 0.9rem;
 }
 
 .contact-close {
     position: absolute;
-    top: 1.2rem;
-    right: 1.25rem;
-    width: 40px;
-    height: 40px;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(26, 36, 48, 0.12);
-    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(13, 71, 161, 0.15);
+    background: rgba(255, 255, 255, 0.95);
     color: var(--medium-gray);
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 .contact-close svg {
@@ -1158,54 +1159,55 @@ html {
     align-self: flex-start;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.3rem 0.85rem;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--medical-blue);
-    background: rgba(13, 71, 161, 0.12);
-    border: 1px solid rgba(13, 71, 161, 0.18);
+    background: rgba(13, 71, 161, 0.08);
+    border: 1px solid rgba(13, 71, 161, 0.15);
 }
 
 .contact-modal-body {
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
+    gap: 1.25rem;
 }
 
 .contact-options-grid {
     display: grid;
-    gap: 0.85rem;
+    gap: 0.65rem;
 }
 
 .contact-option {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 1.2rem;
-    padding: 1.2rem 1.5rem;
-    border-radius: 18px;
-    border: 1px solid rgba(13, 71, 161, 0.12);
-    background: rgba(255, 255, 255, 0.95);
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(13, 71, 161, 0.1);
+    background: #fafafa;
     text-decoration: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    box-shadow: 0 18px 36px -28px rgba(13, 71, 161, 0.25);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.06);
 }
 
 .contact-option:hover,
 .contact-option:focus-visible {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 42px -30px rgba(13, 71, 161, 0.32);
-    border-color: rgba(13, 71, 161, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.12);
+    border-color: var(--medical-blue);
+    background: #ffffff;
 }
 
 .contact-option-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1229,41 +1231,42 @@ html {
 }
 
 .contact-option-icon svg {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
 }
 
 .contact-option-text {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.25rem;
 }
 
 .contact-option-label {
-    font-size: 0.82rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(26, 36, 48, 0.6);
+    letter-spacing: 0.06em;
+    color: var(--medium-gray);
 }
 
 .contact-option-value {
-    font-size: 1.28rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--dark-gray);
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
 }
 
 .contact-option-note {
-    font-size: 0.9rem;
-    color: rgba(26, 36, 48, 0.58);
+    font-size: 0.8rem;
+    color: var(--medium-gray);
+    line-height: 1.4;
 }
 
 .contact-option-chevron svg {
-    width: 18px;
-    height: 18px;
-    color: rgba(26, 36, 48, 0.4);
-    transition: transform 0.25s ease, color 0.25s ease;
+    width: 16px;
+    height: 16px;
+    color: var(--medium-gray);
+    transition: all 0.2s ease;
 }
 
 .contact-option:hover .contact-option-chevron svg,
@@ -1275,47 +1278,47 @@ html {
 .contact-meta {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .contact-meta-card {
-    border-radius: 18px;
-    padding: 1.35rem 1.5rem;
+    border-radius: 12px;
+    padding: 1rem 1.15rem;
     border: 1px solid rgba(13, 71, 161, 0.1);
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow: 0 16px 34px -28px rgba(13, 71, 161, 0.24);
+    background: #fafafa;
+    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.06);
 }
 
 .contact-meta-card h3 {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--medical-blue);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .contact-meta-card--hours {
-    background: linear-gradient(125deg, rgba(13, 71, 161, 0.05), rgba(255, 255, 255, 0.96));
+    background: #fafafa;
 }
 
 .contact-meta-card--visit {
-    background: linear-gradient(125deg, rgba(255, 143, 0, 0.05), rgba(255, 255, 255, 0.96));
+    background: #fafafa;
 }
 
 .contact-hours-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 1rem;
+    margin: 0 0 0.75rem;
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
-    font-size: 0.94rem;
-    color: rgba(26, 36, 48, 0.7);
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--medium-gray);
 }
 
 .contact-hours-list li {
     display: flex;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .contact-hours-list li span:first-child {
@@ -1323,40 +1326,41 @@ html {
 }
 
 .contact-meta-note {
-    font-size: 0.85rem;
-    color: rgba(26, 36, 48, 0.58);
-    line-height: 1.45;
+    font-size: 0.75rem;
+    color: var(--medium-gray);
+    line-height: 1.4;
 }
 
 .contact-meta-card address {
     font-style: normal;
-    font-size: 0.94rem;
-    color: rgba(26, 36, 48, 0.72);
+    font-size: 0.8rem;
+    color: var(--medium-gray);
     line-height: 1.5;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .contact-meta-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.55rem 1.05rem;
-    border-radius: 999px;
-    background: rgba(13, 71, 161, 0.12);
+    gap: 0.35rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    background: rgba(13, 71, 161, 0.08);
     color: var(--medical-blue);
     font-weight: 600;
+    font-size: 0.8rem;
     text-decoration: none;
-    transition: background 0.25s ease, transform 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 .contact-meta-link svg {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
 }
 
 .contact-meta-link:hover,
 .contact-meta-link:focus-visible {
-    background: rgba(13, 71, 161, 0.22);
+    background: rgba(13, 71, 161, 0.15);
     transform: translateY(-1px);
 }
 
@@ -1382,18 +1386,19 @@ html {
 
 @media (max-width: 768px) {
     .contact-modal-content {
-        width: min(100%, 520px);
-        padding: 2.1rem;
+        width: min(95%, 480px);
+        padding: 1.5rem;
     }
 
     .contact-options-grid {
-        gap: 0.75rem;
+        gap: 0.6rem;
     }
 
     .contact-option {
         grid-template-columns: auto 1fr;
         grid-template-rows: auto auto;
         align-items: flex-start;
+        padding: 0.9rem 1rem;
     }
 
     .contact-option-chevron {
@@ -1402,26 +1407,37 @@ html {
 
     .contact-meta {
         grid-template-columns: 1fr;
+        gap: 0.6rem;
     }
 }
 
 @media (max-width: 480px) {
     .contact-modal {
-        padding: 1.25rem;
+        padding: 0.75rem;
     }
 
     .contact-modal-content {
-        border-radius: 18px;
-        padding: 1.85rem 1.6rem;
+        border-radius: 14px;
+        padding: 1.35rem 1.15rem;
     }
 
     .contact-option {
-        padding: 1.1rem 1.3rem;
-        gap: 1rem;
+        padding: 0.85rem 1rem;
+        gap: 0.85rem;
     }
 
     .contact-option-value {
-        font-size: 1.18rem;
+        font-size: 1rem;
+    }
+    
+    .contact-option-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-option-icon svg {
+        width: 20px;
+        height: 20px;
     }
 }
 
