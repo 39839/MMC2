@@ -32,6 +32,92 @@
             }
         }
     </script>
+    <style>
+        /* Enhanced Doctor Cards */
+        .doctor-card-enhanced {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(13, 71, 161, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .doctor-card-enhanced:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(13, 71, 161, 0.15);
+            border-color: #ff8f00;
+        }
+
+        .doctor-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f9ff 0%, #e3f2fd 100%);
+        }
+
+        .doctor-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .doctor-card-enhanced:hover .doctor-image {
+            transform: scale(1.05);
+        }
+
+        .doctor-info-enhanced {
+            padding: 2rem;
+        }
+
+        .doctor-name-enhanced {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0d47a1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .doctor-title-enhanced {
+            color: #ff8f00;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .doctor-bio-enhanced {
+            color: #5a6474;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .specialty-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(13, 71, 161, 0.1);
+            color: #0d47a1;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+            letter-spacing: 0.03em;
+        }
+
+        .specialty-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body class="bg-light-gray text-dark-gray">
 
@@ -49,7 +135,7 @@
             </div>
             <h1 class="text-5xl lg:text-6xl font-black mb-6" data-aos="fade-up">About Montgomery Medical Clinic</h1>
             <p class="text-xl lg:text-2xl text-white/90 max-w-3xl" data-aos="fade-up" data-aos-delay="100">
-                Your trusted, healthcare partner.
+                Your trusted healthcare partner.
             </p>
         </div>
     </section>
@@ -80,41 +166,105 @@
         <div class="container mx-auto px-6 lg:px-8">
             <div class="text-center mb-20 max-w-3xl mx-auto" data-aos="fade-up">
                 <h2 class="section-title text-dark-gray mb-6">Meet Our Expert Providers</h2>
-                <p class="section-subtitle">Our team consists of board-certified physicians with extensive experience and a shared passion for patient-centered care. We are dedicated to building lasting relationships to better serve your healthcare needs.</p>
+                <p class="section-subtitle">Our team consists of board-certified physicians and healthcare professionals with extensive experience and a shared passion for patient-centered care.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
 
-                <div class="doctor-card text-center" data-aos="fade-up">
-                    <img src="https://nextpatient.co/static/practices/1492/Efi-Kessous.jpg" alt="Dr. Efi Kessous" class="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg border-4 border-white">
-                    <div class="doctor-info p-0">
-                        <h3 class="doctor-name">Dr. Efi Kessous, MD, MPH</h3>
-                        <p class="doctor-title">Board-Certified in Family Medicine</p>
-                        <p class="text-medium-gray leading-relaxed">
-                            Dr. Efi Kessous is a board-certified Family Medicine physician and a faculty member at The George Washington University School of Medicine. His clinical interests include procedural family medicine, women's health, and occupational medicine. He is a designated FAA aviation medical examiner.
+                <!-- Dr. Efi Kessous - Primary Care -->
+                <div class="doctor-card-enhanced" data-aos="fade-up">
+                    <div class="doctor-image-container">
+                        <img src="../images/Efi.jpg" alt="Dr. Efi Kessous" class="doctor-image">
+                    </div>
+                    <div class="doctor-info-enhanced">
+                        <h3 class="doctor-name-enhanced">Dr. Efi Kessous</h3>
+                        <p class="doctor-title-enhanced">MD, MPH</p>
+                        <p class="doctor-bio-enhanced">
+                            Dr. Efi Kessous is board-certified in Family Medicine and practices primary and urgent care medicine at Montgomery Medical Clinic. He is also an Assistant Professor and faculty member at The George Washington University School of Medicine & Health Sciences. Dr. Kessous completed his medical degree and Master's in Public Health from St. Georges University School of Medicine, followed by family medicine residency at University of Maryland in Baltimore and surgical residency at Hahnemann/Drexel University Hospital in Philadelphia. His clinical interests include procedural family medicine, injuries and lacerations, women's health, and occupational and travel medicine. He is an active clinical instructor and a current member of the FAA aviation medical examiners.
                         </p>
+                        <div class="specialty-badges">
+                            <span class="specialty-badge">Primary Care</span>
+                            <span class="specialty-badge">Urgent Care</span>
+                            <span class="specialty-badge">Women's Health</span>
+                            <span class="specialty-badge">FAA Medical Examiner</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="doctor-card text-center" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://montgomerysportsmedicine.com/wp-content/uploads/2022/08/Dr-Kessous-Cropped-Picture.png" alt="Dr. Eran Kessous" class="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg border-4 border-white">
-                    <div class="doctor-info p-0">
-                        <h3 class="doctor-name">Dr. Eran Kessous, MD</h3>
-                        <p class="doctor-title">Board-Certified in Family & Sports Medicine</p>
-                        <p class="text-medium-gray leading-relaxed">
-                           Dr. Eran Kessous completed his sports medicine training at Harvard Medical School. He specializes in preventing, diagnosing, and treating injuries for athletes of all levels and was a team physician for the MLS team D.C. United and currently consults for the Kirov Academy of Ballet.
+                <!-- Dr. Bertha Velandia - Primary Care -->
+                <div class="doctor-card-enhanced" data-aos="fade-up" data-aos-delay="100">
+                    <div class="doctor-image-container">
+                        <img src="../images/Bertha.jpg" alt="Dr. Bertha Velandia" class="doctor-image">
+                    </div>
+                    <div class="doctor-info-enhanced">
+                        <h3 class="doctor-name-enhanced">Dr. Bertha Velandia</h3>
+                        <p class="doctor-title-enhanced">MD</p>
+                        <p class="doctor-bio-enhanced">
+                            Dr. Bertha Velandia is an experienced primary care physician who received her medical degree from the Universidad Nacional in Bogota, Colombia in 1983. She completed her residency in family medicine at the UAB Huntsville Medical Campus in 2009. During her career, Dr. Velandia has received an outstanding award in Obstetrics and Gynecology. She has also served in rural communities and published an article on scurvy still being present in developed countries. Dr. Velandia now resides in Maryland and during her spare time likes hiking, playing hide and seek with her two grandsons, and listening to folklore music.
                         </p>
+                        <div class="specialty-badges">
+                            <span class="specialty-badge">Primary Care</span>
+                            <span class="specialty-badge">Family Medicine</span>
+                            <span class="specialty-badge">OB/GYN</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="doctor-card text-center" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://nextpatient.co/static/practices/1492/Jonathan-Lawless.jpg" alt="Dr. Jonathan Lawless" class="w-48 h-48 rounded-full mx-auto mb-6 shadow-lg border-4 border-white">
-                    <div class="doctor-info p-0">
-                        <h3 class="doctor-name">Dr. Jonathan Lawless, DO</h3>
-                        <p class="doctor-title">Board-Certified in Family & Sports Medicine</p>
-                        <p class="text-medium-gray leading-relaxed">
-                            Dr. Lawless is dual board-certified in family and sports medicine. His expertise includes diagnostic musculoskeletal ultrasound, ultrasound-guided injections, and osteopathic manipulative treatment. He has provided medical coverage for collegiate sports, marathons, and triathlons.
+                <!-- Dr. Eran Kessous - Sports Medicine -->
+                <div class="doctor-card-enhanced" data-aos="fade-up" data-aos-delay="200">
+                    <div class="doctor-image-container">
+                        <img src="../images/Eran.jpg" alt="Dr. Eran Kessous" class="doctor-image">
+                    </div>
+                    <div class="doctor-info-enhanced">
+                        <h3 class="doctor-name-enhanced">Dr. Eran Kessous</h3>
+                        <p class="doctor-title-enhanced">MD, CAQSM</p>
+                        <p class="doctor-bio-enhanced">
+                            Dr. Eran Kessous is board certified in both family and sports medicine. He completed his sports medicine training at Harvard Medical School's Children's Hospital in Boston. Dr. Kessous received his medical degree from St. George's University in 1999, completed a surgical internship at Mount Sinai School of Medicine in New York, and after three years as a general and orthopedic surgery resident at Tel Aviv Medical Center, returned to Boston to complete a family medicine residency at Boston University Medical Center. He was an official team physician for the Major League Soccer Team DC United and is currently the medical consultant for the Kirov Academy of Ballet. He is also a clinical assistant professor at Georgetown University School of Medicine.
                         </p>
+                        <div class="specialty-badges">
+                            <span class="specialty-badge">Sports Medicine</span>
+                            <span class="specialty-badge">Family Medicine</span>
+                            <span class="specialty-badge">Orthopedics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dr. Jonathan Lawless - Sports Medicine & Primary Care -->
+                <div class="doctor-card-enhanced" data-aos="fade-up" data-aos-delay="300">
+                    <div class="doctor-image-container">
+                        <img src="../images/LawLess.png" alt="Dr. Jonathan Lawless" class="doctor-image">
+                    </div>
+                    <div class="doctor-info-enhanced">
+                        <h3 class="doctor-name-enhanced">Dr. Jonathan Lawless</h3>
+                        <p class="doctor-title-enhanced">DO, CAQSM</p>
+                        <p class="doctor-bio-enhanced">
+                            Dr. Lawless is board-certified in family medicine and sports medicine. He completed his sports medicine training and family medicine training at Northwell Plainview Hospital in Plainview, NY. Dr. Lawless graduated from medical school at Lake Erie College of Osteopathic Medicine in 2012 and completed a traditional rotating internship at UPMC Mercy Hospital in Pittsburgh, PA. He was appointed a teaching associate in family medicine at Hofstra Northwell School of Medicine. His experience includes team physician for LIU Post University and medical coverage for marathons and triathlons. His skills include musculoskeletal care, diagnostic musculoskeletal ultrasound, ultrasound-guided injections, and osteopathic manipulative treatment.
+                        </p>
+                        <div class="specialty-badges">
+                            <span class="specialty-badge">Sports Medicine</span>
+                            <span class="specialty-badge">Family Medicine</span>
+                            <span class="specialty-badge">MSK Ultrasound</span>
+                            <span class="specialty-badge">OMT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dr. Sara Brooks - Dermatology -->
+                <div class="doctor-card-enhanced" data-aos="fade-up" data-aos-delay="400">
+                    <div class="doctor-image-container">
+                        <img src="../images/Brooks.jpg" alt="Dr. Sara Brooks" class="doctor-image">
+                    </div>
+                    <div class="doctor-info-enhanced">
+                        <h3 class="doctor-name-enhanced">Dr. Sara Brooks</h3>
+                        <p class="doctor-title-enhanced">MD, Board Certified Dermatologist</p>
+                        <p class="doctor-bio-enhanced">
+                            Dr. Sara Brooks is a Board Certified Dermatologist and Maryland native from St. Mary's County. She attended the Honors college at University of Maryland, College Park, obtaining both a Bachelor's in Cell Biology and a Master's in Management and Organization. She went to medical school at Drexel University in Philadelphia, where she was inducted into AOA, the prestigious medical honor society. She completed a medical internship at Thomas Jefferson University and her residency in Internal Medicine and Dermatology at Georgetown University and Washington Hospital Center, where she served as Chief Resident of Dermatology. She also completed a Melanoma Fellowship at the Washington Cancer Institute. She is a Fellow of the American Academy of Dermatology.
+                        </p>
+                        <div class="specialty-badges">
+                            <span class="specialty-badge">Dermatology</span>
+                            <span class="specialty-badge">Melanoma</span>
+                            <span class="specialty-badge">Skin Cancer</span>
+                        </div>
                     </div>
                 </div>
 

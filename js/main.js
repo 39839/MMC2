@@ -205,3 +205,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('mmc:header-ready', initHeaderFeatures);
+
+// Toggle function for expandable sections (Occupational Health page)
+function toggleDropdown(sectionId) {
+    const content = document.getElementById(`${sectionId}-content`);
+    const arrow = document.getElementById(`${sectionId}-arrow`);
+    
+    if (!content || !arrow) return;
+    
+    // Toggle the hidden class
+    content.classList.toggle('hidden');
+    
+    // Rotate the arrow
+    if (content.classList.contains('hidden')) {
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        arrow.style.transform = 'rotate(180deg)';
+    }
+}

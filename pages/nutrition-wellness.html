@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutrition + Wellness | Montgomery Medical Clinic</title>
+    <title>Wellness Center | Montgomery Medical Clinic</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,53 +32,107 @@
         }
     </script>
     <style>
-        /* Fix for Five Elements Acupuncture card hover cutoff - AGGRESSIVE */
-        .max-w-6xl {
-            overflow: visible !important;
+        .division-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(13, 71, 161, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid transparent;
+            position: relative;
         }
-        
-        .max-w-6xl > div {
-            overflow: visible !important;
+
+        .division-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(13, 71, 161, 0.2);
         }
-        
-        /* Ensure featured wellness service has LOTS of room */
-        .max-w-6xl.mb-20 {
-            padding: 4rem 1rem !important;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 6rem !important;
+
+        .division-card.nutrition-card {
+            border-top: 6px solid #4caf50;
         }
-        
-        /* Allow container to grow on hover - AGGRESSIVE */
-        .max-w-6xl > a {
-            display: block;
-            margin: 3rem 0 !important;
-            overflow: visible !important;
+
+        .division-card.nutrition-card:hover {
+            border-color: #4caf50;
         }
-        
-        .max-w-6xl a > div {
-            overflow: visible !important;
+
+        .division-card.training-card {
+            border-top: 6px solid #ff8f00;
         }
-        
-        /* Fix grid cutoff issues */
-        .container {
-            overflow: visible !important;
+
+        .division-card.training-card:hover {
+            border-color: #ff8f00;
         }
-        
-        section {
-            overflow: visible !important;
+
+        .division-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: transform 0.3s ease;
         }
-        
-        .grid {
-            overflow: visible !important;
-            padding: 2rem 0 !important;
+
+        .division-card:hover .division-icon {
+            transform: scale(1.1) rotate(5deg);
         }
-        
-        /* Fix for all cards on this page */
-        .bg-white.p-6,
-        .bg-white.p-4 {
-            margin: 0.75rem !important;
-            overflow: visible !important;
+
+        .division-icon.nutrition {
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        }
+
+        .division-icon.training {
+            background: linear-gradient(135deg, #ff8f00 0%, #ffb300 100%);
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #5a6474;
+            font-size: 0.95rem;
+        }
+
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+
+        .service-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        .nutrition-card .service-check {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+
+        .training-card .service-check {
+            background: rgba(255, 143, 0, 0.1);
+            color: #ff8f00;
+        }
+
+        .provider-highlight {
+            background: linear-gradient(135deg, #f5f9ff 0%, #e3f2fd 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #0d47a1;
         }
     </style>
 </head>
@@ -87,19 +141,17 @@
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
-
-
     <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container mx-auto px-6 lg:px-8 relative z-10">
             <div class="breadcrumb" data-aos="fade-right">
                 <a href="../index.html">Home</a>
                 <span>/</span>
-                <span>Nutrition + Wellness</span>
+                <span>Wellness Center</span>
             </div>
-            <h1 class="text-5xl lg:text-6xl font-black mb-6" data-aos="fade-up">Nutrition + Wellness</h1>
+            <h1 class="text-5xl lg:text-6xl font-black mb-6" data-aos="fade-up">Wellness Center</h1>
             <p class="text-xl lg:text-2xl text-white/90 max-w-3xl" data-aos="fade-up" data-aos-delay="100">
-                Personalized nutrition guidance and wellness programs to fuel your body and optimize your health.
+                Comprehensive wellness programs combining nutrition and personal training to help you achieve your health goals.
             </p>
         </div>
     </section>
@@ -107,200 +159,201 @@
     <!-- INTRO SECTION -->
     <section class="py-20 lg:py-24 bg-white">
         <div class="container mx-auto px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center mb-16">
-                <div class="floating mb-12 lg:mb-0" data-aos="fade-right">
-                    <img src="../images/CurrentPhoto1.png" alt="Nutrition and wellness services at Montgomery Medical Clinic" class="rounded-3xl shadow-2xl w-full">
-                </div>
-                <div data-aos="fade-left">
-                    <h2 class="text-3xl font-bold text-brand-blue mb-6">Transform Your Health Through Nutrition</h2>
-                    <p class="text-lg leading-relaxed mb-4">
-                        Proper nutrition is the foundation of good health. Our certified nutrition coaches and wellness experts work with you to create personalized plans that fit your lifestyle, goals, and medical needs.
-                    </p>
-                    <p class="text-lg leading-relaxed italic text-medium-gray">
-                        Whether you're managing a chronic condition, seeking weight loss, or optimizing athletic performance, we provide evidence-based guidance to help you achieve lasting results.
-                    </p>
-                    <div class="mt-6 bg-brand-blue/5 p-4 rounded-xl">
-                        <p class="text-md font-semibold text-brand-blue">✓ Personalized Plans Based on Your Unique Needs</p>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-4xl mx-auto">
-
-                <div class="prose max-w-none mb-12" data-aos="fade-up">
-                    <p class="text-lg leading-relaxed mb-4">
-                        Our nutrition and wellness services go beyond simple meal planning. We take a comprehensive approach to your health, considering your medical history, current conditions, lifestyle factors, and personal goals to create a customized nutrition plan that works for you.
-                    </p>
-                    <p class="text-lg leading-relaxed mb-4">
-                        Working closely with our medical team, our nutrition coaches can help manage conditions such as diabetes, heart disease, obesity, and gastrointestinal disorders through targeted dietary interventions.
-                    </p>
-                    <div class="bg-brand-blue/5 p-6 rounded-xl mt-6">
-                        <p class="text-lg font-semibold text-brand-blue">✓ Personalized Nutrition Plans Based on Your Unique Needs</p>
-                    </div>
-                </div>
+            <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-black mb-6 text-brand-blue">Your Complete Wellness Journey</h2>
+                <p class="text-xl text-medium-gray leading-relaxed">
+                    Our Wellness Center offers a holistic approach to health, combining expert nutrition guidance with personalized fitness training. Whether you're looking to manage a health condition, lose weight, build strength, or simply optimize your well-being, our integrated programs are designed to help you succeed.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES SECTION -->
+    <!-- TWO MAIN DIVISIONS -->
     <section class="py-20 lg:py-24 bg-light-blue-bg">
         <div class="container mx-auto px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl lg:text-5xl font-black mb-6">Our Nutrition & Wellness Services</h2>
-                <p class="text-lg text-medium-gray max-w-3xl mx-auto">Personalized nutrition programs designed to help you achieve your health goals</p>
+                <h2 class="text-4xl lg:text-5xl font-black mb-6">Our Two Main Divisions</h2>
+                <p class="text-xl text-medium-gray max-w-3xl mx-auto">Comprehensive care across nutrition and fitness, working together for your optimal health.</p>
             </div>
 
-            <!-- Five Elements Acupuncture Feature Section - PROMINENTLY DISPLAYED -->
-            <div class="max-w-6xl mx-auto mb-20">
-                <div class="text-center mb-12" data-aos="fade-up">
-                    <span class="inline-block bg-brand-orange text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4">Featured Wellness Service</span>
-                    <h2 class="text-3xl lg:text-4xl font-black text-brand-blue mb-4">Explore Our Holistic Health Services</h2>
-                    <p class="text-lg text-medium-gray">Click below to learn more about our specialized acupuncture and wellness programs</p>
-                </div>
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                 
-                <a href="five-elements-acupuncture.html" class="block group" data-aos="fade-up" style="overflow: visible !important; margin: 2.5rem 0;">
-                    <div class="relative bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 p-12 rounded-3xl border-4 border-brand-blue shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-2" style="overflow: visible !important;">
-                        <!-- Decorative elements -->
-                        <div class="absolute top-0 right-0 w-40 h-40 bg-brand-orange opacity-10 rounded-full -mr-20 -mt-20"></div>
-                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-blue opacity-10 rounded-full -ml-16 -mb-16"></div>
+                <!-- NUTRITION DIVISION -->
+                <div class="division-card nutrition-card" data-aos="fade-up">
+                    <div class="p-8 lg:p-12">
+                        <div class="division-icon nutrition">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 text-center" style="color: #4caf50;">Nutrition Services</h3>
+                        <p class="text-center text-medium-gray mb-6 text-lg">
+                            Evidence-based nutrition counseling tailored to your health goals and medical needs.
+                        </p>
                         
-                        <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
-                            <div class="flex-shrink-0">
-                                <div class="w-32 h-32 bg-gradient-to-br from-brand-blue to-brand-orange rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                                    <img src="../icons/Accupuncture.png" class="h-20 w-20 object-contain filter brightness-0 invert" alt="Five Elements Acupuncture"/>
-                                </div>
-                            </div>
-                            <div class="flex-1 text-center md:text-left">
-                                <h3 class="text-4xl font-black text-brand-blue mb-4 group-hover:text-brand-orange transition-colors">Five Elements Acupuncture & Wellness</h3>
-                                <p class="text-xl text-medium-gray mb-6 leading-relaxed">
-                                    Holistic healthcare combining traditional Chinese medicine with modern functional health practices. Led by Dr. Min Lu, MD, our acupuncture services provide comprehensive treatment for pain, stress, digestive issues, women's health, and more.
-                                </p>
-                                <div class="flex items-center justify-center md:justify-start gap-3 text-brand-orange font-bold text-xl group-hover:gap-4 transition-all">
-                                    <span>Explore Acupuncture Services</span>
-                                    <svg class="w-8 h-8 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                                    </svg>
-                                </div>
-                            </div>
+                        <div class="bg-green-50 rounded-xl p-6 mb-6">
+                            <h4 class="font-bold text-lg mb-4" style="color: #4caf50;">What We Offer:</h4>
+                            <ul class="service-list">
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Personalized Nutrition Counseling</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Medical Nutrition Therapy</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Weight Management Programs</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Diabetes & Heart Disease Management</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Sports Nutrition</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Meal Planning & Education</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Prenatal & Pediatric Nutrition</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>GI Disorder Management</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="provider-highlight">
+                            <p class="text-sm font-bold text-brand-blue mb-2">EXPERT NUTRITION GUIDANCE</p>
+                            <p class="text-sm text-medium-gray">Our certified nutrition specialists work closely with our medical team to create comprehensive, medically-supervised nutrition plans that address your unique health needs.</p>
+                        </div>
+
+                        <div class="text-center mt-6">
+                            <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <span>Book Nutrition Consultation</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                </a>
-            </div>
+                </div>
 
-            <!-- Core Nutrition Services -->
-            <div class="mb-16" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-brand-blue mb-8 text-center">Core Nutrition Services</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Personalized Nutrition Counseling</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Weight Loss & Management Programs</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Diabetes Nutrition Management</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Heart-Healthy Diet Planning</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Sports Nutrition & Performance</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Sports Nutrition & Performance</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Prenatal & Postnatal Nutrition</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Pediatric Nutrition Counseling</h3>
-                </div>
-                </div>
-            </div>
+                <!-- PERSONAL TRAINING DIVISION -->
+                <div class="division-card training-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-8 lg:p-12">
+                        <div class="division-icon training">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-3xl font-black mb-4 text-center" style="color: #ff8f00;">Personal Training</h3>
+                        <p class="text-center text-medium-gray mb-6 text-lg">
+                            Customized fitness programs designed to help you build strength, improve performance, and reach your goals.
+                        </p>
+                        
+                        <div class="bg-orange-50 rounded-xl p-6 mb-6">
+                            <h4 class="font-bold text-lg mb-4" style="color: #ff8f00;">What We Offer:</h4>
+                            <ul class="service-list">
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>One-on-One Personal Training</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Customized Workout Programs</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Strength & Conditioning</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Weight Loss Training</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Athletic Performance Enhancement</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Post-Injury Rehabilitation Training</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Senior Fitness Programs</span>
+                                </li>
+                                <li>
+                                    <span class="service-check">✓</span>
+                                    <span>Functional Fitness Training</span>
+                                </li>
+                            </ul>
+                        </div>
 
-            <!-- Specialized Programs -->
-            <div class="mb-16" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-brand-orange mb-8 text-center">Specialized Programs</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• GI Disorder Nutrition Therapy</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Cholesterol Management</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Food Allergy Management</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Meal Planning & Preparation Guidance</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Nutritional Supplement Guidance</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Eating Disorder Support</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Plant-Based Diet Planning</h3>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
-                    <h3 class="font-bold text-lg mb-2">• Wellness & Lifestyle Coaching</h3>
-                </div>
-                </div>
-            </div>
+                        <div class="provider-highlight">
+                            <p class="text-sm font-bold text-brand-blue mb-2">LED BY BERTHA BROOKS, FNP-C, CPT</p>
+                            <p class="text-sm text-medium-gray">Bertha combines her expertise as a Family Nurse Practitioner with certified personal training to deliver safe, effective, and medically-informed fitness programs.</p>
+                        </div>
 
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-4xl lg:text-5xl font-black mb-6">Common Health Goals We Support</h2>
-            </div>
+                        <div class="text-center mt-6">
+                            <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <span>Book Training Session</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Weight Loss</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Diabetes Control</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Heart Health</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Muscle Gain</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Energy Boost</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Digestive Health</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Athletic Performance</div>
-                <div class="bg-white p-4 rounded-lg shadow-md text-center font-semibold" data-aos="fade-up">Healthy Aging</div>
             </div>
         </div>
     </section>
 
-    <!-- APPROACH SECTION -->
+    <!-- INTEGRATED APPROACH -->
     <section class="py-20 lg:py-24 bg-white">
         <div class="container mx-auto px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-4xl lg:text-5xl font-black mb-6">Our Approach to Nutrition & Wellness</h2>
-                    <p class="text-xl text-medium-gray">Evidence-based, personalized care that considers your whole health picture.</p>
+                    <h2 class="text-4xl lg:text-5xl font-black mb-6">The Power of Integration</h2>
+                    <p class="text-xl text-medium-gray">Nutrition and fitness work hand-in-hand for optimal results. Our integrated approach ensures you get the most effective care.</p>
                 </div>
 
-                <div class="space-y-8" data-aos="fade-up">
-                    <div class="bg-light-blue-bg p-6 lg:p-8 rounded-xl">
-                        <h3 class="text-2xl font-bold text-brand-blue mb-4">1. Comprehensive Assessment</h3>
-                        <p class="text-medium-gray leading-relaxed">
-                            We begin with a thorough evaluation of your medical history, current health conditions, medications, lifestyle habits, and nutritional goals. This helps us understand your unique needs and challenges.
-                        </p>
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="text-center" data-aos="fade-up">
+                        <div class="w-16 h-16 bg-gradient-to-br from-brand-blue to-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Coordinated Care</h3>
+                        <p class="text-medium-gray">Your nutrition and training plans are designed to work together seamlessly.</p>
                     </div>
 
-                    <div class="bg-light-blue-bg p-6 lg:p-8 rounded-xl">
-                        <h3 class="text-2xl font-bold text-brand-blue mb-4">2. Personalized Plan Development</h3>
-                        <p class="text-medium-gray leading-relaxed">
-                            Based on your assessment, we create a customized nutrition plan tailored to your goals, preferences, and medical needs. Our plans are realistic, sustainable, and designed to fit into your daily life.
-                        </p>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Better Results</h3>
+                        <p class="text-medium-gray">Combining proper nutrition with exercise accelerates your progress and maximizes outcomes.</p>
                     </div>
 
-                    <div class="bg-light-blue-bg p-6 lg:p-8 rounded-xl">
-                        <h3 class="text-2xl font-bold text-brand-blue mb-4">3. Ongoing Support & Monitoring</h3>
-                        <p class="text-medium-gray leading-relaxed">
-                            We provide continuous support through regular follow-up appointments, progress tracking, and plan adjustments as needed. Your success is our priority, and we're with you every step of the way.
-                        </p>
-                    </div>
-
-                    <div class="bg-light-blue-bg p-6 lg:p-8 rounded-xl">
-                        <h3 class="text-2xl font-bold text-brand-blue mb-4">4. Integration with Medical Care</h3>
-                        <p class="text-medium-gray leading-relaxed">
-                            Our nutrition coaches work closely with your physicians to ensure your nutrition plan complements your overall medical treatment, optimizing your health outcomes.
-                        </p>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Medical Support</h3>
+                        <p class="text-medium-gray">Our wellness programs are backed by our medical team for safe, effective care.</p>
                     </div>
                 </div>
             </div>
@@ -312,7 +365,7 @@
         <div class="container mx-auto px-6 lg:px-8">
             <div class="bg-gradient-blue text-white rounded-3xl p-12 lg:p-16 text-center shadow-2xl max-w-4xl mx-auto" data-aos="fade-up">
                 <h2 class="text-3xl lg:text-4xl font-black mb-6">Ready to Transform Your Health?</h2>
-                <p class="text-xl mb-8 text-white/90">Start your personalized nutrition journey with our expert team today.</p>
+                <p class="text-xl mb-8 text-white/90">Start your personalized wellness journey with our expert team today.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-10 py-4 text-lg">
                         Schedule Consultation
@@ -326,7 +379,6 @@
     </section>
 
     <!-- FOOTER -->
-            <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -41,16 +41,78 @@
             overflow-x: hidden;
         }
 
+        /* Critical: Only show one slide at a time */
         .slideshow-container .slide {
-            display: none;
+            display: none !important;
             animation: fadeIn 1.5s;
         }
         .slideshow-container .slide.active {
-            display: flex;
+            display: flex !important;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+        
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            /* Slideshow mobile adjustments */
+            .slideshow-container {
+                padding: 1rem !important;
+            }
+            
+            .slide {
+                padding: 1rem !important;
+                min-height: 180px !important;
+            }
+            
+            .slide h3 {
+                font-size: 1.25rem !important;
+                line-height: 1.3 !important;
+            }
+            
+            .slide .inline-flex {
+                font-size: 0.8rem !important;
+                padding: 0.5rem 0.75rem !important;
+            }
+            
+            /* Navigation arrows mobile */
+            .slideshow-container button {
+                width: 32px;
+                height: 32px;
+                padding: 0.5rem;
+            }
+            
+            .slideshow-container button svg {
+                width: 16px;
+                height: 16px;
+            }
+            
+            /* Better touch targets */
+            .btn {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+            
+            /* Service cards mobile spacing */
+            #services .grid {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .slide {
+                padding: 0.75rem 0.5rem !important;
+            }
+            
+            .slide h3 {
+                font-size: 1.1rem !important;
+            }
+            
+            /* Ensure buttons wrap nicely */
+            .slide .flex-wrap {
+                justify-content: center;
+            }
         }
         
         /* Clean & Aesthetic Slideshow Container */
@@ -140,20 +202,21 @@
                     <span class="text-brand-orange">Personalized</span>
                     Healthcare.
                 </h1>
-                <p class="mt-4 sm:mt-6 text-gray-200 leading-relaxed" style="font-size: calc(1rem + 2px);">
+                <p class="mt-4 sm:mt-6 text-gray-200 leading-relaxed text-base sm:text-lg">
                     We are committed to a patient-centered approach, ensuring your health needs are understood and addressed. Our team provides integrated, comprehensive care you can trust.
                 </p>
-                <p class="mt-3 text-white/90 text-lg font-semibold">
+                <p class="mt-3 text-white/90 text-base sm:text-lg font-semibold">
                     Proudly serving Gaithersburg, Montgomery County, and the surrounding areas.
                 </p>
                 <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-6 sm:px-10 py-4 sm:py-5 text-base sm:text-lg">
+                    <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base lg:text-lg text-center">
                         Schedule Your Visit
                     </a>
-                    <a href="#services" class="btn btn-outline border-2 border-white text-white hover:bg-white hover:text-dark-gray px-6 sm:px-10 py-4 sm:py-5 text-base sm:text-lg">
+                    <a href="#services" class="btn btn-outline border-2 border-white text-white hover:bg-white hover:text-dark-gray px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base lg:text-lg text-center">
                         Explore Services
                     </a>
                 </div>
+
             </div>
         </div>
     </section>
@@ -174,72 +237,101 @@
                     </svg>
                 </button>
                 
-                <div class="slide active flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-12">
+                <div class="slide active flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-4 sm:px-8 lg:px-12">
                     <div class="shrink-0 relative">
                         <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-purple-300 rounded-full blur-lg opacity-50"></div>
-                        <div class="relative w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
-                            <img src="icons/syringe.png" class="h-10 w-10" alt="Flu shot vaccine icon"/>
+                        <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
+                            <img src="icons/syringe.png" class="h-8 w-8 sm:h-10 sm:w-10" alt="Flu shot vaccine icon"/>
                         </div>
                     </div>
                     <div class="flex-1">
-                        <span class="inline-block bg-orange-300 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">Available Today</span>
-                        <h3 class="text-2xl lg:text-3xl font-extrabold text-dark-gray mb-3 leading-tight">
+                        <span class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-orange to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow-md">Available Today</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-dark-gray mb-2 sm:mb-3 leading-tight">
                             Seasonal <span class="text-brand-blue">Flu Shots</span> Are Here
                         </h3>
-                        <div class="flex items-center justify-center lg:justify-start gap-3 flex-wrap">
-                            <span class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-4 py-2 rounded-lg text-sm shadow-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <div class="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 flex-wrap">
+                            <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm shadow-md hover:bg-deep-blue transition-all cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                                 Walk-ins Welcome
-                            </span>
-                            <span class="text-medium-gray font-medium text-sm">Protect yourself this season</span>
+                            </a>
+                            <span class="text-medium-gray font-medium text-xs sm:text-sm">Protect yourself this season</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="slide flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-12">
+                <div class="slide flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-4 sm:px-8 lg:px-12">
+                    <div class="shrink-0 relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-green-300 to-teal-300 rounded-full blur-lg opacity-50"></div>
+                        <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center shadow-md p-3 sm:p-4">
+                            <img src="icons/OccupationalHealth.png" class="h-10 w-10 sm:h-12 sm:w-12 object-contain" alt="FAA and Immigration Medical Services icon"/>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <span class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-orange to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow-md">Specialized Services</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-dark-gray mb-2 sm:mb-3 leading-tight">
+                            <span class="text-brand-blue">FAA Physical Examinations</span> & Immigration Physicals
+                        </h3>
+                        <div class="flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-2 sm:gap-3 flex-wrap">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 text-brand-blue" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-medium-gray font-medium text-xs sm:text-sm">Authorized Aviation Medical Examiner - All Three Classes</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 text-brand-blue" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-medium-gray font-medium text-xs sm:text-sm">USCIS-Authorized Civil Surgeon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-4 sm:px-8 lg:px-12">
                     <div class="shrink-0 relative">
                         <div class="absolute inset-0 bg-gradient-to-tr from-sky-300 to-indigo-300 rounded-full blur-lg opacity-50"></div>
-                        <div class="relative w-20 h-20 bg-gradient-to-br from-sky-500 to-indigo-600 rounded-full flex items-center justify-center shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-sky-500 to-indigo-600 rounded-full flex items-center justify-center shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-10 sm:w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V9h14v10zM7 11h5v5H7z"/>
                             </svg>
                         </div>
                     </div>
                     <div class="flex-1">
-                        <span class="inline-block bg-orange-300 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">Available Today</span>
-                        <h3 class="text-2xl lg:text-3xl font-extrabold text-dark-gray mb-3 leading-tight">
+                        <span class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-orange to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow-md">Available Today</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-dark-gray mb-2 sm:mb-3 leading-tight">
                             Same Day <span class="text-brand-blue">Urgent Care</span> Appointments
                         </h3>
-                        <div class="flex items-center justify-center lg:justify-start gap-3 flex-wrap">
-                            <span class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-4 py-2 rounded-lg text-sm shadow-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <div class="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 flex-wrap">
+                            <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm shadow-md hover:bg-deep-blue transition-all cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
                                 Walk-In Basis
-                            </span>
-                            <span class="text-medium-gray font-medium text-sm">No appointment needed</span>
+                            </a>
+                            <span class="text-medium-gray font-medium text-xs sm:text-sm">No appointment needed</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="slide flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-12">
+                <div class="slide flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-10 relative z-10 text-center lg:text-left min-h-[200px] px-4 sm:px-8 lg:px-12">
                     <div class="shrink-0 relative">
                         <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-amber-200 rounded-full blur-lg opacity-50"></div>
-                        <div class="relative w-20 h-20 bg-gradient-to-br from-blue-500 to-deep-blue rounded-full flex items-center justify-center shadow-md">
-                            <img src="icons/hospital.png" class="h-10 w-10" alt="Medical facility comprehensive care icon"/>
+                        <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500 to-deep-blue rounded-full flex items-center justify-center shadow-md">
+                            <img src="icons/hospital.png" class="h-8 w-8 sm:h-10 sm:w-10" alt="Medical facility comprehensive care icon"/>
                         </div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-2xl lg:text-3xl font-extrabold text-dark-gray mb-3 leading-tight">
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-dark-gray mb-2 sm:mb-3 leading-tight">
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-orange">One Stop</span> For All Your Medical Needs
                         </h3>
-                        <p class="text-medium-gray font-medium text-base mb-4">Comprehensive multi-specialty care under one roof.</p>
+                        <p class="text-medium-gray font-medium text-sm sm:text-base mb-3 sm:mb-4">Comprehensive multi-specialty care under one roof.</p>
                         <div class="flex items-center justify-center lg:justify-start">
-                            <a href="#services" class="inline-flex items-center gap-2 bg-white text-dark-gray font-bold px-4 py-2 rounded-lg text-sm shadow-md border border-gray-300 hover:bg-gray-100 transition-all">
+                            <a href="#services" class="inline-flex items-center gap-2 bg-white text-dark-gray font-bold px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm shadow-md border border-gray-300 hover:bg-gray-100 transition-all">
                                 Explore Our Services
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </a>
@@ -251,25 +343,26 @@
                     <span class="slideshow-dot active" onclick="currentSlide(1)"></span>
                     <span class="slideshow-dot" onclick="currentSlide(2)"></span>
                     <span class="slideshow-dot" onclick="currentSlide(3)"></span>
+                    <span class="slideshow-dot" onclick="currentSlide(4)"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-gradient-blue text-white py-16">
-        <div class="container mx-auto px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+    <section class="bg-gradient-blue text-white py-12 sm:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 text-center">
                 <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-number text-white">70+</div>
-                    <div class="stat-label text-white/90">Patients Seen Daily</div>
+                    <div class="stat-number text-white text-4xl sm:text-5xl lg:text-6xl">70+</div>
+                    <div class="stat-label text-white/90 text-sm sm:text-base">Patients Seen Daily</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-number text-white">7</div>
-                    <div class="stat-label text-white/90">Departments</div>
+                    <div class="stat-number text-white text-4xl sm:text-5xl lg:text-6xl">7</div>
+                    <div class="stat-label text-white/90 text-sm sm:text-base">Departments</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-number text-white">10K+</div>
-                    <div class="stat-label text-white/90">Patients Served Annually</div>
+                    <div class="stat-number text-white text-4xl sm:text-5xl lg:text-6xl">10K+</div>
+                    <div class="stat-label text-white/90 text-sm sm:text-base">Patients Served Annually</div>
                 </div>
             </div>
         </div>
@@ -386,10 +479,10 @@
     </section>
     <section class="py-16 md:py-24 lg:py-32 bg-light-blue-bg">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-gradient-blue text-white rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-20 text-center shadow-2xl" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6">Ready to Experience the Difference?</h2>
-                <p class="text-base sm:text-lg md:text-xl mb-8 md:mb-10 text-white/90 max-w-2xl mx-auto">Join thousands of satisfied patients who trust Montgomery Medical Clinic for their healthcare needs.</p>
-                <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg inline-flex">
+            <div class="bg-gradient-blue text-white rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-20 text-center shadow-2xl" data-aos="fade-up">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 md:mb-6">Ready to Experience the Difference?</h2>
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 text-white/90 max-w-2xl mx-auto">Join thousands of satisfied patients who trust Montgomery Medical Clinic for their healthcare needs.</p>
+                <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-5 text-sm sm:text-base lg:text-lg inline-flex">
                     Schedule Appointment
                 </a>
             </div>
@@ -411,65 +504,123 @@
         });
 
         // Enhanced Slideshow functionality with dots
-        let slideIndex = 0;
+        const SLIDE_INTERVAL = 12000;
+        let slideIndex = 1; // Track currently visible slide (1-based)
         let slideTimeout;
 
+        function normalizeIndex(index, total) {
+            if (total === 0) {
+                return 0;
+            }
+            return (index % total + total) % total;
+        }
+
+        function setSlide(targetIndex, slides, dots) {
+            const totalSlides = slides.length;
+            if (!totalSlides) {
+                return;
+            }
+
+            const normalizedIndex = normalizeIndex(targetIndex, totalSlides);
+
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].classList.remove("active");
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+
+            slides[normalizedIndex].classList.add("active");
+            if (dots[normalizedIndex]) {
+                dots[normalizedIndex].classList.add("active");
+            }
+
+            slideIndex = normalizedIndex + 1;
+        }
+
+        function getCurrentSlideIndex(slides) {
+            if (!slides.length) {
+                return -1;
+            }
+
+            const presumedIndex = slideIndex - 1;
+            if (presumedIndex >= 0 && presumedIndex < slides.length && slides[presumedIndex].classList.contains("active")) {
+                return presumedIndex;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                if (slides[i].classList.contains("active")) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         function showSlides() {
+            const slides = document.querySelectorAll(".slideshow-container .slide");
+            const dots = document.querySelectorAll(".slideshow-dot");
+
+            if (!slides.length) {
+                return;
+            }
+
             clearTimeout(slideTimeout);
+
+            const currentIndex = getCurrentSlideIndex(slides);
+            const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % slides.length;
+
+            setSlide(nextIndex, slides, dots);
+
+            slideTimeout = setTimeout(showSlides, SLIDE_INTERVAL);
+        }
+        
+        function currentSlide(n) {
+            const slides = document.querySelectorAll(".slideshow-container .slide");
+            const dots = document.querySelectorAll(".slideshow-dot");
+
+            if (!slides.length) {
+                return;
+            }
+
+            clearTimeout(slideTimeout);
+            setSlide(n - 1, slides, dots);
+            slideTimeout = setTimeout(showSlides, SLIDE_INTERVAL);
+        }
+        
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll(".slideshow-container .slide");
+            const dots = document.querySelectorAll(".slideshow-dot");
+
+            if (!slides.length) {
+                return;
+            }
+
+            clearTimeout(slideTimeout);
+
+            let currentIndex = getCurrentSlideIndex(slides);
+            if (currentIndex === -1) {
+                currentIndex = 0;
+            }
+
+            const targetIndex = normalizeIndex(currentIndex + direction, slides.length);
+
+            setSlide(targetIndex, slides, dots);
+
+            slideTimeout = setTimeout(showSlides, SLIDE_INTERVAL);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize slideshow - show first slide immediately
             let slides = document.querySelectorAll(".slideshow-container .slide");
             let dots = document.querySelectorAll(".slideshow-dot");
             
             if (slides.length > 0) {
-                for (let i = 0; i < slides.length; i++) {
-                    slides[i].classList.remove("active");
-                }
-                
-                for (let i = 0; i < dots.length; i++) {
-                    dots[i].classList.remove("active");
-                }
-                
-                slideIndex++;
-                if (slideIndex > slides.length) {slideIndex = 1}
-                
-                slides[slideIndex-1].classList.add("active");
-                if (dots[slideIndex-1]) {
-                    dots[slideIndex-1].classList.add("active");
-                }
-                
-                slideTimeout = setTimeout(showSlides, 12000);
+                setSlide(0, slides, dots);
             }
-        }
-        
-        function currentSlide(n) {
-            slideIndex = n - 1;
-            showSlides();
-        }
-        
-        function changeSlide(direction) {
-            clearTimeout(slideTimeout);
-            let slides = document.querySelectorAll(".slideshow-container .slide");
-            let dots = document.querySelectorAll(".slideshow-dot");
-            
-            slides[slideIndex-1].classList.remove("active");
-            if (dots[slideIndex-1]) {
-                dots[slideIndex-1].classList.remove("active");
-            }
-            
-            slideIndex += direction;
-            
-            if (slideIndex > slides.length) {slideIndex = 1}
-            if (slideIndex < 1) {slideIndex = slides.length}
-            
-            slides[slideIndex-1].classList.add("active");
-            if (dots[slideIndex-1]) {
-                dots[slideIndex-1].classList.add("active");
-            }
-            
-            slideTimeout = setTimeout(showSlides, 12000);
-        }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            showSlides();
+            clearTimeout(slideTimeout);
+            slideTimeout = setTimeout(showSlides, SLIDE_INTERVAL);
         });
     </script>
 
