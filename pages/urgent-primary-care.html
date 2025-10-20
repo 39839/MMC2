@@ -32,26 +32,63 @@
         }
     </script>
     <style>
-        /* Fix grid cutoff issues */
-        .container {
-            overflow: visible !important;
+        /* Provider Cards */
+        .provider-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(13, 71, 161, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
         }
-        
-        section {
-            overflow: visible !important;
+
+        .provider-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(13, 71, 161, 0.15);
+            border-color: #ff8f00;
         }
-        
-        .grid {
-            overflow: visible !important;
-            padding: 2rem 0 !important;
+
+        .provider-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f9ff 0%, #e3f2fd 100%);
         }
-        
-        /* Fix for all cards on this page */
-        .bg-white.p-6,
-        .bg-white.p-4,
-        .feature-item {
-            margin: 0.75rem !important;
-            overflow: visible !important;
+
+        .provider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .provider-card:hover .provider-image {
+            transform: scale(1.05);
+        }
+
+        .provider-info {
+            padding: 2rem;
+        }
+
+        .provider-name {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #0d47a1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .provider-title {
+            color: #ff8f00;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
     </style>
 </head>
@@ -118,8 +155,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Latest Equipment</h3>
-                        <p class="text-medium-gray">State-of-the-art diagnostic tools and treatment equipment on-site.</p>
+                        <h3 class="text-xl font-bold mb-2">On-Site Services</h3>
+                        <p class="text-medium-gray">Diagnostic tools and treatment options available right here in our clinic.</p>
                     </div>
 
                     <div class="feature-item">
@@ -206,12 +243,16 @@
                 <p class="text-xl text-medium-gray max-w-3xl mx-auto">Board-certified family medicine doctors dedicated to your health and wellbeing.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                <div class="doctor-card" data-aos="fade-up">
-                    <div class="doctor-image"></div>
-                    <div class="doctor-info">
-                        <h3 class="doctor-name">Dr. Efi Kessous, MD, MPH</h3>
-                        <p class="doctor-title">Board-Certified in Family Medicine</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                
+                <!-- Dr. Efi Kessous -->
+                <div class="provider-card" data-aos="fade-up">
+                    <div class="provider-image-container">
+                        <img src="../images/Efi.jpg" alt="Dr. Efi Kessous" class="provider-image">
+                    </div>
+                    <div class="provider-info">
+                        <h3 class="provider-name">Dr. Efi Kessous</h3>
+                        <p class="provider-title">MD, MPH - Board-Certified Family Medicine</p>
                         <p class="text-medium-gray leading-relaxed mb-4">
                             Dr. Efi Kessous is board-certified in Family Medicine and practices primary and urgent care medicine at Montgomery Medical Clinic. He is also an Assistant Professor and faculty member at The George Washington University School of Medicine & Health Sciences.
                         </p>
@@ -224,11 +265,34 @@
                     </div>
                 </div>
 
-                <div class="doctor-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="doctor-image"></div>
-                    <div class="doctor-info">
-                        <h3 class="doctor-name">Dr. Jonathan Lawless, DO</h3>
-                        <p class="doctor-title">Board-Certified in Family & Sports Medicine</p>
+                <!-- Dr. Bertha Velandia -->
+                <div class="provider-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="provider-image-container">
+                        <img src="../images/Bertha.jpg" alt="Dr. Bertha Velandia" class="provider-image">
+                    </div>
+                    <div class="provider-info">
+                        <h3 class="provider-name">Dr. Bertha Velandia</h3>
+                        <p class="provider-title">MD - Board-Certified Family Medicine</p>
+                        <p class="text-medium-gray leading-relaxed mb-4">
+                            Dr. Bertha Velandia is an experienced primary care physician who received her medical degree from the Universidad Nacional in Bogota, Colombia in 1983. She completed her residency in family medicine at the UAB Huntsville Medical Campus in 2009.
+                        </p>
+                        <p class="text-medium-gray leading-relaxed mb-4">
+                            During her distinguished career, Dr. Velandia has received an outstanding award in Obstetrics and Gynecology. She has also dedicated time serving in rural communities and published research on scurvy in developed countries.
+                        </p>
+                        <p class="text-medium-gray leading-relaxed">
+                            Dr. Velandia brings warmth, experience, and dedication to every patient interaction, making healthcare accessible and compassionate for families in the Gaithersburg community.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dr. Jonathan Lawless -->
+                <div class="provider-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="provider-image-container">
+                        <img src="../images/LawLess.png" alt="Dr. Jonathan Lawless" class="provider-image">
+                    </div>
+                    <div class="provider-info">
+                        <h3 class="provider-name">Dr. Jonathan Lawless</h3>
+                        <p class="provider-title">DO, CAQSM - Board-Certified Family & Sports Medicine</p>
                         <p class="text-medium-gray leading-relaxed mb-4">
                             Dr. Lawless is dual board-certified in family medicine and sports medicine. He completed his training at Northwell Plainview Hospital in Plainview, NY, and graduated from Lake Erie College of Osteopathic Medicine in 2012.
                         </p>
@@ -240,6 +304,7 @@
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -263,7 +328,6 @@
     </section>
 
     <!-- FOOTER -->
-            <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
