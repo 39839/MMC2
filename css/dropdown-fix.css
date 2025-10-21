@@ -18,7 +18,7 @@
 header.glass-effect {
     position: sticky !important;
     top: var(--top-contact-bar-height, 56px) !important;
-    z-index: 9999 !important;
+    z-index: 11000 !important;
     overflow: visible !important;
     isolation: isolate;
     -webkit-transform: translateZ(0);
