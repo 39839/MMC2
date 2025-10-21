@@ -326,6 +326,7 @@ function initializeMobileMenu() {
             // Function to show dropdown
             function showDropdown() {
                 clearTimeout(hoverTimeout);
+                hoverTimeout = null;
                 servicesDropdown.classList.add('active');
                 if (servicesArrow) {
                     servicesArrow.classList.add('rotate-180');
@@ -333,15 +334,32 @@ function initializeMobileMenu() {
                 isOpen = true;
             }
             
+            const HOVER_HIDE_DELAY = 350;
+
             // Function to hide dropdown
-            function hideDropdown() {
+            function hideDropdown(options = {}) {
+                const { immediate = false } = options;
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+
+                if (immediate || window.innerWidth <= 1024) {
+                    servicesDropdown.classList.remove('active');
+                    if (servicesArrow) {
+                        servicesArrow.classList.remove('rotate-180');
+                    }
+                    isOpen = false;
+                    hoverTimeout = null;
+                    return;
+                }
+
                 hoverTimeout = setTimeout(() => {
                     servicesDropdown.classList.remove('active');
                     if (servicesArrow) {
                         servicesArrow.classList.remove('rotate-180');
                     }
                     isOpen = false;
-                }, 150);
+                    hoverTimeout = null;
+                }, HOVER_HIDE_DELAY);
             }
             
             // Desktop hover events
@@ -377,7 +395,7 @@ function initializeMobileMenu() {
                 
                 if (window.innerWidth <= 1024) {
                     if (isOpen) {
-                        hideDropdown();
+                        hideDropdown({ immediate: true });
                     } else {
                         showDropdown();
                     }
