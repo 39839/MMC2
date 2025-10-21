@@ -164,28 +164,65 @@ function initHeaderEnhancements() {
     window.addEventListener('resize', handleRepositioning);
 
     // Mobile menu functionality
+    if (typeof mobileMenuButton.__mmcFallbackToggle__ === 'function') {
+        mobileMenuButton.removeEventListener('click', mobileMenuButton.__mmcFallbackToggle__);
+        mobileMenuButton.__mmcFallbackToggle__ = null;
+    }
+
+    if (typeof mobileMenu.__mmcFallbackClose__ === 'function') {
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.removeEventListener('click', mobileMenu.__mmcFallbackClose__);
+        });
+        mobileMenu.__mmcFallbackClose__ = null;
+    }
+
+    mobileMenuButton.dataset.mmcMobileMenuEnhanced = 'true';
+    mobileMenuButton.setAttribute('aria-controls', 'mobile-menu');
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
+
     const iconPath = mobileMenuButton.querySelector('svg path');
 
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+    const updateMenuVisualState = (isOpen) => {
+        mobileMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.body.classList.toggle('mobile-menu-open', isOpen);
 
         if (iconPath) {
-            if (mobileMenu.classList.contains('hidden')) {
-                iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-            } else {
-                iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-            }
+            iconPath.setAttribute(
+                'd',
+                isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'
+            );
+        }
+    };
+
+    const openMobileMenu = () => {
+        mobileMenu.classList.remove('hidden');
+        updateMenuVisualState(true);
+    };
+
+    const closeMobileMenu = () => {
+        mobileMenu.classList.add('hidden');
+        updateMenuVisualState(false);
+    };
+
+    mobileMenuButton.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('hidden')) {
+            openMobileMenu();
+        } else {
+            closeMobileMenu();
         }
     });
 
     // Close mobile menu on link click
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            if (iconPath) {
-                iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-            }
+            closeMobileMenu();
         });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+            closeMobileMenu();
+        }
     });
 
     // Header shadow on scroll

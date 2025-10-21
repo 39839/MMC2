@@ -162,8 +162,44 @@ function initializeMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
     
     if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
+        mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.dataset.mmcMobileMenuFallback = 'true';
+
+        const fallbackToggle = () => {
+            if (mobileMenuBtn.dataset.mmcMobileMenuEnhanced === 'true') {
+                return;
+            }
+
+            const willOpen = mobileMenu.classList.contains('hidden');
+            if (willOpen) {
+                mobileMenu.classList.remove('hidden');
+                document.body.classList.add('mobile-menu-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            } else {
+                mobileMenu.classList.add('hidden');
+                document.body.classList.remove('mobile-menu-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+        };
+
+        const fallbackClose = () => {
+            if (mobileMenuBtn.dataset.mmcMobileMenuEnhanced === 'true') {
+                return;
+            }
+
+            mobileMenu.classList.add('hidden');
+            document.body.classList.remove('mobile-menu-open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        };
+
+        // Store references so enhanced scripts can remove if needed
+        mobileMenuBtn.__mmcFallbackToggle__ = fallbackToggle;
+        mobileMenu.__mmcFallbackClose__ = fallbackClose;
+
+        mobileMenuBtn.addEventListener('click', fallbackToggle);
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', fallbackClose);
         });
     }
 }

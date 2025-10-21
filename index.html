@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="description" content="Montgomery Medical Clinic - Premier multi-specialty healthcare in Gaithersburg, MD. Urgent care, primary care, sports medicine, dermatology, and more.">
-    <title>Montgomery Medical Clinic | Premier Healthcare in Gaithersburg, MD</title>
+    <meta name="description" content="Montgomery Medical Clinic - Premier urgent care center and medical center in Gaithersburg, MD. Our primary care providers and doctors offer comprehensive healthcare services.">
+    <title>Urgent Care Center & Medical Center | Montgomery Medical Clinic - Primary Care Doctors in Gaithersburg</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,18 @@
         html, body {
             max-width: 100vw;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Mobile-first responsive design */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Ensure touch targets are at least 44x44px */
+        button, a, input, select, textarea {
+            min-height: 44px;
+            min-width: 44px;
         }
 
         /* Critical: Only show one slide at a time */
@@ -56,30 +68,46 @@
         
         /* Enhanced Mobile Responsiveness */
         @media (max-width: 768px) {
+            /* Prevent text from being too small */
+            body {
+                font-size: 16px;
+            }
+
+            /* Hero section mobile optimization */
+            .page-header h1 {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+
             /* Slideshow mobile adjustments */
             .slideshow-container {
-                padding: 1rem !important;
+                padding: 0.75rem !important;
+                margin: 0 -1rem;
             }
             
             .slide {
                 padding: 1rem !important;
                 min-height: 180px !important;
+                flex-direction: column;
             }
             
             .slide h3 {
-                font-size: 1.25rem !important;
+                font-size: 1.125rem !important;
                 line-height: 1.3 !important;
+                text-align: center;
             }
             
             .slide .inline-flex {
-                font-size: 0.8rem !important;
+                font-size: 0.75rem !important;
                 padding: 0.5rem 0.75rem !important;
+                white-space: normal;
+                text-align: center;
             }
             
             /* Navigation arrows mobile */
             .slideshow-container button {
-                width: 32px;
-                height: 32px;
+                width: 36px;
+                height: 36px;
                 padding: 0.5rem;
             }
             
@@ -92,11 +120,24 @@
             .btn {
                 min-height: 48px;
                 touch-action: manipulation;
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
             }
             
             /* Service cards mobile spacing */
             #services .grid {
                 gap: 1rem;
+                grid-template-columns: 1fr;
+            }
+
+            /* Stats section mobile */
+            .stat-number {
+                font-size: 2.5rem !important;
+            }
+
+            /* Cards on mobile */
+            .card {
+                padding: 1.5rem !important;
             }
         }
         
@@ -106,19 +147,24 @@
             }
             
             .slide h3 {
-                font-size: 1.1rem !important;
+                font-size: 1rem !important;
             }
             
             /* Ensure buttons wrap nicely */
             .slide .flex-wrap {
                 justify-content: center;
             }
+
+            /* Navigation improvements */
+            .breadcrumb {
+                font-size: 0.875rem;
+            }
         }
         
         /* Clean & Aesthetic Slideshow Container */
         .slideshow-container {
             background: white;
-            border: 1px solid #e5e7eb; /* tailwind's gray-200 */
+            border: 1px solid #e5e7eb;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             max-width: 100%;
             overflow: hidden;
@@ -129,6 +175,7 @@
             display: flex;
             justify-content: center;
             gap: 6px;
+            margin-top: 1rem;
         }
         
         @media (min-width: 768px) {
@@ -138,24 +185,28 @@
         }
         
         .slideshow-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: #d1d5db;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-width: 10px;
+            min-height: 10px;
         }
         
         @media (min-width: 768px) {
             .slideshow-dot {
-                width: 9px;
-                height: 9px;
+                width: 12px;
+                height: 12px;
+                min-width: 12px;
+                min-height: 12px;
             }
         }
         
         .slideshow-dot.active {
             background: #0d47a1;
-            transform: scale(1.1);
+            transform: scale(1.2);
         }
         
         .slideshow-dot:hover {
@@ -180,6 +231,14 @@
         #services .card {
             margin: 0.75rem;
         }
+
+        /* Mobile menu improvements */
+        @media (max-width: 1024px) {
+            .mobile-menu-button {
+                min-width: 48px;
+                min-height: 48px;
+            }
+        }
     </style>
 </head>
 <body class="bg-light-gray text-dark-gray">
@@ -191,7 +250,7 @@
 
 
     <section class="relative text-white min-h-[50vh] md:min-h-[65vh] lg:min-h-[85vh] flex items-center py-12 md:py-20" style="z-index: 1; position: relative; isolation: isolate;" data-aos="fade-in">
-        <img src="images/PhotoWide.jpeg" alt="Team of doctors at Montgomery Medical Clinic" class="absolute inset-0 w-full h-full object-cover z-0">
+        <img src="images/PhotoWide.jpeg" alt="Expert doctors and primary care providers at Montgomery Medical Clinic urgent care center" class="absolute inset-0 w-full h-full object-cover z-0">
         
         <div class="absolute inset-0 bg-gradient-to-r from-dark-gray/80 via-dark-gray/60 via-30% to-transparent" style="z-index: 10;"></div>
         
@@ -203,7 +262,7 @@
                     Healthcare.
                 </h1>
                 <p class="mt-4 sm:mt-6 text-gray-200 leading-relaxed text-base sm:text-lg">
-                    We are committed to a patient-centered approach, ensuring your health needs are understood and addressed. Our team provides integrated, comprehensive care you can trust.
+                    Our medical center provides comprehensive services with experienced doctors and primary care providers committed to patient-centered care. Visit our urgent care center for immediate medical attention or schedule an appointment at our clinic in Gaithersburg.
                 </p>
                 <p class="mt-3 text-white/90 text-base sm:text-lg font-semibold">
                     Proudly serving Gaithersburg, Montgomery County, and the surrounding areas.
@@ -241,7 +300,7 @@
                     <div class="shrink-0 relative">
                         <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-purple-300 rounded-full blur-lg opacity-50"></div>
                         <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
-                            <img src="icons/syringe.png" class="h-8 w-8 sm:h-10 sm:w-10" alt="Flu shot vaccine icon"/>
+                            <img src="icons/syringe.png" class="h-8 w-8 sm:h-10 sm:w-10" alt="Flu vaccination services at urgent care center"/>
                         </div>
                     </div>
                     <div class="flex-1">
@@ -254,7 +313,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
                                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                Walk-ins Welcome
+                                Walk-ins Welcome at Our Clinic
                             </a>
                             <span class="text-medium-gray font-medium text-xs sm:text-sm">Protect yourself this season</span>
                         </div>
@@ -265,7 +324,7 @@
                     <div class="shrink-0 relative">
                         <div class="absolute inset-0 bg-gradient-to-tr from-green-300 to-teal-300 rounded-full blur-lg opacity-50"></div>
                         <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center shadow-md p-3 sm:p-4">
-                            <img src="icons/OccupationalHealth.png" class="h-10 w-10 sm:h-12 sm:w-12 object-contain" alt="FAA and Immigration Medical Services icon"/>
+                            <img src="icons/OccupationalHealth.png" class="h-10 w-10 sm:h-12 sm:w-12 object-contain" alt="Specialized medical services at medical center"/>
                         </div>
                     </div>
                     <div class="flex-1">
@@ -302,7 +361,7 @@
                     <div class="flex-1">
                         <span class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-orange to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow-md">Available Today</span>
                         <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-dark-gray mb-2 sm:mb-3 leading-tight">
-                            Same Day <span class="text-brand-blue">Urgent Care</span> Appointments
+                            Same Day <span class="text-brand-blue">Urgent Care Center</span> Appointments
                         </h3>
                         <div class="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 flex-wrap">
                             <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="inline-flex items-center gap-2 bg-brand-blue text-white font-bold px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm shadow-md hover:bg-deep-blue transition-all cursor-pointer">
@@ -311,7 +370,7 @@
                                 </svg>
                                 Walk-In Basis
                             </a>
-                            <span class="text-medium-gray font-medium text-xs sm:text-sm">No appointment needed</span>
+                            <span class="text-medium-gray font-medium text-xs sm:text-sm">No appointment needed at our medical center</span>
                         </div>
                     </div>
                 </div>
@@ -320,14 +379,14 @@
                     <div class="shrink-0 relative">
                         <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-amber-200 rounded-full blur-lg opacity-50"></div>
                         <div class="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500 to-deep-blue rounded-full flex items-center justify-center shadow-md">
-                            <img src="icons/hospital.png" class="h-8 w-8 sm:h-10 sm:w-10" alt="Medical facility comprehensive care icon"/>
+                            <img src="icons/hospital.png" class="h-8 w-8 sm:h-10 sm:w-10" alt="Comprehensive medical care at clinic and urgent care center"/>
                         </div>
                     </div>
                     <div class="flex-1">
                         <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-dark-gray mb-2 sm:mb-3 leading-tight">
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-orange">One Stop</span> For All Your Medical Needs
                         </h3>
-                        <p class="text-medium-gray font-medium text-sm sm:text-base mb-3 sm:mb-4">Comprehensive multi-specialty care under one roof.</p>
+                        <p class="text-medium-gray font-medium text-sm sm:text-base mb-3 sm:mb-4">Our medical center offers comprehensive multi-specialty care with expert doctors and primary care providers under one roof.</p>
                         <div class="flex items-center justify-center lg:justify-start">
                             <a href="#services" class="inline-flex items-center gap-2 bg-white text-dark-gray font-bold px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm shadow-md border border-gray-300 hover:bg-gray-100 transition-all">
                                 Explore Our Services
@@ -354,11 +413,11 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 text-center">
                 <div class="stat-card" data-aos="fade-up">
                     <div class="stat-number text-white text-4xl sm:text-5xl lg:text-6xl">70+</div>
-                    <div class="stat-label text-white/90 text-sm sm:text-base">Patients Seen Daily</div>
+                    <div class="stat-label text-white/90 text-sm sm:text-base">Patients Seen Daily at Our Medical Center</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="stat-number text-white text-4xl sm:text-5xl lg:text-6xl">7</div>
-                    <div class="stat-label text-white/90 text-sm sm:text-base">Departments</div>
+                    <div class="stat-label text-white/90 text-sm sm:text-base">Departments with Expert Doctors</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="stat-number text-white text-4xl sm:text-5xl lg:text-6xl">10K+</div>
@@ -372,16 +431,16 @@
         <div class="container mx-auto px-6 lg:px-8">
             <div class="text-center mb-20 max-w-3xl mx-auto" data-aos="fade-up">
                 <h2 class="section-title text-dark-gray mb-6">Our Departments</h2>
-                <p class="section-subtitle">Comprehensive healthcare services tailored to your unique needs, delivered by board-certified specialists.</p>
+                <p class="section-subtitle">Comprehensive healthcare services delivered by board-certified doctors and primary care providers at our medical center and urgent care center.</p>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 <a href="pages/urgent-primary-care.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="primary" data-aos="fade-up">
                     <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
-                        <img src="icons/PrimaryCare.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Urgent and Primary Care medical services icon"/>
+                        <img src="icons/PrimaryCare.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Urgent care center and primary care provider services"/>
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Urgent & Primary Care</h3>
-                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Your foundation for lifelong health, from routine check-ups to immediate care needs.</p>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Your foundation for lifelong health from our experienced primary care providers, with urgent care center services for immediate medical needs at our clinic.</p>
                     <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
                         Explore Urgent Care
                     </span>
@@ -389,10 +448,10 @@
 
                 <a href="pages/sports-medicine.html" class="card p-6 sm:p-8 md:p-10 text-center flex flex-col group" data-service="sports" data-aos="fade-up" data-aos-delay="50">
                     <div class="icon-wrap-new bg-white p-6 rounded-2xl mb-6 sm:mb-8 mx-auto flex items-center justify-center shadow-md">
-                        <img src="icons/PhysicalTherapy.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Sports Medicine and Physical Therapy rehabilitation icon"/>
+                        <img src="icons/PhysicalTherapy.png" class="h-20 w-20 sm:h-24 sm:w-24 object-contain" alt="Sports medicine doctors at medical center"/>
                     </div>
                     <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Sports Medicine & Physical Therapy</h3>
-                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Comprehensive rehabilitation and sports injury care to get you back in the game, stronger than before.</p>
+                    <p class="text-sm sm:text-base text-medium-gray mb-4 sm:mb-6 flex-grow">Comprehensive rehabilitation and sports injury care from our specialized doctors to get you back in the game stronger than before.</p>
                     <span class="btn btn-outline border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 text-sm font-bold transition-all">
                         Explore Sports Medicine
                     </span>
@@ -449,18 +508,22 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
                 <div class="floating" data-aos="fade-right">
-                    <img src="images/CurrentPhoto1.png" alt="Montgomery Medical Clinic modern facility with board-certified medical professionals providing patient care" class="rounded-3xl shadow-2xl w-full">
+                    <img src="images/Clinic.jpeg" 
+                         alt="Montgomery Medical Clinic urgent care center and medical center facility in Gaithersburg with primary care providers"
+                         class="rounded-3xl shadow-2xl w-full"
+                         loading="eager"
+                         fetchpriority="high">
                 </div>
                 <div class="mt-10 lg:mt-0 space-y-4 md:space-y-6" data-aos="fade-left">
                     <span class="text-brand-blue font-bold uppercase tracking-widest text-sm">WHO WE ARE</span>
-                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black">About Us</h2>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black">About Our Medical Center</h2>
                     <p class="text-base md:text-lg text-medium-gray leading-relaxed">
-                        Our facility is equipped with top-of-the-line technology, including an in-house radiology center and physical therapy unit, ensuring seamless care under one roof.
+                        Our medical center and urgent care center serve the Gaithersburg community with compassionate, patient-focused healthcare. Our clinic houses modern diagnostic equipment, including radiology services and physical therapy facilities, allowing our doctors and primary care providers to deliver coordinated care conveniently under one roof.
                     </p>
                     <p class="text-base md:text-lg text-medium-gray leading-relaxed">
-                        With over five decades of combined experience, our board-certified physicians build lasting relationships based on trust and personalized attention.
+                        With decades of combined medical experience, our board-certified doctors and primary care physicians are dedicated to building trusted, long-term relationships with patients at our urgent care center and medical center. Every patient receives personalized attention from our primary care providers who truly understand your health journey.
                     </p>
-                    <a href="pages/about.html" class="btn btn-primary inline-flex mt-6">Learn More About Us</a>
+                    <a href="pages/about.html" class="btn btn-primary inline-flex mt-6">Learn More About Our Clinic</a>
                 </div>
             </div>
         </div>
@@ -469,10 +532,10 @@
     <section id="insurance" class="py-16 md:py-24 lg:py-32 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 max-w-4xl mx-auto" data-aos="fade-up">
-                <h2 class="section-title text-dark-gray mb-6">Insurance Information</h2>
-                <p class="section-subtitle">We accept a wide variety of insurance plans to make quality healthcare accessible.</p>
+                <h2 class="section-title text-dark-gray mb-6">Insurance Information for Our Clinic</h2>
+                <p class="section-subtitle">Our medical center and urgent care center accept a wide variety of insurance plans to make quality healthcare from our doctors and primary care providers accessible to everyone in our community.</p>
                 <a href="pages/insurance.html" class="btn btn-primary mt-8 inline-flex">
-                    View All Accepted Insurance Plans
+                    View All Accepted Insurance Plans at Our Medical Center
                 </a>
             </div>
         </div>
@@ -480,10 +543,10 @@
     <section class="py-16 md:py-24 lg:py-32 bg-light-blue-bg">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-gradient-blue text-white rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-20 text-center shadow-2xl" data-aos="fade-up">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 md:mb-6">Ready to Experience the Difference?</h2>
-                <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 text-white/90 max-w-2xl mx-auto">Join thousands of satisfied patients who trust Montgomery Medical Clinic for their healthcare needs.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 md:mb-6">Ready to Experience Quality Care at Our Medical Center?</h2>
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 text-white/90 max-w-2xl mx-auto">Join thousands of satisfied patients who trust our urgent care center, primary care providers, and doctors at Montgomery Medical Clinic for their healthcare needs. Our clinic offers comprehensive services from experienced primary care physicians at our medical center.</p>
                 <a href="https://nextpatient.co/p/montgomerymedclinic/schedule" target="_blank" class="btn btn-secondary px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-5 text-sm sm:text-base lg:text-lg inline-flex">
-                    Schedule Appointment
+                    Schedule Appointment at Our Clinic
                 </a>
             </div>
         </div>
