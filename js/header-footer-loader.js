@@ -2,58 +2,82 @@ let contactBarResizeObserver = null;
 let resizeListenerAttached = false;
 let resizeDebounceTimer = null;
 
-// Load header and footer components
-document.addEventListener('DOMContentLoaded', function() {
-    // Determine if we're on the home page or a subpage
-    const isHomePage = window.location.pathname.endsWith('index.html') || 
-                       window.location.pathname.endsWith('/') ||
-                       window.location.pathname.split('/').pop() === '';
-    
-    const basePath = isHomePage ? '' : '../';
-    
-    // Load header
-    fetch(basePath + 'includes/header.html')
-        .then(response => response.text())
-        .then(data => {
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            if (headerPlaceholder) {
+function initHeaderFooter() {
+    const pathName = window.location.pathname;
+    const pathSegments = pathName.split('/').filter(Boolean);
+    const currentFile = pathSegments[pathSegments.length - 1] || 'index.html';
+    const headerPlaceholder = document.getElementById('header-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+
+    const isHomePage = currentFile === 'index.html';
+    const inferredBasePath = isHomePage ? '' : (pathSegments.includes('pages') ? '../' : '');
+    const basePath = (headerPlaceholder && typeof headerPlaceholder.dataset.mmcHeaderBasePath === 'string')
+        ? headerPlaceholder.dataset.mmcHeaderBasePath
+        : inferredBasePath;
+
+    if (headerPlaceholder) {
+        headerPlaceholder.dataset.mmcHeaderBasePath = basePath;
+    }
+
+    const headerAlreadyInjected = !!(headerPlaceholder &&
+        headerPlaceholder.dataset.mmcHeaderInserted === 'true' &&
+        headerPlaceholder.childElementCount > 0);
+
+    const headerPromise = (!headerPlaceholder || headerAlreadyInjected)
+        ? Promise.resolve()
+        : fetch(basePath + 'includes/header.html')
+            .then(response => response.text())
+            .then(data => {
                 headerPlaceholder.innerHTML = data;
-                updateHeaderLinks(basePath, isHomePage);
-                initializeMobileMenu();
-                initializeServicesDropdown();
-                initializeContactModal();
-                updateContactBarOffset();
-                observeContactBarHeight();
+                headerPlaceholder.dataset.mmcHeaderInserted = 'true';
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+            });
 
-                if (!resizeListenerAttached) {
-                    window.addEventListener('resize', handleWindowResize);
-                    window.addEventListener('orientationchange', handleWindowResize);
-                    window.addEventListener('load', updateContactBarOffset);
-                    resizeListenerAttached = true;
-                }
+    Promise.resolve(headerPromise).then(() => {
+        if (!headerPlaceholder) {
+            return;
+        }
 
-                document.dispatchEvent(new CustomEvent('mmc:header-ready', {
-                    detail: {
-                        basePath,
-                        isHomePage
-                    }
-                }));
+        updateHeaderLinks(basePath, isHomePage);
+        initializeMobileMenu();
+        initializeServicesDropdown();
+        initializeContactModal();
+        updateContactBarOffset();
+        observeContactBarHeight();
+
+        if (!resizeListenerAttached) {
+            window.addEventListener('resize', handleWindowResize);
+            window.addEventListener('orientationchange', handleWindowResize);
+            window.addEventListener('load', updateContactBarOffset);
+            resizeListenerAttached = true;
+        }
+
+        document.dispatchEvent(new CustomEvent('mmc:header-ready', {
+            detail: {
+                basePath,
+                isHomePage
             }
-        })
-        .catch(error => console.error('Error loading header:', error));
-    
-    // Load footer
-    fetch(basePath + 'includes/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            const footerPlaceholder = document.getElementById('footer-placeholder');
-            if (footerPlaceholder) {
+        }));
+    });
+
+    if (footerPlaceholder) {
+        fetch(basePath + 'includes/footer.html')
+            .then(response => response.text())
+            .then(data => {
                 footerPlaceholder.innerHTML = data;
                 updateFooterLinks(basePath);
-            }
-        })
-        .catch(error => console.error('Error loading footer:', error));
-});
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeaderFooter, { once: true });
+} else {
+    initHeaderFooter();
+}
 
 // Update all header links based on current page location
 function updateHeaderLinks(basePath, isHomePage) {
@@ -62,7 +86,26 @@ function updateHeaderLinks(basePath, isHomePage) {
     const logoImg = document.querySelector('.logo-img');
     if (logoLink && logoImg) {
         logoLink.href = basePath + 'index.html';
-        logoImg.src = basePath + 'images/Logo.png';
+        const logoWebp = basePath + 'images/Logo-fast.webp';
+        const logoFallback = basePath + 'images/Logo.png';
+
+        if (!logoImg.dataset.mmcLogoFallbackBound) {
+            logoImg.addEventListener('error', function handleLogoError() {
+                if (logoImg.dataset.mmcLogoFallbackUsed === 'true') {
+                    return;
+                }
+                logoImg.dataset.mmcLogoFallbackUsed = 'true';
+                logoImg.src = logoFallback;
+            });
+            logoImg.dataset.mmcLogoFallbackBound = 'true';
+        }
+
+        logoImg.src = logoWebp;
+        logoImg.setAttribute('loading', 'eager');
+        logoImg.setAttribute('decoding', 'sync');
+        logoImg.setAttribute('fetchpriority', 'high');
+        logoImg.width = 360;
+        logoImg.height = 100;
     }
     
     // Define page mappings
@@ -103,7 +146,23 @@ function updateFooterLinks(basePath) {
     // Update footer logo
     const footerLogo = document.querySelector('.footer-logo');
     if (footerLogo) {
-        footerLogo.src = basePath + 'images/Logo.png';
+        const logoWebp = basePath + 'images/Logo-fast.webp';
+        const logoFallback = basePath + 'images/Logo.png';
+
+        if (!footerLogo.dataset.mmcLogoFallbackBound) {
+            footerLogo.addEventListener('error', () => {
+                if (footerLogo.dataset.mmcLogoFallbackUsed === 'true') {
+                    return;
+                }
+                footerLogo.dataset.mmcLogoFallbackUsed = 'true';
+                footerLogo.src = logoFallback;
+            });
+            footerLogo.dataset.mmcLogoFallbackBound = 'true';
+        }
+
+        footerLogo.src = logoWebp;
+        footerLogo.setAttribute('loading', 'lazy');
+        footerLogo.decoding = 'async';
     }
     
     // Define page mappings for footer

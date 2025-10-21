@@ -14,6 +14,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dropdown-fix.css">
+    <link rel="preload" href="includes/header.html" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="js/header-footer-loader.js" as="script">
+    <link rel="preload" href="js/critical-header.js" as="script">
+    <link rel="preload" href="images/Logo-fast.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="images/PhotoWide.webp" as="image" type="image/webp" fetchpriority="high">
 
     <script>
         tailwind.config = {
@@ -245,12 +250,24 @@
 
 <!-- Header Placeholder -->
 <div id="header-placeholder"></div>
+<script src="js/critical-header.js"></script>
 
 
 
 
     <section class="relative text-white min-h-[50vh] md:min-h-[65vh] lg:min-h-[85vh] flex items-center py-12 md:py-20" style="z-index: 1; position: relative; isolation: isolate;" data-aos="fade-in">
-        <img src="images/PhotoWide.jpeg" alt="Expert doctors and primary care providers at Montgomery Medical Clinic urgent care center" class="absolute inset-0 w-full h-full object-cover z-0">
+        <picture class="absolute inset-0 z-0 block">
+            <source srcset="images/PhotoWide.webp" type="image/webp">
+            <source srcset="images/PhotoWide.jpeg" type="image/jpeg">
+            <img src="images/PhotoWide.jpeg"
+                 alt="Expert doctors and primary care providers at Montgomery Medical Clinic urgent care center"
+                 class="w-full h-full object-cover block"
+                 loading="eager"
+                 decoding="sync"
+                 fetchpriority="high"
+                 width="1426"
+                 height="658">
+        </picture>
         
         <div class="absolute inset-0 bg-gradient-to-r from-dark-gray/80 via-dark-gray/60 via-30% to-transparent" style="z-index: 10;"></div>
         

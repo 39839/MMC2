@@ -14,6 +14,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dropdown-fix.css">
+    <link rel="preload" href="../includes/header.html" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="../js/header-footer-loader.js" as="script">
+    <link rel="preload" href="../js/critical-header.js" as="script">
+    <link rel="preload" href="../images/Logo-fast.webp" as="image" type="image/webp" fetchpriority="high">
 
     <script>
         tailwind.config = {
@@ -141,6 +145,7 @@
 
     <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
+    <script src="../js/critical-header.js"></script>
 
     <!-- PAGE HEADER -->
     <section class="page-header">
