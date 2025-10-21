@@ -149,15 +149,31 @@ function initHeaderFeatures() {
         mobileMenu.__mmcFallbackClose__ = null;
     }
 
+    if (typeof mobileMenu.__mmcFallbackDocumentHandler__ === 'function') {
+        document.removeEventListener('click', mobileMenu.__mmcFallbackDocumentHandler__);
+        mobileMenu.__mmcFallbackDocumentHandler__ = null;
+    }
+
+    if (typeof mobileMenu.__mmcFallbackResizeHandler__ === 'function') {
+        window.removeEventListener('resize', mobileMenu.__mmcFallbackResizeHandler__);
+        window.removeEventListener('orientationchange', mobileMenu.__mmcFallbackResizeHandler__);
+        mobileMenu.__mmcFallbackResizeHandler__ = null;
+    }
+
     mobileMenuButton.dataset.mmcMobileMenuEnhanced = 'true';
     mobileMenuButton.setAttribute('aria-controls', 'mobile-menu');
     mobileMenuButton.setAttribute('aria-expanded', 'false');
+    mobileMenuButton.classList.remove('active');
+    if (!mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+    }
 
     const icon = mobileMenuButton.querySelector('svg path');
 
     const applyMenuState = (isOpen) => {
         mobileMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         document.body.classList.toggle('mobile-menu-open', isOpen);
+        mobileMenuButton.classList.toggle('active', isOpen);
 
         if (icon) {
             icon.setAttribute(
@@ -191,11 +207,32 @@ function initHeaderFeatures() {
         });
     });
 
+    document.addEventListener('click', (event) => {
+        if (mobileMenu.classList.contains('hidden')) {
+            return;
+        }
+
+        if (mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target)) {
+            return;
+        }
+
+        closeMenu();
+    });
+
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
             closeMenu();
         }
     });
+
+    const handleViewportChange = () => {
+        if (window.innerWidth >= 1024 && !mobileMenu.classList.contains('hidden')) {
+            closeMenu();
+        }
+    };
+
+    window.addEventListener('resize', handleViewportChange);
+    window.addEventListener('orientationchange', handleViewportChange);
 
     const updateHeaderShadow = () => {
         if (window.pageYOffset > 100) {

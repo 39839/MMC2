@@ -223,7 +223,12 @@ function initializeMobileMenu() {
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.classList.remove('active');
         mobileMenuBtn.dataset.mmcMobileMenuFallback = 'true';
+
+        if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+        }
 
         const fallbackToggle = () => {
             if (mobileMenuBtn.dataset.mmcMobileMenuEnhanced === 'true') {
@@ -235,10 +240,12 @@ function initializeMobileMenu() {
                 mobileMenu.classList.remove('hidden');
                 document.body.classList.add('mobile-menu-open');
                 mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                mobileMenuBtn.classList.add('active');
             } else {
                 mobileMenu.classList.add('hidden');
                 document.body.classList.remove('mobile-menu-open');
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.classList.remove('active');
             }
         };
 
@@ -250,11 +257,44 @@ function initializeMobileMenu() {
             mobileMenu.classList.add('hidden');
             document.body.classList.remove('mobile-menu-open');
             mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.classList.remove('active');
         };
+
+        const handleDocumentClick = (event) => {
+            if (mobileMenuBtn.dataset.mmcMobileMenuEnhanced === 'true') {
+                return;
+            }
+
+            if (mobileMenu.classList.contains('hidden')) {
+                return;
+            }
+
+            if (mobileMenu.contains(event.target) || mobileMenuBtn.contains(event.target)) {
+                return;
+            }
+
+            fallbackClose();
+        };
+
+        const handleResize = () => {
+            if (mobileMenuBtn.dataset.mmcMobileMenuEnhanced === 'true') {
+                return;
+            }
+
+            if (window.innerWidth >= 1024) {
+                fallbackClose();
+            }
+        };
+
+        document.addEventListener('click', handleDocumentClick);
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', handleResize);
 
         // Store references so enhanced scripts can remove if needed
         mobileMenuBtn.__mmcFallbackToggle__ = fallbackToggle;
         mobileMenu.__mmcFallbackClose__ = fallbackClose;
+        mobileMenu.__mmcFallbackDocumentHandler__ = handleDocumentClick;
+        mobileMenu.__mmcFallbackResizeHandler__ = handleResize;
 
         mobileMenuBtn.addEventListener('click', fallbackToggle);
         mobileMenu.querySelectorAll('a').forEach(link => {

@@ -33,14 +33,14 @@
 <!-- Main Navigation Header -->
 <header class="glass-effect sticky top-0" style="z-index: 10020;">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]">
-        <nav class="flex items-center justify-between py-3 gap-2">
+        <nav class="flex items-center justify-between py-3 gap-2 relative">
             <!-- Logo - Fixed for immediate loading -->
             <div class="flex items-center flex-shrink-0">
                 <a href="#" class="flex items-center group logo-link">
                     <img 
                         src="images/Logo.png" 
                         alt="Montgomery Medical Clinic" 
-                        class="h-16 w-auto lg:h-20 object-contain transition-transform duration-200 group-hover:scale-105"
+                        class="h-16 w-auto lg:h-20 object-contain transition-transform duration-200 group-hover:scale-105 logo-img"
                         loading="eager"
                         fetchpriority="high"
                         width="200"
@@ -90,7 +90,7 @@
         </nav>
         
         <!-- Mobile Menu - Minimal and clean -->
-        <div id="mobile-menu" class="mobile-menu">
+        <div id="mobile-menu" class="mobile-menu hidden">
             <div class="mobile-menu-inner">
                 <a href="#" class="mobile-menu-item mobile-nav-home">Home</a>
                 <a href="#" class="mobile-menu-item mobile-nav-urgent">Urgent & Primary Care</a>
@@ -109,159 +109,6 @@
         </div>
     </div>
 </header>
-
-<style>
-/* Mobile Hamburger Menu - Clean & Minimal */
-.mobile-menu-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    padding: 12px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.hamburger-box {
-    width: 24px;
-    height: 18px;
-    display: inline-block;
-    position: relative;
-}
-
-.hamburger-inner {
-    display: block;
-    top: 50%;
-    margin-top: -1.5px;
-}
-
-.hamburger-inner,
-.hamburger-inner::before,
-.hamburger-inner::after {
-    width: 24px;
-    height: 2.5px;
-    background-color: #0d47a1;
-    border-radius: 2px;
-    position: absolute;
-    transition: transform 0.25s ease, opacity 0.2s ease;
-}
-
-.hamburger-inner::before,
-.hamburger-inner::after {
-    content: "";
-    display: block;
-}
-
-.hamburger-inner::before {
-    top: -7px;
-}
-
-.hamburger-inner::after {
-    bottom: -7px;
-}
-
-/* Active state */
-.mobile-menu-button.active .hamburger-inner {
-    transform: rotate(45deg);
-}
-
-.mobile-menu-button.active .hamburger-inner::before {
-    top: 0;
-    transform: rotate(90deg);
-}
-
-.mobile-menu-button.active .hamburger-inner::after {
-    opacity: 0;
-    bottom: 0;
-}
-
-/* Mobile Menu - Minimal & Beautiful */
-.mobile-menu {
-    display: none;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.mobile-menu.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    animation: slideDown 0.3s ease forwards;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.mobile-menu-inner {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem 0 1rem;
-    border-top: 1px solid #e5e7eb;
-}
-
-.mobile-menu-item {
-    display: flex;
-    align-items: center;
-    padding: 0.875rem 1rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: #1a1d23;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    border-left: 3px solid transparent;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.mobile-menu-item:active {
-    background: #f5f9ff;
-    border-left-color: #0d47a1;
-    color: #0d47a1;
-}
-
-.mobile-menu-portal {
-    margin: 0.75rem 1rem 0;
-    background: #0d47a1;
-    color: white;
-    border-radius: 8px;
-    border-left: none !important;
-    justify-content: center;
-    padding: 0.875rem;
-    font-weight: 600;
-}
-
-.mobile-menu-portal:active {
-    background: #002171;
-    color: white;
-}
-
-/* Ensure proper sizing on mobile devices */
-@media (max-width: 1023px) {
-    .mobile-menu-button {
-        min-width: 48px;
-        min-height: 48px;
-    }
-}
-
-@media (max-width: 640px) {
-    .mobile-menu-item {
-        font-size: 0.875rem;
-        padding: 0.75rem 0.875rem;
-    }
-}
-</style>
 
 <!-- Contact Modal -->
 <div id="contact-modal" class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-describedby="contact-modal-description">
@@ -371,33 +218,61 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isActive = mobileMenu.classList.contains('active');
-            
-            if (isActive) {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            } else {
-                mobileMenu.classList.add('active');
-                mobileMenuBtn.classList.add('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'true');
-            }
-        });
-        
-        // Close menu when clicking on a link
-        const menuLinks = mobileMenu.querySelectorAll('.mobile-menu-item');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            });
-        });
+    if (!mobileMenuBtn || !mobileMenu) {
+        return;
     }
+
+    const openMenu = () => {
+        mobileMenu.classList.remove('hidden');
+        document.body.classList.add('mobile-menu-open');
+        mobileMenuBtn.classList.add('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeMenu = () => {
+        mobileMenu.classList.add('hidden');
+        document.body.classList.remove('mobile-menu-open');
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    mobileMenuBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (mobileMenu.classList.contains('hidden')) {
+            openMenu();
+        } else {
+            closeMenu();
+        }
+    });
+
+    mobileMenu.querySelectorAll('.mobile-menu-item').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        const isMenuOpen = !mobileMenu.classList.contains('hidden');
+        if (!isMenuOpen) {
+            return;
+        }
+
+        if (mobileMenu.contains(event.target) || mobileMenuBtn.contains(event.target)) {
+            return;
+        }
+
+        closeMenu();
+    });
+
+    const handleViewportReset = () => {
+        if (window.innerWidth >= 1024) {
+            closeMenu();
+        }
+    };
+
+    window.addEventListener('resize', handleViewportReset);
+    window.addEventListener('orientationchange', handleViewportReset);
 });
 </script>
