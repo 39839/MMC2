@@ -198,6 +198,77 @@ header nav {
     z-index: 10030;
 }
 
+/* ===== HEADER LAYOUT IMPROVEMENTS ===== */
+.main-header-nav {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: clamp(1.25rem, 3vw, 3rem);
+    row-gap: clamp(0.5rem, 1.5vw, 1rem);
+    position: relative;
+    width: 100%;
+}
+
+.main-header-logo {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.main-header-links {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 2.2vw, 1.9rem);
+    flex-wrap: wrap;
+    min-width: 0;
+    text-align: center;
+}
+
+.main-header-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 1.8vw, 1.4rem);
+    flex-wrap: wrap;
+    min-width: 0;
+    justify-content: flex-end;
+}
+
+.main-header-actions > * {
+    white-space: nowrap;
+}
+
+@media (max-width: 1340px) {
+    .main-header-links {
+        gap: clamp(0.85rem, 1.8vw, 1.35rem);
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-header-actions {
+        gap: clamp(0.45rem, 1.5vw, 1rem);
+    }
+
+    .main-header-actions .btn {
+        padding-inline: clamp(0.85rem, 2.2vw, 1.1rem);
+        padding-block: 0.6rem;
+        font-size: 0.9375rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    .main-header-links {
+        gap: clamp(0.7rem, 2vw, 1.1rem);
+    }
+
+    .main-header-nav {
+        column-gap: clamp(1rem, 2.4vw, 2.2rem);
+    }
+}
+
 .nav-link {
     position: relative;
     font-weight: 600;
@@ -432,7 +503,8 @@ body.mobile-menu-open {
     background-color: var(--light-gray);
     color: var(--medical-blue);
     border-left-color: var(--medical-orange);
-    transform: translateX(4px);
+    box-shadow: inset 3px 0 0 rgba(255, 143, 0, 0.15);
+    transform: none;
 }
 
 /* ===== MEDICAL HERO SECTION ===== */
