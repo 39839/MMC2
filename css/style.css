@@ -185,6 +185,10 @@ header nav {
     overflow: visible !important;
 }
 
+.logo-link {
+    margin-left: -20px;
+}
+
 .nav-link {
     position: relative;
     font-weight: 600;
