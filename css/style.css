@@ -186,7 +186,7 @@ header nav {
 }
 
 .logo-link {
-    margin-left: 0;
+    margin-left: 10px;
     position: relative;
     z-index: 10030;
     display: flex;
