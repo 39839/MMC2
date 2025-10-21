@@ -229,6 +229,7 @@ function initializeMobileMenu() {
         if (!mobileMenu.classList.contains('hidden')) {
             mobileMenu.classList.add('hidden');
         }
+        mobileMenu.classList.remove('is-open');
 
         const fallbackToggle = () => {
             if (mobileMenuBtn.dataset.mmcMobileMenuEnhanced === 'true') {
@@ -238,10 +239,12 @@ function initializeMobileMenu() {
             const willOpen = mobileMenu.classList.contains('hidden');
             if (willOpen) {
                 mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('is-open');
                 document.body.classList.add('mobile-menu-open');
                 mobileMenuBtn.setAttribute('aria-expanded', 'true');
                 mobileMenuBtn.classList.add('active');
             } else {
+                mobileMenu.classList.remove('is-open');
                 mobileMenu.classList.add('hidden');
                 document.body.classList.remove('mobile-menu-open');
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
@@ -254,6 +257,7 @@ function initializeMobileMenu() {
                 return;
             }
 
+            mobileMenu.classList.remove('is-open');
             mobileMenu.classList.add('hidden');
             document.body.classList.remove('mobile-menu-open');
             mobileMenuBtn.setAttribute('aria-expanded', 'false');

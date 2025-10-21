@@ -167,6 +167,7 @@ function initHeaderFeatures() {
     if (!mobileMenu.classList.contains('hidden')) {
         mobileMenu.classList.add('hidden');
     }
+    mobileMenu.classList.remove('is-open');
 
     const icon = mobileMenuButton.querySelector('svg path');
 
@@ -174,6 +175,7 @@ function initHeaderFeatures() {
         mobileMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         document.body.classList.toggle('mobile-menu-open', isOpen);
         mobileMenuButton.classList.toggle('active', isOpen);
+        mobileMenu.classList.toggle('is-open', isOpen);
 
         if (icon) {
             icon.setAttribute(

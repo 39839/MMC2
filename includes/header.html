@@ -222,14 +222,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    mobileMenu.classList.add('hidden');
+    mobileMenu.classList.remove('is-open');
+    mobileMenuBtn.classList.remove('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+
     const openMenu = () => {
         mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('is-open');
         document.body.classList.add('mobile-menu-open');
         mobileMenuBtn.classList.add('active');
         mobileMenuBtn.setAttribute('aria-expanded', 'true');
     };
 
     const closeMenu = () => {
+        mobileMenu.classList.remove('is-open');
         mobileMenu.classList.add('hidden');
         document.body.classList.remove('mobile-menu-open');
         mobileMenuBtn.classList.remove('active');

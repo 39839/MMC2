@@ -337,7 +337,8 @@ body.mobile-menu-open {
         display: none;
     }
 
-    body.mobile-menu-open #mobile-menu {
+    body.mobile-menu-open #mobile-menu,
+    #mobile-menu.is-open {
         pointer-events: auto;
         opacity: 1;
         transform: translateY(0) scale(1);
