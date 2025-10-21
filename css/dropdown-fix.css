@@ -85,8 +85,10 @@ header nav {
     position: absolute !important;
     top: 100% !important;
     left: 50% !important;
-    transform: translate(-50%, -12px) !important;
-    -webkit-transform: translate(-50%, -12px) !important;
+    transform: translate(-50%, 0) scale(0.98) !important;
+    -webkit-transform: translate(-50%, 0) scale(0.98) !important;
+    transform-origin: top center;
+    -webkit-transform-origin: top center;
     
     /* Dimensions */
     width: var(--dropdown-width);
@@ -111,7 +113,7 @@ header nav {
     pointer-events: none;
     
     /* Smooth transitions */
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.24s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.24s ease;
     
     /* Performance */
     will-change: transform, opacity;
@@ -146,8 +148,8 @@ header nav {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-    transform: translate(-50%, 0) !important;
-    -webkit-transform: translate(-50%, 0) !important;
+    transform: translate(-50%, 0) scale(1) !important;
+    -webkit-transform: translate(-50%, 0) scale(1) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
@@ -163,13 +165,13 @@ header nav {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-    transform: translate(-50%, 0) !important;
-    -webkit-transform: translate(-50%, 0) !important;
+    transform: translate(-50%, 0) scale(1) !important;
+    -webkit-transform: translate(-50%, 0) scale(1) !important;
 }
 
-/* Hide transition with delay */
+/* Hide transition timing */
 .services-dropdown-wrapper #services-dropdown {
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+    transition-delay: 0s;
 }
 
 /* ===============================
