@@ -14,6 +14,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dropdown-fix.css">
+    <link rel="stylesheet" href="../css/in-page-nav.css">
     <link rel="preload" href="../includes/header.html" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="../js/header-footer-loader.js" as="script">
     <link rel="preload" href="../js/critical-header.js" as="script">
@@ -36,6 +37,7 @@
             }
         }
     </script>
+    <script src="../js/in-page-nav.js" defer></script>
     <style>
         .division-card {
             background: white;
@@ -157,13 +159,13 @@
             </div>
             <h1 class="text-5xl lg:text-6xl font-black mb-6" data-aos="fade-up">Wellness Centers & Functional Medicine</h1>
             <p class="text-xl lg:text-2xl text-white/90 max-w-3xl" data-aos="fade-up" data-aos-delay="100">
-                Our wellness centers offer functional medicine and holistic medicine approaches. Work with our functional doctors to achieve your health goals through comprehensive wellness programs.
+                Our Wellness Centers take a functional and holistic approach to health—helping you achieve your goals through customized nutrition and fitness programs. We focus on improving balance, strength, and overall well-being through personalized nutrition planning and guided personal training. Every program is designed to help you feel stronger, more energized, and in control of your health.
             </p>
         </div>
     </section>
 
     <!-- INTRO SECTION -->
-    <section class="py-20 lg:py-24 bg-white">
+    <section id="wellness-overview" data-page-nav data-page-nav-title="Overview" class="py-20 lg:py-24 bg-white">
         <div class="container mx-auto px-6 lg:px-8">
             <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-black mb-6 text-brand-blue">Your Complete Wellness Journey at Our Wellness Centers</h2>
@@ -175,11 +177,11 @@
     </section>
 
     <!-- TWO MAIN DIVISIONS -->
-    <section class="py-20 lg:py-24 bg-light-blue-bg">
+    <section id="wellness-divisions" data-page-nav data-page-nav-title="Divisions" class="py-20 lg:py-24 bg-light-blue-bg">
         <div class="container mx-auto px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl lg:text-5xl font-black mb-6">Our Two Main Divisions at the Wellness Centers</h2>
-                <p class="text-xl text-medium-gray max-w-3xl mx-auto">Our functional medicine and holistic medicine approaches combine nutrition and fitness. Our functional doctors work together for your optimal health and wellness.</p>
+                <p class="text-xl text-medium-gray max-w-3xl mx-auto">Our functional medicine and holistic medicine approaches combine nutrition and fitness for your optimal health and wellness.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -206,31 +208,19 @@
                                 </li>
                                 <li>
                                     <span class="service-check">✓</span>
-                                    <span>Medical Nutrition Therapy</span>
-                                </li>
-                                <li>
-                                    <span class="service-check">✓</span>
                                     <span>Weight Management Programs</span>
                                 </li>
                                 <li>
                                     <span class="service-check">✓</span>
-                                    <span>Diabetes & Heart Disease Management</span>
+                                    <span>Diabetes Disease Management</span>
                                 </li>
                                 <li>
                                     <span class="service-check">✓</span>
-                                    <span>Sports Nutrition</span>
+                                    <span>Heart Disease Management</span>
                                 </li>
                                 <li>
                                     <span class="service-check">✓</span>
                                     <span>Meal Planning & Education</span>
-                                </li>
-                                <li>
-                                    <span class="service-check">✓</span>
-                                    <span>Prenatal & Pediatric Nutrition</span>
-                                </li>
-                                <li>
-                                    <span class="service-check">✓</span>
-                                    <span>GI Disorder Management</span>
                                 </li>
                             </ul>
                         </div>
@@ -303,8 +293,8 @@
                         </div>
 
                         <div class="provider-highlight">
-                            <p class="text-sm font-bold text-brand-blue mb-2">LED BY BERTHA BROOKS, FNP-C, CPT</p>
-                            <p class="text-sm text-medium-gray">Bertha combines her expertise as a Family Nurse Practitioner with certified personal training to deliver safe, effective, and medically-informed fitness programs.</p>
+                            <p class="text-sm font-bold text-brand-blue mb-2">PERSONALIZED TRAINING APPROACH</p>
+                            <p class="text-sm text-medium-gray">Our certified personal trainers work closely alongside patients to fully understand their individual needs, assess physical limitations, and develop customized programs that properly strengthen the body while preventing injury.</p>
                         </div>
 
                         <div class="text-center mt-6">
@@ -323,7 +313,7 @@
     </section>
 
     <!-- INTEGRATED APPROACH -->
-    <section class="py-20 lg:py-24 bg-white">
+    <section id="wellness-integration" data-page-nav data-page-nav-title="Integration" class="py-20 lg:py-24 bg-white">
         <div class="container mx-auto px-6 lg:px-8">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-16" data-aos="fade-up">
@@ -367,7 +357,7 @@
     </section>
 
     <!-- CTA SECTION -->
-    <section class="py-20 lg:py-24 bg-light-blue-bg">
+    <section class="py-20 lg:py-24 bg-light-blue-bg" data-page-nav-stop="cta">
         <div class="container mx-auto px-6 lg:px-8">
             <div class="bg-gradient-blue text-white rounded-3xl p-12 lg:p-16 text-center shadow-2xl max-w-4xl mx-auto" data-aos="fade-up">
                 <h2 class="text-3xl lg:text-4xl font-black mb-6">Ready to Transform Your Health with Functional Medicine?</h2>
@@ -385,7 +375,7 @@
     </section>
 
     <!-- FOOTER -->
-    <div id="footer-placeholder"></div>
+    <div id="footer-placeholder" data-page-nav-stop="footer"></div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/header-footer-loader.js"></script>
